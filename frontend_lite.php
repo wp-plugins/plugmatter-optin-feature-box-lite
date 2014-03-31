@@ -77,6 +77,8 @@
 	 	  	} else if($doc->type == "button") {
 				$pm_btn_txt = $doc->params->text;
 				$pm_btn_class = $doc->params->btn_class;
+                $pm_email_input_txt = $doc->params->email_input;
+                $pm_name_input_txt = $doc->params->name_input;
 	 	  	} else if($doc->type == "service") {
 	 	  		$service_meta = array("Aweber" => array("action_url" => "http://www.aweber.com/scripts/addlead.pl","name" => "email", "name_field" => "name"),
 							  "GetResponse" => array("action_url" => "https://app.getresponse.com/add_contact_webform.html","name" => "email", "name_field" => "name"),

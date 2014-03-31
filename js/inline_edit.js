@@ -497,8 +497,8 @@ jQuery.fn.inlineEdit = function(edit_type) {
 	
 	 
 
-	jQuery('#pm_change_picture').click(function(){	
-			   var thickbox_shown = (jQuery('#TB_window').is(':visible')) ? true : false;
+	jQuery('#pm_change_picture').click(function(e){	
+			   /*var thickbox_shown = (jQuery('#TB_window').is(':visible')) ? true : false;
 			   if(thickbox_shown == false) {
 			   tb_show('', 'media-upload.php?TB_iframe=true');
 			   return false;
@@ -518,12 +518,28 @@ jQuery.fn.inlineEdit = function(edit_type) {
 					   tb_remove();
 				   }
 			   };
-			   }
-				
-	
-		
+			   }*/
+                var media_pick_shown = (jQuery('.media-modal').is(':visible')) ? true : false;
+                 e.preventDefault();
+                if(media_pick_shown == false) {
+                var file_frame;
+
+                    file_frame = wp.media.frames.file_frame = wp.media({
+                    title: jQuery( this ).data( 'uploader_title' ),
+                    button: {
+                                text: jQuery( this ).data( 'uploader_button_text' ),
+                            },
+                    multiple: false
+                });
+
+                file_frame.on( 'select', function() {
+                    attachment = file_frame.state().get('selection').first().toJSON();
+                    jQuery('#pm_image').css("background-image", "url("+attachment.url+")");
+                    file_frame.remove();
+                });     
+                file_frame.open();
+                }
 	   });
-	
 };
 
 

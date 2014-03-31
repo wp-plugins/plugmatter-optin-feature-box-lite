@@ -151,85 +151,92 @@ jQuery(document).ready(function(){
 			if(params[i]["type"] == "user_designed_template") {
 				base_template = params[i]["type"];
 				page_id = params[i]["id"];
-				jQuery.post(plugin_url+"get_page_content.php",{"page_id":page_id},function(result){
+				jQuery.post("<?php echo admin_url("admin-ajax.php?action=plug_get_page_content") ?>",{"page_id":page_id},function(result){
 					jQuery('#ajax_load_temp').html(result).show();
 				});
+                var user_designed_template = true;
 			}	
 		}
 		
-		var filename = plugin_url+'templates/'+base_temp_name+"/style.css";
-		pm_temp_style.setAttribute("href", filename);			
-		jQuery('#ajax_load_temp').html("<div class ='pm_loading' style='width:100%;height:300px; background:url("+plugin_url+"images/loading.gif"+") no-repeat scroll center;'>&nbsp;</div>").show();
-		setTimeout(function() {
-		jQuery('#ajax_load_temp').load(admin_url,function(){			
-			for(var i=0;i<params.length;i++) {
-				if(params[i]["type"] == "text") {
-					var color = params[i]["params"]["color"];
-				    jQuery('#pm_h1').css("color",color);
-				    var font_family = params[i]["params"]["font_family"];
-				    var font_weight =  params[i]["params"]["font_weight"];
-				    update_fun(font_family) ; 
-				    //alert(font_family);
-				    var id = params[i]["id"];
-				    var text = params[i]["params"]["text"];
-				    jQuery('#pm_h1').text(text);
-			        jQuery("#"+id).inlineEdit(params[i]["type"]);
-			 	} else if(params[i]["type"] == "textarea") {
-			   		var html = params[i]["params"]["html"];
-		         	jQuery('#pm_description').html(html);
-					var color = params[i]["params"]["color"];
-					jQuery('#pm_description').css("color", color);										
-					var font_size = params[i]["params"]["font_size"];
-					jQuery('#pm_description').css("font-size", font_size);
-		         	var font_family = params[i]["params"]["font_family"];
-		         	update_font_family(font_family);	
-		         	//alert(font_family);
-		         	var id = params[i]["id"];	 	   	
-				 	jQuery("#"+id).inlineEdit(params[i]["type"]);				  	
-				} else if(params[i]["type"] == "service") {
-					var html = params[i]["params"];
-					jQuery.each(html, function(name,value) {
-						email_service_option[name] = value;
-					});
-					var id = params[i]["id"]; 
-				  	jQuery("#"+id).inlineEdit(params[i]["type"]);
-				 jQuery("#pm_exclamation_icon").attr('src',plugin_url+"/images/tick-icon.png").css("opacity","1");
-				} else if(params[i]["type"] == "color") {							   		
-				 	var bgcolor = params[i]["params"]["bgcolor"];			           
-		            var id = params[i]["id"]; 		                       
-		            if(jQuery("#"+id).attr("gradient") != null) {				       		 		
-						var rules = jQuery("#"+id).css("background-image");				 		
-					 	var new_rules = rules.replace(/rgb\((\d{1,3}), (\d{1,3}), (\d{1,3})\)/,bgcolor);							 	
-				 	    jQuery("#"+id).css("background-image",new_rules);
-					 	jQuery("#"+id).attr("gradient",bgcolor);		    			 	    				    
-					 } else {			
-					 	jQuery("#"+id).css("background-color", bgcolor);					 		
-					 }
-				  	 jQuery("#"+id).inlineEdit(params[i]["type"]);					 
-				} else if(params[i]["type"] == "image") {
-					var img_url = params[i]["params"]["img_url"];					
-		            jQuery("#pm_image").css('background-image',img_url);
-		            var id = params[i]["id"];	   		
-				  	jQuery("#"+id).inlineEdit(params[i]["type"]);	
-				} else if(params[i]["type"] == "video") {
-					var id = params[i]["id"];	 
-					var video_src = params[i]["params"]["video_src"];		
-					var video_url = params[i]["params"]["video_url"];		
-					jQuery("#pm_video").attr("src", video_src);
-					jQuery("#pm_video").attr("video_url", video_url);
-				  	jQuery("#"+id).inlineEdit(params[i]["type"]);
-				} else if(params[i]["type"] == "button") {
-					var txt = params[i]["params"]["text"];
-					var btn_class = params[i]["params"]["btn_class"];	
-					jQuery("#pm_button").val(txt);	
-					jQuery("#pm_button").removeClass();
-		    		jQuery("#pm_button").addClass(btn_class);			           
-		            var id = params[i]["id"];	   		
-				  	jQuery("#"+id).inlineEdit(params[i]["type"]);
-				}
-			}	   
-		}).show();	
-		}, 2000);	
+        if(user_designed_template != true) {
+            var filename = plugin_url+'templates/'+base_temp_name+"/style.css";
+            pm_temp_style.setAttribute("href", filename);			
+            jQuery('#ajax_load_temp').html("<div class ='pm_loading' style='width:100%;height:300px; background:url("+plugin_url+"images/loading.gif"+") no-repeat scroll center;'>&nbsp;</div>").show();
+            setTimeout(function() {
+            jQuery('#ajax_load_temp').load(admin_url,function(){			
+                for(var i=0;i<params.length;i++) {
+                    if(params[i]["type"] == "text") {
+                        var color = params[i]["params"]["color"];
+                        jQuery('#pm_h1').css("color",color);
+                        var font_family = params[i]["params"]["font_family"];
+                        var font_weight =  params[i]["params"]["font_weight"];
+                        update_fun(font_family) ; 
+                        //alert(font_family);
+                        var id = params[i]["id"];
+                        var text = params[i]["params"]["text"];
+                        jQuery('#pm_h1').text(text);
+                        jQuery("#"+id).inlineEdit(params[i]["type"]);
+                    } else if(params[i]["type"] == "textarea") {
+                        var html = params[i]["params"]["html"];
+                        jQuery('#pm_description').html(html);
+                        var color = params[i]["params"]["color"];
+                        jQuery('#pm_description').css("color", color);										
+                        var font_size = params[i]["params"]["font_size"];
+                        jQuery('#pm_description').css("font-size", font_size);
+                        var font_family = params[i]["params"]["font_family"];
+                        update_font_family(font_family);	
+                        //alert(font_family);
+                        var id = params[i]["id"];	 	   	
+                        jQuery("#"+id).inlineEdit(params[i]["type"]);				  	
+                    } else if(params[i]["type"] == "service") {
+                        var html = params[i]["params"];
+                        jQuery.each(html, function(name,value) {
+                            email_service_option[name] = value;
+                        });
+                        var id = params[i]["id"]; 
+                        jQuery("#"+id).inlineEdit(params[i]["type"]);
+                     jQuery("#pm_exclamation_icon").attr('src',plugin_url+"/images/tick-icon.png").css("opacity","1");
+                    } else if(params[i]["type"] == "color") {							   		
+                        var bgcolor = params[i]["params"]["bgcolor"];			           
+                        var id = params[i]["id"]; 		                       
+                        if(jQuery("#"+id).attr("gradient") != null) {				       		 		
+                            var rules = jQuery("#"+id).css("background-image");				 		
+                            var new_rules = rules.replace(/rgb\((\d{1,3}), (\d{1,3}), (\d{1,3})\)/,bgcolor);							 	
+                            jQuery("#"+id).css("background-image",new_rules);
+                            jQuery("#"+id).attr("gradient",bgcolor);		    			 	    				    
+                         } else {			
+                            jQuery("#"+id).css("background-color", bgcolor);					 		
+                         }
+                         jQuery("#"+id).inlineEdit(params[i]["type"]);					 
+                    } else if(params[i]["type"] == "image") {
+                        var img_url = params[i]["params"]["img_url"];					
+                        jQuery("#pm_image").css('background-image',img_url);
+                        var id = params[i]["id"];	   		
+                        jQuery("#"+id).inlineEdit(params[i]["type"]);	
+                    } else if(params[i]["type"] == "video") {
+                        var id = params[i]["id"];	 
+                        var video_src = params[i]["params"]["video_src"];		
+                        var video_url = params[i]["params"]["video_url"];		
+                        jQuery("#pm_video").attr("src", video_src);
+                        jQuery("#pm_video").attr("video_url", video_url);
+                        jQuery("#"+id).inlineEdit(params[i]["type"]);
+                    } else if(params[i]["type"] == "button") {
+                        var txt = params[i]["params"]["text"];
+                        var btn_class = params[i]["params"]["btn_class"];	
+                        var email_input = params[i]["params"]["email_input"];
+                        var name_input = params[i]["params"]["name_input"];
+                        jQuery("#pm_input").val(email_input);
+                        jQuery("#pm_name_field").val(name_input);                        
+                        jQuery("#pm_button").val(txt);	
+                        jQuery("#pm_button").removeClass();
+                        jQuery("#pm_button").addClass(btn_class);			           
+                        var id = params[i]["id"];	   		
+                        jQuery("#"+id).inlineEdit(params[i]["type"]);
+                    }
+                }	   
+            }).show();	
+            }, 2000);	
+        }
 	}
 
 
@@ -266,7 +273,7 @@ jQuery(document).ready(function(){
 			jQuery("select#select_page").change(function(){				
 				var page_id = jQuery("select#select_page").val();
 				jQuery('#ajax_load_temp').html("<div class ='pm_loading' style='width:100%;height:300px; background:url("+plugin_url+"images/loading.gif"+") no-repeat scroll center;'>&nbsp;</div>").show();
-				jQuery.post(plugin_url+"get_page_content.php",{page_id:page_id},function(result){
+				jQuery.post("<?php echo admin_url("admin-ajax.php?action=plug_get_page_content") ?>",{"page_id":page_id},function(result){
 					jQuery('#ajax_load_temp').html(result).show();
 				  });						
 			});
@@ -285,6 +292,8 @@ jQuery(document).ready(function(){
 				jQuery("#pm_h1").text("Lorem ipsum dolor sit amet");
 				jQuery("#pm_description").html("Fusce vel sapien vehicula, consequat massa eu, pellentesque mauris.");			
 			}
+            jQuery("#pm_input").val("Enter Your Email Address");	
+            jQuery("#pm_name_field").val("Enter Your First Name");	                
 			jQuery("#pm_button").val("Subscribe");		
 			jQuery("#pm_video").attr("src", "//player.vimeo.com/video/79277917?badge=0&byline=0&portrait=0&title=0");
 			jQuery("#pm_video").attr("video_url", "http://vimeo.com/79277917");
@@ -401,7 +410,9 @@ jQuery(document).ready(function(){
 	   			var id = jQuery(this).attr('id');
 	   			var txt =  jQuery("#pm_button").val();
 	   			var btn_class =  jQuery("#pm_button").attr("class") ;		   		
-	   			json_params.push({"type":edit_type,"id":id,"params":{"text":txt,"btn_class":btn_class}});
+                var email_input =  jQuery("#pm_input").val();
+                var name_input =  jQuery("#pm_name_field").val();
+	   			json_params.push({"type":edit_type,"id":id,"params":{"text":txt,"btn_class":btn_class, "email_input":email_input, "name_input":name_input }});
 		   	}			
 		}); 
 

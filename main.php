@@ -4,7 +4,7 @@ Plugin Name: Plugmatter Feature Box Lite
 Plugin URI: http://plugmatter.com/feature-box
 Description: The ultimate feature box plugin for WordPress.
 Author: Plugmatter
-Version: 1.3.8
+Version: 1.4.0
 Author URI: http://plugmatter.com/
 */
 
@@ -132,13 +132,20 @@ function get_fonts() {
 }
 
 add_action('wp_ajax_plug_load_template', 'plug_load_template');
-
 function plug_load_template() {
 	$tem_name = $_GET["data"];
 	include(Plugmatter_FILE_PATH . "/templates/". $tem_name . "/template.php");
 	die();
 }
 
+add_action('wp_ajax_plug_get_page_content', 'plug_get_page_content');
+function plug_get_page_content() {
+	$page_id = $_POST['page_id'];
+    $thispost = get_post( $page_id );
+    $content = $thispost->post_content;
+    echo $content;
+	die();
+}
 
 function license_submenu_page_callback() {
 	set_js_globals();
