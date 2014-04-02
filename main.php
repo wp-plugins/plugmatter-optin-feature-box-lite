@@ -165,11 +165,11 @@ function ab_test_stats_page_callback(){
 
 function setting_submenu_page_callback() {
 	set_js_globals();
-	if(get_option('Plugmatter_Featurebox_License') == "") {
-		include('license.php'); 
-	} else {
+	//if(get_option('Plugmatter_Featurebox_License') == "") {
+	//	include('license.php'); 
+	//} else {
 		include('settings.php'); 
-	}
+	//}
 }
 
 function ab_test_submenu_page_callback() {
