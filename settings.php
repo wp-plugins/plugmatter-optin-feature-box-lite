@@ -179,7 +179,6 @@ if(isset($_POST["plugmatter_show_on_sections"] ) && ($_POST["plugmatter_show_on_
 }); 	
 </script>
 
-
 <div class='pmadmin_wrap'>
 	<div class='pmadmin_headbar'>
 		<div class='pmadmin_pagetitle'><h2>General Settings</h2></div>
@@ -460,4 +459,7 @@ if(isset($_POST["plugmatter_show_on_sections"] ) && ($_POST["plugmatter_show_on_
 		<br><br>
 	</form>
 </div>
+</div>
+<div style='margin:0 20px 0 20px;color:gray;background:#fff;padding:15px'><img src="<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/support.png"; ?>" align='left' style='margin-right:10px;position:relative;top:-2px'>
+    For installation and setup instructions, follow our <a href='http://plugmatter.com/user-guide' target='_blank'>user guide</a>. Or contact <a href='http://plugmatter.com/support' target='_blank'>support</a>.
 </div>
