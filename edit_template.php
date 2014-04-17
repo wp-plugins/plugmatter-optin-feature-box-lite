@@ -124,10 +124,8 @@ function escapeJsonString($value) {
 </tbody>
 </table>
 </form>
-
-
-
 <div  id='pm_hover_icon' >&nbsp;</div>
+        
 <script type="text/javascript">
 jQuery(document).ready(function(){ 
 
@@ -427,3 +425,14 @@ jQuery(document).ready(function(){
 });
 </script>
 </div></div>
+<?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite") { ?>
+<div style='background:#fff;border:#ddd;padding:20px;margin:30px;'>
+<div class='plug_enable_lable' style='margin-top:10px;width:100%;margin-bottom:20px;'>Need more base templates? Check them out:</div>    
+<div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_1.png"; ?>' width='225'></div>
+<div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_2.png"; ?>' width='225'></div>
+<div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_3.png"; ?>' width='225'></div>
+<div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_4.png"; ?>' width='225'></div>
+<div style='clear:both'>&nbsp;</div>
+<div style='margin:10px;text-align:center;'><input id="submit" class="pm_primary_buttons" type="button" value="Upgrade Get Them Now!" onclick="location.href='http://plugmatter.com/feature-box#plans&pricing'" name="submit"></div>    
+</div>
+<?php } ?>

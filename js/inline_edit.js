@@ -5,7 +5,7 @@
 var service_list = [];
 
 service_list.push({"service":"iContact","fields":["listid","clientid","specialid","formid"]});
-service_list.push({"service":"Aweber","fields":["listname","redirect_url"]});
+service_list.push({"service":"Aweber","fields":["listname","redirect_url","meta_adtracking"]});
 service_list.push({"service":"ConstantContact","fields":["llr","m","p"]});
 service_list.push({"service":"CampaignMonitor","fields":["cm_account_name","cm_id"]});
 service_list.push({"service":"GetResponse","fields":["webform_id"]});
