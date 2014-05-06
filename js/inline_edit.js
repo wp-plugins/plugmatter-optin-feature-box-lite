@@ -14,7 +14,7 @@ service_list.push({"service":"InfusionSoft","fields":["inf_form_xid", "infusions
 service_list.push({"service":"Feedburner","fields":["uri"]});
 service_list.push({"service":"MadMimi","fields":["webform_id"]});
 service_list.push({"service":"MailPoet","fields":["list_id", "redirect_url"]});
-service_list.push({"service":"Custom","fields":["form_action_url","email_field_name","field1","field2","field3","redirect_url"]});
+service_list.push({"service":"Custom","fields":["action_url","email_field_name","name_field_name", "hidden_filed1","hidden_filed1_value","hidden_filed2","hidden_filed2_value","hidden_filed3","hidden_filed3_value"]});
 
 var email_service_option = {};
 

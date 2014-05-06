@@ -90,7 +90,7 @@
 	 	  					  "Feedburner" => array("action_url" => "http://feedburner.google.com/fb/a/mailverify","name" => "email", "name_field" => "name"),	 	  				
 							  "MadMimi" => array("action_url" => "https://madmimi.com/signups/subscribe/". (isset($doc->params->webform_id)?$doc->params->webform_id:""),"name" => "signup[email]", "name_field" => "signup[name]"),	 	  											
 							  "MailPoet" => array("action_url" => "#pm_mailpoet","name" => "email", "name_field" => "name"),	 	  																		  
-	 	  					  "Custom" => array(),
+	 	  					  "Custom" => array("action_url" => (isset($doc->params->action_url)?$doc->params->action_url:""), "name" => (isset($doc->params->email_field_name)?$doc->params->email_field_name:""), "name_field" => (isset($doc->params->name_field_name)?$doc->params->name_field_name:""))
 				);
 				$service_name = $doc->params->service;
 				$pm_service_action = $service_meta[$service_name]['action_url'];	
@@ -101,7 +101,18 @@
 						if($service_name == "Aweber" && $key == "redirect_url") {
 							$key = "redirect";
 						}                        
-				 		$pm_service_hiddens.="<input type='hidden' name='".$key."' value='".$value."' />";								 		
+				 		if($service_name == "Custom") {
+							if(strpos($key, "value") !== false) {
+								$tmp_custom_key = substr($key,0, -6);
+								$custom_key = $doc->params->$tmp_custom_key;
+								$custom_value = $value;
+								$pm_service_hiddens.="<input type='hidden' name='".$custom_key."' value='".$custom_value."' />";
+							}
+						} else {  
+                            if($key != "action_url") {
+				 			    $pm_service_hiddens.="<input type='hidden' name='".$key."' value='".$value."' />";					
+                            }
+						}
 				 	}
 				}					
 	 	  	}

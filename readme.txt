@@ -149,6 +149,10 @@ You can check out our FAQs on our website: http://plugmatter.com/feature-box#faq
 
 == Changelog ==
 
+#### 1.4.2 ####
+* Custom form option updated
+
+
 #### 1.4.1 ####
 * Aweber form tracking enabled
 * Responsive templates improved
@@ -211,4 +215,4 @@ You can check out our FAQs on our website: http://plugmatter.com/feature-box#faq
 * Fixed Aweber redirection issue.
 
 == Upgrade Notice ==
-There's a new version of Plugmatter Feature Box Lite i.e., version 1.4.0
+There's a new version of Plugmatter Feature Box Lite i.e., version 1.4.2
