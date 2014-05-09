@@ -127,7 +127,9 @@ Path: Appearance > Editor > Header > Line at the bottom
 
 You can check out our FAQs on our website: http://plugmatter.com/feature-box#faqs
 
-== Get FREE Support ==
+== Support ==
+
+<h3>Get FREE Support</h3>
 
 At Plugmatter, we take Customer Support very seriously, even for our free users. For any issues you may have using the plugin, feel free to contact support@plugmatter.com.
 
@@ -136,7 +138,7 @@ At Plugmatter, we take Customer Support very seriously, even for our free users.
 
 1. Plugmatter Feature box  - "What You See is What You Get" Template Editor
 2. Plugmatter Feature box  - Over 630 Amazing, High Quality Google Web Fonts for You to Use
-3. Plugmatter Feature box  - Eye-Catchy Button Styles That Helps Improve Conversion
+3. Plugmatter Feature box  - Eye-Catchy Button Styles That Help Improve Conversion
 4. Plugmatter Feature box  - The ONLY In-line Editor for Optin Forms in the Industry
 5. Plugmatter Feature box  - Supports All the Major Mailing List Services
 6. Plugmatter Feature box  - Feature-Loaded to Take Your List Building to the Next Level
