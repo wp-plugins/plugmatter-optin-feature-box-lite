@@ -1,18 +1,12 @@
 ﻿=== Plugmatter Optin Feature Box ===
 Contributors: SNaimath, Akramquraishi
-Donate link: http://plugmatter.com/
-Tags: optin, optin popup, aweber, constant contact, dashboard, email, getresponse, icontact, mailchimp, onclick popup, page, pages, pop-up, popup, popup box, popup 
-
-message, popup window, popups, post, posts, shortcode, unblockable, hover, lightbox, widget, mailpoet, wordpress popup, email list, build email list, grow email list, 
-
-email list building, list building, email marketing, mailing list, email subscriptions, feature box, optin feature box, wp feature box, thesis feature box, list 
-
-building plugin, optin box, optin form, forms, conversion, subscribers, subscriptions, newsletter.
+Tags: optin, optin popup, aweber, constant contact, dashboard, email, getresponse, icontact, mailchimp, onclick popup, page, pages, pop-up, popup, popup box, popup message, popup window, popups, post, posts, shortcode, unblockable, hover, lightbox, widget, mailpoet, wordpress popup, email list, build email list, grow email list, email list building, list building, email marketing, mailing list, email subscriptions, feature box, optin feature box, wp feature box, thesis feature box, list building plugin, optin box, optin form, forms, conversion, subscribers, subscriptions, newsletter.
 Requires at least: 3.7.0
 Tested up to: 3.9.0 and above
 Stable tag: 4.3
 License: Premium
 License URI: http://plugmatter.com/feature-box/
+Donate Link: http://plugmatter.com/
 
 Plugmatter Optin Feature Box is the Only List Building Plugin that Allows You to Create High Converting Optin Feature Boxes for Your WordPress Site.
 
@@ -20,31 +14,26 @@ Plugmatter Optin Feature Box is the Only List Building Plugin that Allows You to
 
 Plugmatter Optin Feature Box Plugin lets you create beautiful optin feature boxes to grow your email list.
 
-What is an Optin Feature Box?
-----
-An optin feature box is an email optin box that sits right under the header of your WordPress site but above the content. Using an optin feature box, you can easily 
+[youtube https://www.youtube.com/watch?v=Iz3XtxNPtfI]
 
-grab the attention of your visitors and convert them into email subscribers.
+See all the Plugmatter Feature Box features at: http://plugmatter.com/feature-box/
 
-Why Use an Optin Feature Box?
-----
-Simply because an email subscription box featured above the fold grabs the most attention and converts really well. When your visitors visit your site, the first and 
+<h3>What is an Optin Feature Box?</h3>
 
-the most important thing to do is grab their email address. And that’s exactly what an optin feature box lets you do.
+An optin feature box is an email optin box that sits right under the header of your WordPress site but above the content. Using an optin feature box, you can easily grab the attention of your visitors and convert them into email subscribers.
 
-How Do You Create an Optin Feature Box?
-----
-You can either hire an expensive designer to design/code a professional feature box OR download and install the Optin Feature Box plugin from Plugmatter for free. It 
+<h3>Why Use an Optin Feature Box?</h3>
 
-saves you time, money and gives you what you need to boost your list building efforts.
+Simply because an email subscription box featured above the fold grabs the most attention and converts really well. When your visitors visit your site, the first and the most important thing to do is grab their email address. And that’s exactly what an optin feature box lets you do.
 
-You’ll start with the free version of Plugmatter Optin Feature Box. It will help you get up and running with your first fully functional optin feature box. If and when 
+<h3>How Do You Create an Optin Feature Box?</h3>
 
-you require more templates and features, you can pay and upgrade to the [PRO version](http://plugmatter.com/feature-box#plans&pricing).
+You can either hire an expensive designer to design/code a professional feature box OR download and install the Optin Feature Box plugin from Plugmatter for free. It saves you time, money and gives you what you need to boost your list building efforts.
+
+You’ll start with the free version of Plugmatter Optin Feature Box. It will help you get up and running with your first fully functional optin feature box. If and when you require more templates and features, you can pay and upgrade to the [PRO version](http://plugmatter.com/feature-box#plans&pricing).
 
 
-Why Choose the Plugmatter Optin Feature Box Plugin?
-----
+<h3>Why Choose the Plugmatter Optin Feature Box Plugin?</h3>
 
 * Why Choose the Plugmatter Optin Feature Box Plugin?
 * No designing/coding required
@@ -57,8 +46,8 @@ Why Choose the Plugmatter Optin Feature Box Plugin?
 * Awesome 24/7 support
 	
 
-Here's what you get with the LITE version:
-----
+<h3>Here's what you get with the LITE version:</h3>
+
 * **A Premium Quality WordPress Email List Building Plugin** that Can Boost Your Email Subscription Rate by 200%
 * **Two High Converting Premium (Responsive) Templates** that You Can Use to Design Your Own Optin Feature Box
 * **Turn Off Your Optin Feature Box** for Already Subscribed Visitors.
@@ -66,8 +55,8 @@ Here's what you get with the LITE version:
 * **Standard Support that Works Rigorously** to Help You Successfully Setup the Plugin
 
 
-Premium Features (Pro Version):
-----
+<h3>Premium Features (Pro Version):</h3>
+
 * **Three More Premium (Responsive) Templates** Along with an Exclusive Video Template
 * **Create Professional, Matching Mini Optin Feature Boxes** to Collect More Emails
 * **Use Your Own Custom Designed** Optin Feature Box
@@ -80,8 +69,7 @@ Premium Features (Pro Version):
 
 [Upgrade to the PRO Version Now!](http://plugmatter.com/feature-box#plans&pricing)
 
-Reviews:
-----
+<h3>Reviews:</h3>
 
 _"I can't believe how easy Plugmatter Optin Feature Box was to set up! Absolutely brilliant! When setting up a new blog, signup forms are usually the last headache I take on. This time around, it's the first thing I set up! I’m a lifelong fan of the plugin."_ - Samar Owais, Freelance Flyer
 
@@ -101,16 +89,14 @@ We're glad to have you, Syed Naimath Co-Founder, Plugmatter.com
 
 You can easily install Plugmatter Optin Feature Box Plugin using the method of your choice:
 
-WordPress Search:
-----
+<h3>WordPress Search:</h3>
 
 1. Use WordPress Plugin Search in your WordPress
 2. Look for "Plugmatter Optin Feature Box"
 3. Click to Install and Activate
 4. A new Plugmatter Feature Box - Lite will appear in your Admin column
 
-Download & Install:
-----
+<h3>Download & Install:</h3>
 
 1. Download the ".zip" of the plugin file from the top right corner of this page on to your computer
 2. Go to your Plugins section and click "add new"
@@ -119,8 +105,7 @@ Download & Install:
 5. Once installed, activate the plugin
 6. A new Plugmatter Feature Box - Lite will appear on your Admin column
 
-FTP:
-----
+<h3>FTP:</h3>
 
 1. You can also install the plugin using the FTP
 2. Simply Download the ".zip" file of Plugin from top right of this page
@@ -130,8 +115,8 @@ FTP:
 6. A new Plugmatter Feature Box - Lite will appear on your Admin column
 
 
-**After the plugin installation, add the below line of code in the header.php file:**
-----
+<h3>**After the plugin installation, add the below line of code in the header.php file:**</h3>
+
 
 Path: Appearance > Editor > Header > Line at the bottom 
 
@@ -142,16 +127,24 @@ Path: Appearance > Editor > Header > Line at the bottom
 
 You can check out our FAQs on our website: http://plugmatter.com/feature-box#faqs
 
+== Get FREE Support ==
+
+At Plugmatter, we take Customer Support very seriously, even for our free users. For any issues you may have using the plugin, feel free to contact support@plugmatter.com.
+
 
 == Screenshots ==
 
-
+1. Plugmatter Feature box  - "What You See is What You Get" Template Editor
+2. Plugmatter Feature box  - Over 630 Amazing, High Quality Google Web Fonts for You to Use
+3. Plugmatter Feature box  - Eye-Catchy Button Styles That Helps Improve Conversion
+4. Plugmatter Feature box  - The ONLY In-line Editor for Optin Forms in the Industry
+5. Plugmatter Feature box  - Supports All the Major Mailing List Services
+6. Plugmatter Feature box  - Feature-Loaded to Take Your List Building to the Next Level
 
 == Changelog ==
 
 #### 1.4.2 ####
 * Custom form option updated
-
 
 #### 1.4.1 ####
 * Aweber form tracking enabled
@@ -208,7 +201,6 @@ You can check out our FAQs on our website: http://plugmatter.com/feature-box#faq
 * Added support for MailPoet (WYSIJA) 
 
 #### 1.2.0 ####
- 
 * Minor bug fixes 
 
 #### 1.10 ####
