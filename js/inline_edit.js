@@ -10,10 +10,12 @@ service_list.push({"service":"ConstantContact","fields":["llr","m","p"]});
 service_list.push({"service":"CampaignMonitor","fields":["cm_account_name","cm_id"]});
 service_list.push({"service":"GetResponse","fields":["webform_id"]});
 service_list.push({"service":"MailChimp","fields":["action_url"]});
-service_list.push({"service":"InfusionSoft","fields":["inf_form_xid", "infusionsoft_version"]});
+service_list.push({"service":"InfusionSoft","fields":["account_subdomain","inf_form_xid", "infusionsoft_version"]});
 service_list.push({"service":"Feedburner","fields":["uri"]});
 service_list.push({"service":"MadMimi","fields":["webform_id"]});
 service_list.push({"service":"MailPoet","fields":["list_id", "redirect_url"]});
+service_list.push({"service":"Feedblitz","fields":["sub"]});
+service_list.push({"service":"Jetpack","fields":[]});
 service_list.push({"service":"Custom","fields":["action_url","email_field_name","name_field_name", "hidden_filed1","hidden_filed1_value","hidden_filed2","hidden_filed2_value","hidden_filed3","hidden_filed3_value"]});
 
 var email_service_option = {};

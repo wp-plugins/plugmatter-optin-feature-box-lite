@@ -86,21 +86,31 @@
 							  "MailChimp" => array("action_url" => (isset($doc->params->action_url)?$doc->params->action_url:""), "name" => "EMAIL", "name_field" => "FNAME"),
 							  "ConstantContact" => array("action_url" => "http://www.formstack.com/forms/index.php","name" => "email", "name_field" => "first_name"),
                               "CampaignMonitor" => array("action_url" => "http://".(isset($doc->params->cm_account_name)?$doc->params->cm_account_name:"").".createsend.com/t/r/s/".(isset($doc->params->cm_id)?$doc->params->cm_id:"")."/","name" => "cm-".(isset($doc->params->cm_id)?$doc->params->cm_id."-".$doc->params->cm_id:""), "name_field" => "cm-name"),                                      
-	 	  					  "InfusionSoft" => array("action_url" => "https://ke128.infusionsoft.com/app/form/process/".(isset($doc->params->inf_form_xid)?$doc->params->inf_form_xid:""), "name" => "inf_field_Email", "name_field" => "inf_field_FirstName"),
+	 	  					  "InfusionSoft" => array("action_url" => "https://".$doc->params->account_subdomain.".infusionsoft.com/app/form/process/".$doc->params->inf_form_xid, "name" => "inf_field_Email", "name_field" => "inf_field_FirstName"),
 	 	  					  "Feedburner" => array("action_url" => "http://feedburner.google.com/fb/a/mailverify","name" => "email", "name_field" => "name"),	 	  				
 							  "MadMimi" => array("action_url" => "https://madmimi.com/signups/subscribe/". (isset($doc->params->webform_id)?$doc->params->webform_id:""),"name" => "signup[email]", "name_field" => "signup[name]"),	 	  											
-							  "MailPoet" => array("action_url" => "#pm_mailpoet","name" => "email", "name_field" => "name"),	 	  																		  
+							  "MailPoet" => array("action_url" => "#pm_mailpoet","name" => "email", "name_field" => "name"),	
+                              "Feedblitz" => array("action_url" => "http://www.feedblitz.com/f/f.fbz?Sub=".(isset($doc->params->sub)?$doc->params->sub:""),"name" => "email", "name_field" => "name"),
+                              "Jetpack" => array("action_url" => "","name" => "email", "name_field" => "name"),
 	 	  					  "Custom" => array("action_url" => (isset($doc->params->action_url)?$doc->params->action_url:""), "name" => (isset($doc->params->email_field_name)?$doc->params->email_field_name:""), "name_field" => (isset($doc->params->name_field_name)?$doc->params->name_field_name:""))
 				);
 				$service_name = $doc->params->service;
 				$pm_service_action = $service_meta[$service_name]['action_url'];	
 				$pm_input_name = $service_meta[$service_name]['name'];
 				$pm_input_name_field_name = $service_meta[$service_name]['name_field'];
+                
+                if($doc->params->service == "Jetpack") {
+                    $pm_service_hiddens.="<input type='hidden' name='jetpack_subscriptions_widget' value='subscribe' />";
+                }
+                
 				foreach($doc->params as $key=>$value){
 				 	if($key != "service"){
 						if($service_name == "Aweber" && $key == "redirect_url") {
 							$key = "redirect";
-						}                        
+						}    
+						if($service_name == "iContact" && $key == "specialid") {
+							$key = "specialid:" . $doc->params->listid;
+						}                            
 				 		if($service_name == "Custom") {
 							if(strpos($key, "value") !== false) {
 								$tmp_custom_key = substr($key,0, -6);
