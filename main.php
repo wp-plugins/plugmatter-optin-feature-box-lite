@@ -18,7 +18,7 @@ define('Plugmatter_DIR_NAME', basename(Plugmatter_FILE_PATH));
 define('Plugmatter_FOLDER', dirname(plugin_basename(__FILE__)));
 define('Plugmatter_URL', $siteurl.'/wp-content/plugins/' . Plugmatter_DIR_NAME);
 define('Plugmatter_GOOGLE_FONTS_KEY', "AIzaSyBKo64RSV_kiZ8T7_J5LNv_npD0YERvr5g");
-define('Plugmatter_UPNOTE', "<span style='color:red;'>This feature is available in premium packages. <a href='http://plugmatter.com/feature-box#plans&pricing' target='_blank'><b>Upgrade Now!</b></a></span>");
+define('Plugmatter_UPNOTE', "<span style='color:red;'>This feature is available in premium packages. <a href='http://plugmatter.com/feature-box' target='_blank'><b>Upgrade Now!</b></a></span>");
 //------------------------------------------------
 
 
