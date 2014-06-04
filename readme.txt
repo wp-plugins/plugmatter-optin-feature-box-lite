@@ -95,6 +95,7 @@ You can easily install Plugmatter Optin Feature Box Plugin using the method of y
 2. Look for "Plugmatter Optin Feature Box"
 3. Click to Install and Activate
 4. A new Plugmatter Feature Box - Lite will appear in your Admin column
+5. Enter your name and email address in order to activate the plug-in
 
 <h3>Download & Install:</h3>
 
@@ -104,6 +105,7 @@ You can easily install Plugmatter Optin Feature Box Plugin using the method of y
 4. Click "Upload" to upload and install the plugin from your computer / desktop
 5. Once installed, activate the plugin
 6. A new Plugmatter Feature Box - Lite will appear on your Admin column
+7. Enter your name and email address in order to activate the plug-in
 
 <h3>FTP:</h3>
 
@@ -113,6 +115,7 @@ You can easily install Plugmatter Optin Feature Box Plugin using the method of y
 4. Upload the ".zip" file in your wp-content > Plugins
 5. Login to your WordPress and Activate the Plugin
 6. A new Plugmatter Feature Box - Lite will appear on your Admin column
+7. Enter your name and email address in order to activate the plug-in
 
 
 <h3>**After the plugin installation, add the below line of code in the header.php file:**</h3>

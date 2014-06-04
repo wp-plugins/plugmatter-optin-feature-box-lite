@@ -68,8 +68,8 @@ function plugmatter_install() {
     UNIQUE KEY id (id)
     ) DEFAULT CHARSET=utf8;";
     $wpdb->query($ab_stats_tbl); 
-    update_option('Plugmatter_PACKAGE', "plug_featurebox_lite");
-	update_option('Plugmatter_Featurebox_License', "LITE");
+    //update_option('Plugmatter_PACKAGE', "plug_featurebox_lite");
+	//update_option('Plugmatter_Featurebox_License', "LITE");
 }
 
 function plugmatter_uninstall() {
