@@ -42,16 +42,20 @@
   		$base_temp_name=$result->base_temp_name;
   		$params=$result->params;
 	 	  		 	  	
-  	    $obj = json_decode($params);  	   
+  	    $obj = json_decode($params);  	  
+        $gwf1arr = array();
 
 		foreach($obj as $doc){
 			if($doc->type == "alignment") {
 				if($doc->width != 0) $pm_box_width = "max-width:".$doc->width."px;max-width:".$doc->width."px;";
 				$custom_css.= "#pm_featurebox { $pm_box_width margin: ".$doc->top_margin."px auto ".$doc->bottom_margin."px; }"; 
 			} else if($doc->type == "text") {
-	 	  		$pm_h1 = $doc->params->text;		 	  			  			
-	 	  		$custom_css.= "h1#".$doc->id."{color:".$doc->params->color."; font-family:".$doc->params->font_family."; }" ;
-	 	  		$gwf1 = urlencode($doc->params->font_family);
+                $objid = $doc->id;
+	 	  		$$objid = $doc->params->text;		 	  			  			
+                $elem_type = explode("_", $objid);
+                $pre_selector = $elem_type[1]."#";
+	 	  		$custom_css.= $pre_selector.$doc->id."{color:".$doc->params->color."; font-family:".$doc->params->font_family."; font-weight:".$doc->params->variant." }" ;
+	 	  		$gwf1arr[] = urlencode($doc->params->font_family);
 	 	  	} else if($doc->type == "textarea") {
 	 	  		$pm_description = $doc->params->html;	 	  			  
 	 	  		$custom_css.= "#".$doc->id."{color:".$doc->params->color."; font-size:". $doc->params->font_size ."; font-family:".$doc->params->font_family."; }" ;
@@ -83,15 +87,17 @@
 	 	  		$service_meta = array("Aweber" => array("action_url" => "http://www.aweber.com/scripts/addlead.pl","name" => "email", "name_field" => "name"),
 							  "GetResponse" => array("action_url" => "https://app.getresponse.com/add_contact_webform.html","name" => "email", "name_field" => "name"),
 							  "iContact" => array("action_url" => "https://app.icontact.com/icp/signup.php","name" => "fields_email", "name_field" => "fields_fname"),
-							  "MailChimp" => array("action_url" => (isset($doc->params->action_url)?$doc->params->action_url:""), "name" => "EMAIL", "name_field" => "FNAME"),
-							  "ConstantContact" => array("action_url" => "http://www.formstack.com/forms/index.php","name" => "email", "name_field" => "first_name"),
-                              "CampaignMonitor" => array("action_url" => "http://".(isset($doc->params->cm_account_name)?$doc->params->cm_account_name:"").".createsend.com/t/r/s/".(isset($doc->params->cm_id)?$doc->params->cm_id:"")."/","name" => "cm-".(isset($doc->params->cm_id)?$doc->params->cm_id."-".$doc->params->cm_id:""), "name_field" => "cm-name"),                                      
+							  "MailChimp" => array("action_url" => $doc->params->action_url, "name" => "EMAIL", "name_field" => "FNAME"),
+							  "ConstantContact" => array("action_url" => "","name" => "fields[email_address][value]", "name_field" => "fields[first_name][value]"),
+                              "CampaignMonitor" => array("action_url" => "http://".$doc->params->cm_account_name.".createsend.com/t/r/s/".$doc->params->cm_id."/","name" => "cm-".$doc->params->cm_id."-".$doc->params->cm_id, "name_field" => "cm-name"),
 	 	  					  "InfusionSoft" => array("action_url" => "https://".$doc->params->account_subdomain.".infusionsoft.com/app/form/process/".$doc->params->inf_form_xid, "name" => "inf_field_Email", "name_field" => "inf_field_FirstName"),
 	 	  					  "Feedburner" => array("action_url" => "http://feedburner.google.com/fb/a/mailverify","name" => "email", "name_field" => "name"),	 	  				
-							  "MadMimi" => array("action_url" => "https://madmimi.com/signups/subscribe/". (isset($doc->params->webform_id)?$doc->params->webform_id:""),"name" => "signup[email]", "name_field" => "signup[name]"),	 	  											
-							  "MailPoet" => array("action_url" => "#pm_mailpoet","name" => "email", "name_field" => "name"),	
+							  "MadMimi" => array("action_url" => "https://madmimi.com/signups/subscribe/".$doc->params->webform_id,"name" => "signup[email]", "name_field" => "signup[name]"),	 	  											
+							  "MailPoet" => array("action_url" => "#pm_mailpoet","name" => "email", "name_field" => "name"),	 	  																		  
                               "Feedblitz" => array("action_url" => "http://www.feedblitz.com/f/f.fbz?Sub=".(isset($doc->params->sub)?$doc->params->sub:""),"name" => "email", "name_field" => "name"),
-                              "Jetpack" => array("action_url" => "","name" => "email", "name_field" => "name"),
+                              "Ontraport" => array("action_url" => "//forms.ontraport.com/v2.4/form_processor.php?","name" => "email", "name_field" => "firstname"),
+                              "SendInBlue" => array("action_url" => "https://my.sendinblue.com/users/subscribe/js_id/".(isset($doc->params->js_id)?$doc->params->js_id:"")."/id/1","name" => "email", "name_field" => "NAME"),                                      
+                              "Jetpack" => array("action_url" => "","name" => "email", "name_field" => "name"),                                      
 	 	  					  "Custom" => array("action_url" => (isset($doc->params->action_url)?$doc->params->action_url:""), "name" => (isset($doc->params->email_field_name)?$doc->params->email_field_name:""), "name_field" => (isset($doc->params->name_field_name)?$doc->params->name_field_name:""))
 				);
 				$service_name = $doc->params->service;
@@ -102,15 +108,22 @@
                 if($doc->params->service == "Jetpack") {
                     $pm_service_hiddens.="<input type='hidden' name='jetpack_subscriptions_widget' value='subscribe' />";
                 }
+                if($doc->params->service == "ConstantContact") {
+                    $pm_service_hiddens.="<input type='hidden' name='uniqueformid' value='Plugmatter' />";
+                }                
+                
                 
 				foreach($doc->params as $key=>$value){
 				 	if($key != "service"){
 						if($service_name == "Aweber" && $key == "redirect_url") {
 							$key = "redirect";
-						}    
+						}
 						if($service_name == "iContact" && $key == "specialid") {
 							$key = "specialid:" . $doc->params->listid;
-						}                            
+						}
+						if($service_name == "ConstantContact" && $key == "list_id") {
+							$key = "cc_newsletter[]";
+						}                        
 				 		if($service_name == "Custom") {
 							if(strpos($key, "value") !== false) {
 								$tmp_custom_key = substr($key,0, -6);
@@ -123,15 +136,19 @@
 				 			    $pm_service_hiddens.="<input type='hidden' name='".$key."' value='".$value."' />";					
                             }
 						}
+
 				 	}
-				}					
+				}
 	 	  	}
 	 	}
-	 	if($doc->type != "user_designed_template") {
+        if($doc->type != "user_designed_template") {
 	 		wp_enqueue_style('pm_button_style', plugins_url('/css/pm_btn_style.css', __FILE__));
 	 		
 	 		wp_enqueue_style('custom-style', plugins_url('/templates/'.$base_temp_name.'/style.css', __FILE__));
 	 		wp_add_inline_style( 'custom-style', $custom_css );
+            
+            wp_register_style('pm_bootstrap', plugins_url('/css/pm_bootstrap.css', __FILE__));
+	 		wp_enqueue_style('pm_bootstrap');            
 	 	  	  
 	 		wp_register_style('pm_gwf1', "http://fonts.googleapis.com/css?family=$gwf1");
 	 		wp_enqueue_style('pm_gwf1');

@@ -4,18 +4,20 @@
 
 var service_list = [];
 
-service_list.push({"service":"iContact","fields":["listid","clientid","specialid","formid"]});
 service_list.push({"service":"Aweber","fields":["listname","redirect_url","meta_adtracking"]});
-service_list.push({"service":"ConstantContact","fields":["llr","m","p"]});
 service_list.push({"service":"CampaignMonitor","fields":["cm_account_name","cm_id"]});
-service_list.push({"service":"GetResponse","fields":["webform_id"]});
-service_list.push({"service":"MailChimp","fields":["action_url"]});
-service_list.push({"service":"InfusionSoft","fields":["account_subdomain","inf_form_xid", "infusionsoft_version"]});
+service_list.push({"service":"ConstantContact","fields":["list_id","cc_redirect_url"]});
 service_list.push({"service":"Feedburner","fields":["uri"]});
-service_list.push({"service":"MadMimi","fields":["webform_id"]});
-service_list.push({"service":"MailPoet","fields":["list_id", "redirect_url"]});
 service_list.push({"service":"Feedblitz","fields":["sub"]});
+service_list.push({"service":"GetResponse","fields":["webform_id"]});
+service_list.push({"service":"iContact","fields":["listid","clientid","specialid","formid"]});
+service_list.push({"service":"InfusionSoft","fields":["account_subdomain","inf_form_xid", "infusionsoft_version"]});
 service_list.push({"service":"Jetpack","fields":[]});
+service_list.push({"service":"MadMimi","fields":["webform_id"]});
+service_list.push({"service":"MailChimp","fields":["action_url"]});
+service_list.push({"service":"MailPoet","fields":["list_id", "redirect_url"]});
+service_list.push({"service":"Ontraport","fields":["uid"]});
+service_list.push({"service":"SendInBlue","fields":["js_id","listid"]});
 service_list.push({"service":"Custom","fields":["action_url","email_field_name","name_field_name", "hidden_filed1","hidden_filed1_value","hidden_filed2","hidden_filed2_value","hidden_filed3","hidden_filed3_value"]});
 
 var email_service_option = {};
@@ -24,8 +26,10 @@ var email_service_option = {};
 
 var fonts = Array; 
 var fileref = ""; 
-var curfont1 = "";
+var curfont = Array;
 var curfont2 = "";
+curfont["pm_h1"] = "";
+curfont["pm_h2"] = "";
 
 //---------------------------------------------------------
 
@@ -102,9 +106,6 @@ jQuery(document).ready(function() {
 
 jQuery.fn.inlineEdit = function(edit_type) {
 	
-	
-	
-	
 	if(edit_type != "color"){
 		jQuery(this).addClass("pm_hover_icon_h");
 		jQuery(this).hover(function(e) {
@@ -137,7 +138,7 @@ jQuery.fn.inlineEdit = function(edit_type) {
 	 if(edit_type == "color"){
 		 var elem = jQuery(this);
 		 var elem_id = jQuery(elem).attr("id");		
-		 var bgcolr = jQuery(elem).css("background-color");		 
+		 var bgcolr = jQuery(elem).css("background-color");		
 		
 		 var colorpicker_div = "<div class='pmie_bgcolor_btn' id="+ elem_id+"_cpbtn >" +
 		 "<div class='pmie_bgcolorpicker_con' id="+ elem_id+"_cpc >" +
@@ -207,22 +208,26 @@ jQuery.fn.inlineEdit = function(edit_type) {
 
 			
 			jQuery("#pmie_h1_txt").focus();
-			jQuery("#pmie_h1_txt").css("font-family",curfont1);
-			get_fonts("text");
+            
+			jQuery("#pmie_h1_txt").css("font-family",curfont[elem.attr("id")]);
+			get_fonts("text", elem.attr("id"));
 			
-			var color = jQuery('#pm_h1').css("color");
+			var color = jQuery(this).css("color");
 			jQuery('#pmie_h1_txt').css("color",color);
-			var fontsize = jQuery('#pm_h1').css("font-size");
+			var fontsize = jQuery(this).css("font-size");
 			jQuery('#pmie_h1_txt').css("font-size",fontsize);
-			var fontfamily = jQuery('#pm_h1').css("font-family");
+			var fontfamily = jQuery(this).css("font-family");
 			jQuery('#pmie_h1_txt').css("font-family",fontfamily);
-			var width = jQuery('#pm_h1').css("width");
+			var width = jQuery(this).css("width");
 			jQuery('#pmie_h1_txt').css("width",width);
-			var height = jQuery('#pm_h1').css("height");
+			var height = jQuery(this).css("height");
 			jQuery('#pmie_h1_div').css("height",height);			
-			var height = jQuery('#pm_h1').css("height");
-			jQuery('#pmie_h1_div').css("height",height);				
-			
+			var line_height = jQuery(this).css("line-height");
+			jQuery('#pmie_h1_div').css("line-height",line_height);
+			var text_align = jQuery(this).css("text-align");
+			jQuery('#pmie_h1_txt').css("text-align",text_align);            
+			var font_weight = jQuery(this).css("font-weight");
+			jQuery('#pmie_h1_txt').css("font-weight",font_weight);   			
 			
 			jQuery(this).hide();
 			e.stopPropagation();
@@ -238,7 +243,7 @@ jQuery.fn.inlineEdit = function(edit_type) {
 			jQuery('#pmie_text_colorpick').farbtastic(function() {
 				var theColorIs =jQuery.farbtastic('#pmie_text_colorpick').color;
 				  jQuery("#pmie_h1_txt").css("color",theColorIs);				  
-				  jQuery("#pm_h1").css("color",theColorIs); 
+				  jQuery(this).css("color",theColorIs); 
 			}); 			
 
 			jQuery("#pmie_h1_div").click(function(e) {
@@ -598,7 +603,7 @@ function pm_get_url_params(url) {
   return query_string;
 }
 
-function get_fonts(area) {
+function get_fonts(area, id) {
 
 	if(area == "text"){
 
@@ -607,10 +612,10 @@ function get_fonts(area) {
 		//select1.setAttribute("id", "variants");
 		//jQuery('#pmie_text_tblr').prepend(select1);
 		//jQuery('#variants').append(jQuery("<option></option>").attr("value","").text("Select Variant"));
-		
 		var select = document.createElement("select");
 		select.setAttribute("name", "family");
 		select.setAttribute("id", "family");
+        select.setAttribute("class", "family-"+id);
 		jQuery('#pmie_text_tblr').prepend(select);
 		jQuery('#family').append(jQuery("<option></option>").attr("value","").text("Select font"));
 
@@ -619,7 +624,7 @@ function get_fonts(area) {
 			var variants = fonts[i]["variants"];
 			jQuery('#family').append(jQuery("<option></option>").attr("value",fam ).text(fam).attr("variants",variants ));
 		}
-		var fontfamily = jQuery('#pm_h1').css("font-family");
+		var fontfamily = jQuery("#"+id).css("font-family");
 		jQuery('#pmie_text_tblr select#family option[value="'+fontfamily+'"]').attr('selected', 'selected');
 		
 	} else if(area == "textarea") {
@@ -654,7 +659,7 @@ function get_fonts(area) {
 		jQuery('#pmie_rt_tblr select#family_textarea option[value="'+fontfamily+'"]').attr('selected', 'selected');
 	}
 
-	jQuery('#family').change(function() { 
+	jQuery('#family').change(function(e) { 
 		//var vr=jQuery("select#family option:selected").attr("variants");
 		//var n=vr.split(",");
 		//var sel = jQuery("select#variants");
@@ -664,7 +669,7 @@ function get_fonts(area) {
 		//	jQuery('#variants').append(jQuery("<option></option>").attr("value",n[i] ).text(n[i]));
 		//}
 		var txt_family=jQuery("#family option:selected").val();
-		font_txt_family(txt_family);
+		font_txt_family(txt_family, jQuery(e.target).attr("class"));
 	});		
 
 	jQuery("#variants").change(function() {	
@@ -693,7 +698,7 @@ function email_service_select_change() {
 			for(var j=0;j<service_list[i]["fields"].length; j++) {
 				jQuery('#email_service_form').append("<div id=service_lable_"+service_list[i]["fields"][j]+ "> "+service_list[i]["fields"][j]+"</div>");
 				if(email_service_option[service_list[i]["fields"][j]] != undefined) {
-					jQuery('#email_service_form').append("<div id= service_field_"+service_list[i]["fields"][j]+ "><input type=text value="+email_service_option[service_list[i]["fields"][j]]+ " class="+val+"_form  id="+service_list[i]["fields"][j]+" ></div>");
+					jQuery('#email_service_form').append("<div id= service_field_"+service_list[i]["fields"][j]+ "><input type='text' value="+email_service_option[service_list[i]["fields"][j]]+ " class="+val+"_form  id="+service_list[i]["fields"][j]+" ></div>");
 				} else {
 					jQuery('#email_service_form').append("<div id= service_field_"+service_list[i]["fields"][j]+" ><input type=text class="+val+"_form id="+service_list[i]["fields"][j]+"></div>");
 				}
@@ -767,11 +772,14 @@ function get_font_txtarea(font) {
 	document.getElementById("pm_description").style.fontFamily=font;
 }
 
-function update_fun(font) {	
-	curfont1 = font.replace(/ /g,"+");
-	var filename = "http://fonts.googleapis.com/css?family="+curfont1;			
+function update_fun() {	
+    var fnt_list = "";
+    for(fnt in curfont) {
+        fnt_list = fnt_list + curfont[fnt] + "|";
+    }
+    fnt_list = fnt_list.substring(0,fnt_list.length - 1);
+	var filename = "http://fonts.googleapis.com/css?family="+fnt_list;			
 	pm_style1.setAttribute("href", filename);			
-	document.getElementById("pm_h1").style.fontFamily=font;
 }
 
 function update_font_family(fam) {
@@ -791,13 +799,18 @@ function font_family(fam) {
 
 
 
-function font_txt_family(family){
-	curfont1 = family.replace(/ /g,"+");
-	var filename = "http://fonts.googleapis.com/css?family="+curfont1;			
+function font_txt_family(family, pid){
+    id = pid.split("-")[1];
+	curfont[id] = family.replace(/ /g,"+");
+    var fnt_list = "";
+    for(fnt in curfont) {
+        fnt_list = fnt_list + curfont[fnt] + "|";
+    }
+    fnt_list = fnt_list.substring(0,fnt_list.length - 1);
+	var filename = "http://fonts.googleapis.com/css?family="+fnt_list;			
 	pm_style1.setAttribute("href", filename);			
 	document.getElementById("pmie_h1_txt").style.fontFamily=family;	
-	document.getElementById("pm_h1").style.fontFamily=family;
-	
+	document.getElementById(id).style.fontFamily=family;
 }
 
 function validate(url) {		       

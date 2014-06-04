@@ -164,15 +164,15 @@ jQuery(document).ready(function(){
             jQuery('#ajax_load_temp').load(admin_url,function(){			
                 for(var i=0;i<params.length;i++) {
                     if(params[i]["type"] == "text") {
+                        var id = params[i]["id"];
+                        var text = params[i]["params"]["text"];                        
                         var color = params[i]["params"]["color"];
-                        jQuery('#pm_h1').css("color",color);
+                        jQuery("#"+id).css("color",color);
                         var font_family = params[i]["params"]["font_family"];
                         var font_weight =  params[i]["params"]["font_weight"];
-                        update_fun(font_family) ; 
-                        //alert(font_family);
-                        var id = params[i]["id"];
-                        var text = params[i]["params"]["text"];
-                        jQuery('#pm_h1').text(text);
+                        curfont[id] = font_family.replace(/ /g,"+");
+                        jQuery("#"+id).css("font-family", font_family);
+                        jQuery("#"+id).text(text);
                         jQuery("#"+id).inlineEdit(params[i]["type"]);
                     } else if(params[i]["type"] == "textarea") {
                         var html = params[i]["params"]["html"];
@@ -231,7 +231,8 @@ jQuery(document).ready(function(){
                         var id = params[i]["id"];	   		
                         jQuery("#"+id).inlineEdit(params[i]["type"]);
                     }
-                }	   
+                }	  
+                update_fun();
             }).show();	
             }, 2000);	
         }
@@ -310,7 +311,6 @@ jQuery(document).ready(function(){
 		   		} else if(edit_type == "service") {
 		   		  	jQuery("#"+this.id).inlineEdit(edit_type);
 		   		} else if(edit_type == "color") {	
-			   				   		
 		   		  	jQuery("#"+this.id).inlineEdit(edit_type);
 		   		} else if(edit_type == "image") {
 		   		  	jQuery("#"+this.id).inlineEdit(edit_type);
@@ -425,14 +425,20 @@ jQuery(document).ready(function(){
 });
 </script>
 </div></div>
-<?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite") { ?>
-<div style='background:#fff;border:#ddd;padding:20px;margin:30px;'>
-<div class='plug_enable_lable' style='margin-top:10px;width:100%;margin-bottom:20px;'>Need more base templates? Check them out:</div>    
-<div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_1.png"; ?>' width='225'></div>
-<div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_2.png"; ?>' width='225'></div>
-<div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_3.png"; ?>' width='225'></div>
-<div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_4.png"; ?>' width='225'></div>
-<div style='clear:both'>&nbsp;</div>
-<div style='margin:10px;text-align:center;'><input id="submit" class="pm_primary_buttons" type="button" value="Upgrade Get Them Now!" onclick="location.href='http://plugmatter.com/feature-box#plans&pricing'" name="submit"></div>    
-</div>
+<?php if(get_option("Plugmatter_PACKAGE") != "plug_featurebox_pro") { ?>
+    <div style='background:#fff;border:#ddd;padding:20px;margin:30px;'>
+        <div class='plug_enable_lable' style='margin-top:10px;width:100%;margin-bottom:20px;'>Need more base templates? Check them out:</div>    
+        <?php if(get_option("Plugmatter_PACKAGE") != "plug_featurebox_lite") { ?>
+            <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_3.png"; ?>' width='225'></div>
+            <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_4.png"; ?>' width='225'></div>
+            <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_5.png"; ?>' width='225'></div>
+            <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_6.png"; ?>' width='225'></div>
+        <?php } ?>
+        <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_7.png"; ?>' width='225'></div>
+        <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_8.png"; ?>' width='225'></div>
+        <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_9.png"; ?>' width='225'></div>
+        <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_10.png"; ?>' width='225'></div>        
+        <div style='clear:both'>&nbsp;</div>
+        <div style='margin:10px;text-align:center;'><input id="submit" class="pm_primary_buttons" type="button" value="Upgrade Get Them Now!" onclick="location.href='http://plugmatter.com/feature-box#plans&pricing'" name="submit"></div>    
+    </div>
 <?php } ?>

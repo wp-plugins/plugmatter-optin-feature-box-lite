@@ -25,6 +25,13 @@
 	padding: 5px;
 	position: absolute;
 	z-index: 5;
+	line-height:20px;
+}
+
+#email_service_form input[type="text"]  {
+	margin: 0 !important;
+    padding: 0 !important;
+    width: 150px !important;
 }
 
 #pmie_text_fontcolor {
@@ -317,7 +324,7 @@
 }
 
 #pmie_btn_tbl td{
-	padding: 3px;
+	padding: 2px;
 }
 
 #pm_picture_size_sug {

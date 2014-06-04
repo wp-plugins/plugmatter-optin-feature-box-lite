@@ -4,7 +4,7 @@ Plugin Name: Plugmatter Feature Box Lite
 Plugin URI: http://plugmatter.com/feature-box
 Description: Plugmatter Optin Feature Box is the Only List Building Plugin that Allows You to Create High Converting Optin Feature Boxes for Your WordPress Site.
 Author: Plugmatter
-Version: 1.4.4
+Version: 1.4.5
 Author URI: http://plugmatter.com/
 */
 
@@ -167,11 +167,11 @@ function ab_test_stats_page_callback(){
 
 function setting_submenu_page_callback() {
 	set_js_globals();
-	//if(get_option('Plugmatter_Featurebox_License') == "") {
-	//	include('license.php'); 
-	//} else {
+	if(get_option('Plugmatter_Featurebox_License') == "") {
+		include('license.php'); 
+	} else {
 		include('settings.php'); 
-	//}
+	}
 }
 
 function ab_test_submenu_page_callback() {
@@ -207,7 +207,8 @@ function pm_admin_styles($hook) {
 		wp_enqueue_style('thickbox');
 		wp_register_style('pm_inline_edit_style', plugins_url('css/pm_inline_edit.css', __FILE__));
 		wp_enqueue_style('pm_inline_edit_style');
-		wp_enqueue_style('pm_button_style', plugins_url('/css/pm_btn_style.css', __FILE__));		
+		wp_enqueue_style('pm_button_style', plugins_url('/css/pm_btn_style.css', __FILE__));
+        wp_enqueue_style('pm_bootstrap', plugins_url('/css/pm_bootstrap.css', __FILE__)); 
 	}
 	wp_register_style('pm_settings', plugins_url('css/style.css', __FILE__));
 	wp_enqueue_style('pm_settings');	
