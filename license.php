@@ -37,8 +37,10 @@ if(isset($_POST["license_key"] ) && ($_POST["license_key"]!="")) {
        if($res_arr[0] == "ERROR") {
            $msg_reg="<div class='pm_msg_error'><strong>".$res_arr[1]."</strong></div>";
        } else {
-           $msg_reg="<div class='pm_msg_success'><strong>".$res_arr[1]."</strong></div>";
+           $res_arr2 = explode("|",$res_arr[1]);
+           $msg_reg="<div class='pm_msg_success'><strong>".$res_arr2[0]."</strong></div>";
            $reg_done = true;
+           $lc_key = $res_arr2[1];
        }
     }
 
@@ -90,7 +92,7 @@ if(isset($_POST["license_key"] ) && ($_POST["license_key"]!="")) {
 		<div>
 			<div class='plug_enable_lable' style='width:250px'>Enter Your License Key</div>
 			<div class='plug_tgl_btn'>
-				<input type='text' name='license_key' size='45' style='padding:6px;'>
+				<input type='text' name='license_key' size='45' style='padding:6px;' value='<?php echo $lc_key; ?>'>
 			</div>
 			<div style='clear:both'>&nbsp;</div>
 		</div>
