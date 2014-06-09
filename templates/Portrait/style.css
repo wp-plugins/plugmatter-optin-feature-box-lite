@@ -10,7 +10,7 @@
 
 #pm_featurebox {
 	max-width: 960px;
-	height: 419px; 
+	height: 410px; 
 	-webkit-border-radius: 5px; 
 	-moz-border-radius: 5px; 
 	border-radius: 5px; 
@@ -36,11 +36,11 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     float: left;
-    height: 377px;
+    height: 335px;
     margin-left: 20px;
     margin-top: 20px;
     position: relative;
-    width: 377px;
+    width: 335px;
     z-index: 1;
 }
 

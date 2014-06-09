@@ -14,7 +14,7 @@ service_list.push({"service":"iContact","fields":["listid","clientid","specialid
 service_list.push({"service":"InfusionSoft","fields":["account_subdomain","inf_form_xid", "infusionsoft_version"]});
 service_list.push({"service":"Jetpack","fields":[]});
 service_list.push({"service":"MadMimi","fields":["webform_id"]});
-service_list.push({"service":"MailChimp","fields":["action_url"]});
+service_list.push({"service":"MailChimp","fields":["action_url","SIGNUP"]});
 service_list.push({"service":"MailPoet","fields":["list_id", "redirect_url"]});
 service_list.push({"service":"Ontraport","fields":["uid"]});
 service_list.push({"service":"SendInBlue","fields":["js_id","listid"]});
@@ -243,7 +243,7 @@ jQuery.fn.inlineEdit = function(edit_type) {
 			jQuery('#pmie_text_colorpick').farbtastic(function() {
 				var theColorIs =jQuery.farbtastic('#pmie_text_colorpick').color;
 				  jQuery("#pmie_h1_txt").css("color",theColorIs);				  
-				  jQuery(this).css("color",theColorIs); 
+				  elem.css("color",theColorIs); 
 			}); 			
 
 			jQuery("#pmie_h1_div").click(function(e) {
