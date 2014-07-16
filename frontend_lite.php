@@ -150,7 +150,7 @@
             wp_register_style('pm_bootstrap', plugins_url('/css/pm_bootstrap.css', __FILE__));
 	 		wp_enqueue_style('pm_bootstrap');            
 	 	  	  
-	 		wp_register_style('pm_gwf1', "http://fonts.googleapis.com/css?family=$gwf1");
+	 		wp_register_style('pm_gwf1', "http://fonts.googleapis.com/css?family=".implode("|", $gwf1arr));
 	 		wp_enqueue_style('pm_gwf1');
 	 	  	  
 	 		wp_register_style('pm_gwf2', "http://fonts.googleapis.com/css?family=$gwf2");
