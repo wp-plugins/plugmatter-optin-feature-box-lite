@@ -1,16 +1,17 @@
-<?php
+<?php 
 /*
 Plugin Name: Plugmatter Feature Box Lite
 Plugin URI: http://plugmatter.com/feature-box
 Description: Plugmatter Optin Feature Box is the Only List Building Plugin that Allows You to Create High Converting Optin Feature Boxes for Your WordPress Site.
 Author: Plugmatter
-Version: 1.4.6
+Version:  1.4.7
 Author URI: http://plugmatter.com/
 */
 
 //--- Global values---
 define('Plugmatter_PACKAGE', 'plug_featurebox_lite');
 //--------------------
+
 global $wpdb;
 $siteurl = get_option('siteurl');
 define('Plugmatter_FILE_PATH', dirname(__FILE__));
@@ -18,7 +19,7 @@ define('Plugmatter_DIR_NAME', basename(Plugmatter_FILE_PATH));
 define('Plugmatter_FOLDER', dirname(plugin_basename(__FILE__)));
 define('Plugmatter_URL', $siteurl.'/wp-content/plugins/' . Plugmatter_DIR_NAME);
 define('Plugmatter_GOOGLE_FONTS_KEY', "AIzaSyBKo64RSV_kiZ8T7_J5LNv_npD0YERvr5g");
-define('Plugmatter_UPNOTE', "<span style='color:red;'>This feature is available in premium packages. <a href='http://plugmatter.com/feature-box' target='_blank'><b>Upgrade Now!</b></a></span>");
+define('Plugmatter_UPNOTE', "<span style='color:red;'>This feature is available in higher packages. <a href='http://plugmatter.com/my/packages' target='_blank'><b>Upgrade Now!</b></a></span>");
 //------------------------------------------------
 
 
@@ -90,11 +91,11 @@ function plugmatter_uninstall() {
     $delete_options = "DELETE FROM wp_options WHERE option_name LIKE 'plugmatter_%' ";
     $wpdb->query($delete_options);
     delete_option('Plugmatter_PACKAGE');
-    delete_option('Plugmatter_Featurebox_License');		
+    delete_option('Plugmatter_Featurebox_License');	
 }
 
 add_action('admin_menu', 'plugmatter_plugin_menu');
-function plugmatter_plugin_menu() {		
+function plugmatter_plugin_menu() {
     if(Plugmatter_PACKAGE == "plug_featurebox_lite") {
         $plug_menu_lable = "Feature Box Lite";
     } else if(Plugmatter_PACKAGE == "plug_featurebox_single"){
@@ -103,7 +104,7 @@ function plugmatter_plugin_menu() {
         $plug_menu_lable = "Feature Box Pro";
     }
 	add_menu_page("Plugmatter Featurebox - Settings",$plug_menu_lable,'manage_options',__FILE__, 'setting_submenu_page_callback',plugins_url( Plugmatter_DIR_NAME.'/images/icon.png')	);		
-	add_submenu_page(__FILE__,"","",'manage_options',__FILE__, 'setting_submenu_page_callback');			
+	add_submenu_page(__FILE__,"","",'manage_options',__FILE__, 'setting_submenu_page_callback');
 	add_submenu_page( __FILE__, 'Plugmatter Featurebox - Templates', 'Templates','manage_options', 'template_submenu-page','template_submenu_page_callback' ); 	
 	add_submenu_page( __FILE__, 'Plugmatter Featurebox - Split-Testing','Split-Testing','manage_options', 'ab_test_submenu_page','ab_test_submenu_page_callback' ); 
 	add_submenu_page( __FILE__, 'Plugmatter Featurebox - General Settings', 'General Settings','manage_options', 'settings_submenu-page','setting_submenu_page_callback' ); 	
@@ -136,12 +137,14 @@ function get_fonts() {
 	die();
 }
 
+
 add_action('wp_ajax_plug_load_template', 'plug_load_template');
 function plug_load_template() {
 	$tem_name = $_GET["data"];
 	include(Plugmatter_FILE_PATH . "/templates/". $tem_name . "/template.php");
 	die();
 }
+
 
 add_action('wp_ajax_plug_get_page_content', 'plug_get_page_content');
 function plug_get_page_content() {
@@ -210,8 +213,8 @@ function pm_admin_styles($hook) {
 		wp_enqueue_style('thickbox');
 		wp_register_style('pm_inline_edit_style', plugins_url('css/pm_inline_edit.css', __FILE__));
 		wp_enqueue_style('pm_inline_edit_style');
-		wp_enqueue_style('pm_button_style', plugins_url('/css/pm_btn_style.css', __FILE__));
-        wp_enqueue_style('pm_bootstrap', plugins_url('/css/pm_bootstrap.css', __FILE__)); 
+		wp_enqueue_style('pm_button_style', plugins_url('/css/pm_btn_style.css', __FILE__));		
+        wp_enqueue_style('pm_bootstrap', plugins_url('/css/pm_bootstrap.css', __FILE__));        
 	}
 	wp_register_style('pm_settings', plugins_url('css/style.css', __FILE__));
 	wp_enqueue_style('pm_settings');	
@@ -331,6 +334,7 @@ function pm_save_postdata( $post_id ) {
 	}	
 }
 
+
 add_action( 'wp_ajax_pm_ab_track', 'pm_ab_track' );
 add_action('wp_ajax_nopriv_pm_ab_track', 'pm_ab_track');
 
@@ -371,6 +375,15 @@ function pm_ab_track() {
 		}
 	}		
 	die();
+}
+
+if(Plugmatter_PACKAGE != "plug_featurebox_lite") {
+    // About Auto Update 
+    require_once ("wp_plugin_auto_update.php");
+    $wp_plugin_auto_update = new WpPluginAutoUpdate('http://plugmatter.com/updates/index.php', 'stable',  basename(dirname(__FILE__)));
+
+    add_filter('pre_set_site_transient_update_plugins', array($wp_plugin_auto_update, 'check_for_plugin_update'));
+    add_filter('plugins_api', array($wp_plugin_auto_update, 'plugins_api_call'), 10, 3);
 }
 
 ?>
