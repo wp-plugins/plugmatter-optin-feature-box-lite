@@ -144,7 +144,7 @@ if(isset($_GET['action'])) {
 				?>
 				<tr>
 					<td class="post-title column-title">
-						<strong><a href="<?php echo admin_url('admin.php?page=ab_test_stats_page&ab_id=$id'); ?>" ><?php echo $compaign_name;?></a></strong>
+						<strong><a href="<?php echo admin_url("admin.php?page=ab_test_stats_page&ab_id=".$id); ?>" ><?php echo $compaign_name;?></a></strong>
 					</td>
 					<td>
 						<?php echo $boxA_name =  $results3->temp_name; ?>

@@ -10,6 +10,7 @@ $pm_box_width="0";
 $pm_box_tmargin="0";
 $pm_box_bmargin="0";
 $params = "";
+$pm_custom_css = "\" \"";
 //------------------
 if($_GET['action']=="edit" && $_GET['template_id']!='') {
 	 $temp_id= $_GET['template_id'];
@@ -25,6 +26,10 @@ if($_GET['action']=="edit" && $_GET['template_id']!='') {
 				$pm_box_width = $align->width;
 				$pm_box_tmargin = $align->top_margin;
 				$pm_box_bmargin = $align->bottom_margin;					
+			
+			}
+			if($align->type == "pm_custom_css"){
+			 	$pm_custom_css = json_encode($align->pm_custom_css); 
 				break;
 			}
 		}
@@ -114,6 +119,10 @@ function escapeJsonString($value) {
 				<div id="ajax_load_temp"></div>
 			</td>
 		</tr>
+		<tr>
+			<td colspan="2"><a id="pm_add_custom_css" href="#">Custom CSS (Advance Users)</a><br/>
+			<textarea name='pm_custom_css' id='pm_custom_css' rows="10" cols="45" style="display:none;"></textarea></td>
+		</tr>
 
 		<tr>
 			<td colspan="2"><br>
@@ -134,11 +143,28 @@ jQuery(document).ready(function(){
 	pm_temp_style.setAttribute("type", "text/css");
 	document.getElementsByTagName("head")[0].appendChild(pm_temp_style);
 
-	
-	
 	var temp_name = '<?php echo $temp_name; ?>';
 	var site_url = '<?php echo get_option('siteurl');?>';
 	var admin_url = '<?php echo admin_url("admin-ajax.php?action=plug_load_template&data=$base_temp_name") ?>';
+	
+	var pm_codemirror = CodeMirror.fromTextArea(document.getElementById("pm_custom_css"), {
+							lineNumbers: true,
+    						mode: "css"
+  						});
+	
+	if(String(<?php echo $pm_custom_css; ?>) !== ""){
+  		var pm_codemirror_value= <?php echo $pm_custom_css; ?>; 
+ 	} else{
+  		var pm_codemirror_value = " "; 
+ 	}
+	
+	pm_codemirror.setValue(pm_codemirror_value); 
+	
+	jQuery("#pm_add_custom_css").click(function(event){
+		event.preventDefault();
+		jQuery(".CodeMirror").toggle();
+	});
+	jQuery(".CodeMirror").hide();	
 
 	if(temp_name != "") {
 		var base_temp_name = '<?php echo $base_temp_name; ?>';
@@ -348,7 +374,12 @@ jQuery(document).ready(function(){
 		if(jQuery("#pm_box_tmargin").val() != "") { var pm_box_tmargin = jQuery("#pm_box_tmargin").val(); } else { var pm_box_tmargin = 0;}
 		if(jQuery("#pm_box_bmargin").val() != "") { var pm_box_bmargin = jQuery("#pm_box_bmargin").val(); } else { var pm_box_bmargin = 0;}
 		
+		var pm_code = pm_codemirror.getValue();
+		if(pm_code != ""){var pm_custom_css = pm_code;} else { var pm_custom_css = "";}
+				
 		json_params.push({"type":"alignment","width": pm_box_width, "top_margin":pm_box_tmargin, "bottom_margin":pm_box_bmargin});
+		
+		json_params.push({"type": "pm_custom_css","pm_custom_css": String(pm_custom_css) });
 		
 		if(template == "user_designed_template") {
 			sel_page_id = jQuery("select#select_page").val();
@@ -420,9 +451,8 @@ jQuery(document).ready(function(){
 		hidden.setAttribute("value", json_params);
         document.forms["form1"].submit();
 	});
-	
-
 });
+
 </script>
 </div></div>
 <?php if(get_option("Plugmatter_PACKAGE") != "plug_featurebox_pro") { ?>

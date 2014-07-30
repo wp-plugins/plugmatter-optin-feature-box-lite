@@ -179,6 +179,7 @@ if(isset($_POST["plugmatter_show_on_sections"] ) && ($_POST["plugmatter_show_on_
 }); 	
 </script>
 
+
 <div class='pmadmin_wrap'>
 	<div class='pmadmin_headbar'>
 		<div class='pmadmin_pagetitle'><h2>General Settings</h2></div>
@@ -247,8 +248,8 @@ if(isset($_POST["plugmatter_show_on_sections"] ) && ($_POST["plugmatter_show_on_
 				<td><label>Turn off Feature Box for Subscribed Visitors:</label></td>
 				<td width='10'>&nbsp;</td>
 				<td>
-					<input type="radio" value="1" name="plugmatter_show_temp_optinuser"	<?php if(get_option('plugmatter_show_temp_optinuser') == 1) echo "checked"; ?>>&nbsp;Disable &nbsp;&nbsp; 
-					<input type="radio" value="0" name="plugmatter_show_temp_optinuser"	<?php if(get_option('plugmatter_show_temp_optinuser') != 1) echo "checked"; ?>>&nbsp;Enable
+					<input type="radio" value="1" name="plugmatter_show_temp_optinuser"	<?php if(get_option('plugmatter_show_temp_optinuser') != 0) echo "checked"; ?>>&nbsp;Disable &nbsp;&nbsp; 
+					<input type="radio" value="0" name="plugmatter_show_temp_optinuser"	<?php if(get_option('plugmatter_show_temp_optinuser') == 0) echo "checked"; ?>>&nbsp;Enable
 				</td>
 				</tr>
 				
@@ -446,10 +447,6 @@ if(isset($_POST["plugmatter_show_on_sections"] ) && ($_POST["plugmatter_show_on_
 					</table>
 				</td>
 				</tr>				
-				
-				
-				
-				
 				<tr><td style='' colspan='3'>&nbsp;</td></tr>				
 			</table>
 		</div>

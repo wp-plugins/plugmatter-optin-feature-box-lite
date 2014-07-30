@@ -370,6 +370,12 @@ jQuery.fn.inlineEdit = function(edit_type) {
 					jQuery('#email_service_list').append(jQuery("<option></option>").attr("value",ser).text(ser));
 				}
 			}
+			var service_help = document.createElement('a');
+			service_help.setAttribute("href","http://plugmatter.com/user-guide");
+			service_help.setAttribute("id", "service_help");
+			service_help.innerHTML = 'HELP';
+			jQuery("#pm_email_service_list").append(service_help);
+
 			}
 			if(email_service_option["service"] != undefined) { email_service_select_change(); }
 			e.stopPropagation();
@@ -685,8 +691,6 @@ function get_fonts(area, id) {
 	});		
 }
 
-	
-
 
 function email_service_select_change() {
 	var val=jQuery("select#email_service_list option:selected").val();
@@ -703,6 +707,7 @@ function email_service_select_change() {
 					jQuery('#email_service_form').append("<div id= service_field_"+service_list[i]["fields"][j]+" ><input type=text class="+val+"_form id="+service_list[i]["fields"][j]+"></div>");
 				}
 			}
+			jQuery("#service_help").attr({href:"http://plugmatter.com/user-guide#"+val,title:val, target:"_balnk"});
 		}
 	}
 	jQuery('#email_service_form').append("<input type='button' value='save' id='pm_email_save_service'>");

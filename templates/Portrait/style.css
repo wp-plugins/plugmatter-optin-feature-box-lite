@@ -103,7 +103,7 @@ h1#pm_h1 {
     margin-right: 10px;
     width: 300px;
 }
-#pm_input{
+input[type="text"]#pm_input{
 	background-color: #fff;
     border: medium none;
     border-radius: 3px 3px 3px 3px;
@@ -112,7 +112,7 @@ h1#pm_h1 {
     font-size: 13px;
     font-style: italic;
     padding: 13px 13px 13px 15px;
-    width: 272px;
+    width: 300px;
 }
  
 #pm_button_div {
