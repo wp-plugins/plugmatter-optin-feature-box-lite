@@ -49,6 +49,9 @@
 			if($doc->type == "alignment") {
 				if($doc->width != 0) $pm_box_width = "max-width:".$doc->width."px;max-width:".$doc->width."px;";
 				$custom_css.= "#pm_featurebox { $pm_box_width margin: ".$doc->top_margin."px auto ".$doc->bottom_margin."px; }"; 
+			} 
+			else if($doc->type == "pm_custom_css") {
+				$pm_custom_css  = $doc->pm_custom_css;
 			} else if($doc->type == "text") {
                 $objid = $doc->id;
 	 	  		$$objid = $doc->params->text;		 	  			  			
@@ -141,6 +144,9 @@
 				}
 	 	  	}
 	 	}
+		
+		if($pm_custom_css) $custom_css .= $pm_custom_css;
+		
         if($doc->type != "user_designed_template") {
 	 		wp_enqueue_style('pm_button_style', plugins_url('/css/pm_btn_style.css', __FILE__));
 	 		

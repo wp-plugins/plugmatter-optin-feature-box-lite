@@ -4,7 +4,7 @@ Plugin Name: Plugmatter Feature Box Lite
 Plugin URI: http://plugmatter.com/feature-box
 Description: Plugmatter Optin Feature Box is the Only List Building Plugin that Allows You to Create High Converting Optin Feature Boxes for Your WordPress Site.
 Author: Plugmatter
-Version: 1.4.8
+Version: 1.4.9
 Author URI: http://plugmatter.com/
 */
 
@@ -108,7 +108,7 @@ function plugmatter_plugin_menu() {
 	add_submenu_page( __FILE__, 'Plugmatter Featurebox - Templates', 'Templates','manage_options', 'template_submenu-page','template_submenu_page_callback' ); 	
 	add_submenu_page( __FILE__, 'Plugmatter Featurebox - Split-Testing','Split-Testing','manage_options', 'ab_test_submenu_page','ab_test_submenu_page_callback' ); 
 	add_submenu_page( __FILE__, 'Plugmatter Featurebox - General Settings', 'General Settings','manage_options', 'settings_submenu-page','setting_submenu_page_callback' ); 	
-	add_submenu_page( __FILE__, 'Plugmatter Featurebox - Support', 'Support','manage_options', 'support_submenu-page','support_submenu_page_callback' );	
+	add_submenu_page( __FILE__, 'Plugmatter Featurebox - Get Support', 'Get Support','manage_options', 'support_submenu-page','support_submenu_page_callback' );	
 
 	add_submenu_page( '', 'Plugmatter Featurebox - Edit Template','','manage_options', 'edit_template_submenu-page','edit_template_submenu_page_callback' );
 	add_submenu_page( '', 'Plugmatter Featurebox - New A/B Split-Test Campaign','','manage_options', 'add_ab_test_submenu_page','add_ab_test_submenu_page_callback' );
@@ -221,7 +221,8 @@ function pm_admin_styles($hook) {
 		wp_register_style('pm_inline_edit_style', plugins_url('css/pm_inline_edit.css', __FILE__));
 		wp_enqueue_style('pm_inline_edit_style');
 		wp_enqueue_style('pm_button_style', plugins_url('/css/pm_btn_style.css', __FILE__));		
-        wp_enqueue_style('pm_bootstrap', plugins_url('/css/pm_bootstrap.css', __FILE__));        
+        wp_enqueue_style('pm_bootstrap', plugins_url('/css/pm_bootstrap.css', __FILE__));       
+		wp_enqueue_style('pm_codemirror', plugins_url('/css/pm_codemirror.css', __FILE__)); 		
 	}
 	wp_register_style('pm_settings', plugins_url('css/style.css', __FILE__));
 	wp_enqueue_style('pm_settings');	
