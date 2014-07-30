@@ -458,7 +458,7 @@ jQuery(document).ready(function(){
 <?php if(get_option("Plugmatter_PACKAGE") != "plug_featurebox_pro") { ?>
     <div style='background:#fff;border:#ddd;padding:20px;margin:30px;'>
         <div class='plug_enable_lable' style='margin-top:10px;width:100%;margin-bottom:20px;'>Need more base templates? Check them out:</div>    
-        <?php if(get_option("Plugmatter_PACKAGE") != "plug_featurebox_lite") { ?>
+        <?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite") { ?>
             <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_3.png"; ?>' width='225'></div>
             <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_4.png"; ?>' width='225'></div>
             <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_5.png"; ?>' width='225'></div>
