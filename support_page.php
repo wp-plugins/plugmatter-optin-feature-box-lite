@@ -69,7 +69,7 @@ if($_POST){
 			<div style='clear:both'>&nbsp;</div>
 			<div class='plug_enable_lable' style='width:150px'>Description</div>
 			<div class='plug_tgl_btn'>
-				<textarea name='support_description' rows='10' cols='50'><?php echo isset($_POST["support_description"])?$_POST["support_description"]:""; ?></textarea> 
+				<textarea name='support_description' rows='10' cols='55'><?php echo isset($_POST["support_description"])?$_POST["support_description"]:""; ?></textarea> 
 			</div>
 			<div style='clear:both'>&nbsp;</div>            
 		</div>
