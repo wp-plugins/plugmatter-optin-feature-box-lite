@@ -3,7 +3,7 @@ Contributors: SNaimath, Akramquraishi
 Tags: optin, optin popup, aweber, constant contact, dashboard, email, getresponse, icontact, mailchimp, onclick popup, page, pages, pop-up, popup, popup box, popup message, popup window, popups, post, posts, shortcode, unblockable, hover, lightbox, widget, mailpoet, wordpress popup, email list, build email list, grow email list, email list building, list building, email marketing, mailing list, email subscriptions, feature box, optin feature box, wp feature box, thesis feature box, list building plugin, optin box, optin form, forms, conversion, subscribers, subscriptions, newsletter.
 Requires at least: 3.7
 Tested up to: 3.9.0 and above
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 License: Premium
 License URI: http://plugmatter.com/feature-box/
 Donate Link: http://plugmatter.com/
@@ -147,16 +147,23 @@ At Plugmatter, we take Customer Support very seriously, even for our free users.
 
 == Changelog ==
 
-#### 1.5.0 ####
+#### 1.5.1 ####
 * submission button problem fixed.
+#### 1.5.0 ####
+* Submmit button enter issue fixed.
+
 #### 1.4.9 ####
 * Custom CSS option issue fixed
 * Get Support added
 * "Turn off feature box for subscribed visitors" setting disabled by default.
-* CSS fixed for template input and button. Required after implementing bootstrap.#### 1.4.8 ####
+* CSS fixed for template input and button. Required after implementing bootstrap.
+
+#### 1.4.8 ####
 * Separated main_lite to fix wordpress repo issue
 * Added custom css option in template editor
-* Added Contextual Help option for email services#### 1.4.7 ####
+* Added Contextual Help option for email services
+
+#### 1.4.7 ####
 * Shortcode processing for user designed templates
 
 #### 1.4.6 ####
@@ -243,7 +250,7 @@ At Plugmatter, we take Customer Support very seriously, even for our free users.
 * Fixed Aweber redirection issue.
 
 == Upgrade Notice ==
-There's a new version of Plugmatter Feature Box Lite i.e., version 1.5.0
+There's a new version of Plugmatter Feature Box Lite i.e., version 1.5.1
 
 
 
