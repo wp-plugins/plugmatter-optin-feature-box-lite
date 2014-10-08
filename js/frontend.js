@@ -31,7 +31,7 @@ jQuery(document).ready(function() {
 	}
 });
 
-	jQuery("#pm_form_submit").submit(function (){ 
+	jQuery("#pm_form_submit").submit(function (event){ 
 				
 		var email = jQuery('#pm_input').val();
 
@@ -59,6 +59,9 @@ jQuery(document).ready(function() {
 					});
 				} 
 			});
+			if(jQuery("#pm_form_submit").attr("action") == "#pm_mailpoet") {  
+        event.preventDefault();      
+      }
 			return true;
 		} else {
 				alert("You have entered an invalid email address!");  
