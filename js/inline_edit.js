@@ -789,20 +789,18 @@ function update_fun() {
 
 function update_font_family(fam) {
 	curfont2 = fam.replace(/ /g,"+");
-	var filename = "http://fonts.googleapis.com/css?family="+curfont2;			
+	var filename = "//fonts.googleapis.com/css?family="+curfont2;			
 	pm_style2.setAttribute("href", filename);			
 	document.getElementById("pm_description").style.fontFamily=fam;
 }
 
 function font_family(fam) {
 	curfont2 = fam.replace(/ /g,"+");
-	var filename = "http://fonts.googleapis.com/css?family="+curfont2;			
+	var filename = "//fonts.googleapis.com/css?family="+curfont2;			
 	pm_style2.setAttribute("href", filename);			
 	document.getElementById("pmie_rt_txtbox").style.fontFamily=fam;
 	document.getElementById("pm_description").style.fontFamily=fam;
 }
-
-
 
 function font_txt_family(family, pid){
     id = pid.split("-")[1];
@@ -812,14 +810,14 @@ function font_txt_family(family, pid){
         fnt_list = fnt_list + curfont[fnt] + "|";
     }
     fnt_list = fnt_list.substring(0,fnt_list.length - 1);
-	var filename = "http://fonts.googleapis.com/css?family="+fnt_list;			
+	var filename = "//fonts.googleapis.com/css?family="+fnt_list;			
 	pm_style1.setAttribute("href", filename);			
 	document.getElementById("pmie_h1_txt").style.fontFamily=family;	
 	document.getElementById(id).style.fontFamily=family;
 }
 
 function validate(url) {		       
-    var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+    var pattern = /((ftp|http|https):\/\/)?(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
        if (pattern.test(url)) {
            return true;
        }else{
@@ -828,7 +826,6 @@ function validate(url) {
        } 
            
 }
-
 
 function initDoc() {
 	oDoc = document.getElementById("pmie_rt_txtbox");

@@ -24,4 +24,6 @@
 			</div>
 		</div>
 		</div>
+		<div class='pm_clear'>&nbsp;</div>
 	</div>
+<div class='pm_clear'>&nbsp;</div>
