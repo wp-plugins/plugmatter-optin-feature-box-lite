@@ -313,7 +313,8 @@ jQuery.fn.inlineEdit = function(edit_type) {
 				  jQuery('#pmie_rt_txtbox').focus().select();
 				  jQuery('#pmie_rt_txtbox').css("color",theColorIs);				  
 				  jQuery('#pm_description').css("color",theColorIs); 
-				  formatDoc('forecolor',theColorIs);
+				 //formatDoc('forecolor',theColorIs);
+				  elem.css("color",theColorIs); 
 			}); 
 			
 			get_fonts("textarea");
@@ -855,5 +856,8 @@ function colorToHex(color) {
     var blue = parseInt(digits[4]);
     
     var rgb = blue | (green << 8) | (red << 16);
-    return digits[1] + '#' + rgb.toString(16);
+    //return digits[1] + "#" +rgb.toString(16);  
+	return digits[1]+"#" + (function(h){
+	return new Array(7-h.length).join("0")+h
+	})(rgb.toString(16).toUpperCase())
 }
