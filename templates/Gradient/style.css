@@ -18,7 +18,7 @@
     -webkit-box-shadow: 0 1px 2px #949393;
     -moz-box-shadow: 0 1px 2px #949393;
     -o-box-shadow: 0 1px 2px #949393;
-    font-family: 'Open Sans';
+    font-family: Open Sans;
     height: 331px;
     margin: 20px auto;
 	max-width: 960px;
@@ -121,7 +121,7 @@ input[type="button"].pm_default_btn {
   -moz-box-shadow:0 1px 2px #7C7F82, 0 1px #9BEA54 inset;
   -o-box-shadow: 0 1px 2px #7C7F82, 0 1px #9BEA54 inset;
   color: #FFFFFF;
-  font-family: 'Open Sans';
+  font-family: Open Sans;
   font-size: 14px;
   font-weight: bold;
   padding: 8px 20px;

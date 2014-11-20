@@ -1,4 +1,4 @@
-<?php 
+  <?php 
 $msg = '';
 $msg_reg='';
 $reg_done = false;

@@ -808,7 +808,9 @@ function font_txt_family(family, pid){
 	curfont[id] = family.replace(/ /g,"+");
     var fnt_list = "";
     for(fnt in curfont) {
-        fnt_list = fnt_list + curfont[fnt] + "|";
+    	  if(curfont[fnt]){
+          fnt_list = fnt_list + curfont[fnt] + "|";
+        }
     }
     fnt_list = fnt_list.substring(0,fnt_list.length - 1);
 	var filename = "//fonts.googleapis.com/css?family="+fnt_list;			

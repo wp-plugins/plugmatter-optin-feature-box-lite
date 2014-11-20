@@ -143,14 +143,20 @@ jQuery(document).ready(function(){
 	pm_temp_style.setAttribute("type", "text/css");
 	document.getElementsByTagName("head")[0].appendChild(pm_temp_style);
 
+
+  pm_custom_style = document.createElement("STYLE");
+  pm_custom_style.setAttribute("id", "pm_custom_style");
+  pm_custom_style.type = 'text/css';
+  document.getElementsByTagName('head')[0].appendChild(pm_custom_style);
+
 	var temp_name = '<?php echo $temp_name; ?>';
 	var site_url = '<?php echo get_option('siteurl');?>';
 	var admin_url = '<?php echo admin_url("admin-ajax.php?action=plug_load_template&data=$base_temp_name") ?>';
 	
 	var pm_codemirror = CodeMirror.fromTextArea(document.getElementById("pm_custom_css"), {
-							lineNumbers: true,
-    						mode: "css"
-  						});
+						            lineNumbers: true,
+    						        mode: "css"
+  						        });
 	
 	if(String(<?php echo $pm_custom_css; ?>) !== ""){
   		var pm_codemirror_value= <?php echo $pm_custom_css; ?>; 
@@ -164,9 +170,20 @@ jQuery(document).ready(function(){
 		event.preventDefault();
 		jQuery(".CodeMirror").toggle();
 	});
+
 	jQuery(".CodeMirror").hide();	
 
-	if(temp_name != "") {
+   pm_codemirror.on("blur", function(pm_codemirror){
+    var pm_icss = pm_codemirror.getValue();
+    if (pm_custom_style.styleSheet){
+        pm_custom_style.styleSheet.cssText = pm_icss;
+    } else {
+        pm_custom_style.appendChild(document.createTextNode(pm_icss));
+    }
+    document.getElementsByTagName('head')[0].appendChild(pm_custom_style);
+  });
+
+	if(temp_name != ""){
 		var base_temp_name = '<?php echo $base_temp_name; ?>';
 		
 		var page_id = "";
@@ -180,90 +197,93 @@ jQuery(document).ready(function(){
 				});
                 var user_designed_template = true;
 			}	
-		}
-		
-        if(user_designed_template != true) {
-            var filename = plugin_url+'templates/'+base_temp_name+"/style.css";
-            pm_temp_style.setAttribute("href", filename);			
-            jQuery('#ajax_load_temp').html("<div class ='pm_loading' style='width:100%;height:300px; background:url("+plugin_url+"images/loading.gif"+") no-repeat scroll center;'>&nbsp;</div>").show();
-            setTimeout(function() {
-            jQuery('#ajax_load_temp').load(admin_url,function(){			
-                for(var i=0;i<params.length;i++) {
-                    if(params[i]["type"] == "text") {
-                        var id = params[i]["id"];
-                        var text = params[i]["params"]["text"];                        
-                        var color = params[i]["params"]["color"];
-                        jQuery("#"+id).css("color",color);
-                        var font_family = params[i]["params"]["font_family"];
-                        var font_weight =  params[i]["params"]["font_weight"];
-                        curfont[id] = font_family.replace(/ /g,"+");
-                        jQuery("#"+id).css("font-family", font_family);
-                        jQuery("#"+id).text(text);
-                        jQuery("#"+id).inlineEdit(params[i]["type"]);
-                    } else if(params[i]["type"] == "textarea") {
-                        var html = params[i]["params"]["html"];
-                        jQuery('#pm_description').html(html);
-                        var color = params[i]["params"]["color"];
-                        jQuery('#pm_description').css("color", color);										
-                        var font_size = params[i]["params"]["font_size"];
-                        jQuery('#pm_description').css("font-size", font_size);
-                        var font_family = params[i]["params"]["font_family"];
-                        update_font_family(font_family);	
-                        //alert(font_family);
-                        var id = params[i]["id"];	 	   	
-                        jQuery("#"+id).inlineEdit(params[i]["type"]);				  	
-                    } else if(params[i]["type"] == "service") {
-                        var html = params[i]["params"];
-                        jQuery.each(html, function(name,value) {
-                            email_service_option[name] = value;
-                        });
-                        var id = params[i]["id"]; 
-                        jQuery("#"+id).inlineEdit(params[i]["type"]);
-                     jQuery("#pm_exclamation_icon").attr('src',plugin_url+"/images/tick-icon.png").css("opacity","1");
-                    } else if(params[i]["type"] == "color") {							   		
-                        var bgcolor = params[i]["params"]["bgcolor"];			           
-                        var id = params[i]["id"]; 		                       
-                        if(jQuery("#"+id).attr("gradient") != null) {				       		 		
-                            var rules = jQuery("#"+id).css("background-image");				 		
-                            var new_rules = rules.replace(/rgb\((\d{1,3}), (\d{1,3}), (\d{1,3})\)/,bgcolor);							 	
-                            jQuery("#"+id).css("background-image",new_rules);
-                            jQuery("#"+id).attr("gradient",bgcolor);		    			 	    				    
-                         } else {			
-                            jQuery("#"+id).css("background-color", bgcolor);					 		
-                         }
-                         jQuery("#"+id).inlineEdit(params[i]["type"]);					 
-                    } else if(params[i]["type"] == "image") {
-                        var img_url = params[i]["params"]["img_url"];					
-                        jQuery("#pm_image").css('background-image',img_url);
-                        var id = params[i]["id"];	   		
-                        jQuery("#"+id).inlineEdit(params[i]["type"]);	
-                    } else if(params[i]["type"] == "video") {
-                        var id = params[i]["id"];	 
-                        var video_src = params[i]["params"]["video_src"];		
-                        var video_url = params[i]["params"]["video_url"];		
-                        jQuery("#pm_video").attr("src", video_src);
-                        jQuery("#pm_video").attr("video_url", video_url);
-                        jQuery("#"+id).inlineEdit(params[i]["type"]);
-                    } else if(params[i]["type"] == "button") {
-                        var txt = params[i]["params"]["text"];
-                        var btn_class = params[i]["params"]["btn_class"];	
-                        var email_input = params[i]["params"]["email_input"];
-                        var name_input = params[i]["params"]["name_input"];
-                        jQuery("#pm_input").val(email_input);
-                        jQuery("#pm_name_field").val(name_input);                        
-                        jQuery("#pm_button").val(txt);	
-                        jQuery("#pm_button").removeClass();
-                        jQuery("#pm_button").addClass(btn_class);			           
-                        var id = params[i]["id"];	   		
-                        jQuery("#"+id).inlineEdit(params[i]["type"]);
-                    }
-                }	  
-                update_fun();
-            }).show();	
-            }, 2000);	
-        }
-	}
+		}	
+    
+   
+    if(user_designed_template != true) {
+      var filename = plugin_url+'templates/'+base_temp_name+"/style.css";
+      pm_temp_style.setAttribute("href", filename);			
+      jQuery('#ajax_load_temp').html("<div class ='pm_loading' style='width:100%;height:300px; background:url("+plugin_url+"images/loading.gif"+") no-repeat scroll center;'>&nbsp;</div>").show();
+      setTimeout(function() {
+      jQuery('#ajax_load_temp').load(admin_url,function(){			
+          for(var i=0;i<params.length;i++) {
+              if(params[i]["type"] == "text") {
+                  var id = params[i]["id"];
+                  var text = params[i]["params"]["text"];                        
+                  var color = params[i]["params"]["color"];
+                  jQuery("#"+id).css("color",color);
+                  var font_family = params[i]["params"]["font_family"];
+                  var font_weight =  params[i]["params"]["font_weight"];
+                  curfont[id] = font_family.replace(/ /g,"+");
+                  jQuery("#"+id).css("font-family", font_family);
+                  jQuery("#"+id).text(text);
+                  jQuery("#"+id).inlineEdit(params[i]["type"]);
+              } else if(params[i]["type"] == "textarea") {
+                  var html = params[i]["params"]["html"];
+                  jQuery('#pm_description').html(html);
+                  var color = params[i]["params"]["color"];
+                  jQuery('#pm_description').css("color", color);										
+                  var font_size = params[i]["params"]["font_size"];
+                  jQuery('#pm_description').css("font-size", font_size);
+                  var font_family = params[i]["params"]["font_family"];
+                  update_font_family(font_family);	
+                  //alert(font_family);
+                  var id = params[i]["id"];	 	   	
+                  jQuery("#"+id).inlineEdit(params[i]["type"]);				  	
+              } else if(params[i]["type"] == "service") {
+                  var html = params[i]["params"];
+                  jQuery.each(html, function(name,value) {
+                      email_service_option[name] = value;
+                  });
+                  var id = params[i]["id"]; 
+                  jQuery("#"+id).inlineEdit(params[i]["type"]);
+               jQuery("#pm_exclamation_icon").attr('src',plugin_url+"/images/tick-icon.png").css("opacity","1");
+              } else if(params[i]["type"] == "color") {							   		
+                  var bgcolor = params[i]["params"]["bgcolor"];			           
+                  var id = params[i]["id"]; 		                       
+                  if(jQuery("#"+id).attr("gradient") != null) {				       		 		
+                      var rules = jQuery("#"+id).css("background-image");				 		
+                      var new_rules = rules.replace(/rgb\((\d{1,3}), (\d{1,3}), (\d{1,3})\)/,bgcolor);							 	
+                      jQuery("#"+id).css("background-image",new_rules);
+                      jQuery("#"+id).attr("gradient",bgcolor);		    			 	    				    
+                   } else {			
+                      jQuery("#"+id).css("background-color", bgcolor);					 		
+                   }
+                   jQuery("#"+id).inlineEdit(params[i]["type"]);					 
+              } else if(params[i]["type"] == "image") {
+                  var img_url = params[i]["params"]["img_url"];					
+                  jQuery("#pm_image").css('background-image',img_url);
+                  var id = params[i]["id"];	   		
+                  jQuery("#"+id).inlineEdit(params[i]["type"]);	
+              } else if(params[i]["type"] == "video") {
+                  var id = params[i]["id"];	 
+                  var video_src = params[i]["params"]["video_src"];		
+                  var video_url = params[i]["params"]["video_url"];		
+                  jQuery("#pm_video").attr("src", video_src);
+                  jQuery("#pm_video").attr("video_url", video_url);
+                  jQuery("#"+id).inlineEdit(params[i]["type"]);
+              } else if(params[i]["type"] == "button") {
+                  var txt = params[i]["params"]["text"];
+                  var btn_class = params[i]["params"]["btn_class"];	
+                  var email_input = params[i]["params"]["email_input"];
+                  var name_input = params[i]["params"]["name_input"];
+                  jQuery("#pm_input").val(email_input);
+                  jQuery("#pm_name_field").val(name_input);                        
+                  jQuery("#pm_button").val(txt);	
+                  jQuery("#pm_button").removeClass();
+                  jQuery("#pm_button").addClass(btn_class);			           
+                  var id = params[i]["id"];	   		
+                  jQuery("#"+id).inlineEdit(params[i]["type"]);
+              }
+          }	  
+          update_fun();
+      }).show();	
+      }, 2000);	
+    }
+	  
+  }
 
+ 
 
 	jQuery("select#base_temp_name").change(function(){
 		jQuery('#ajax_load_temp').html("<div class ='pm_loading' style='width:100%;height:300px;"+ 
@@ -469,6 +489,6 @@ jQuery(document).ready(function(){
         <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_9.png"; ?>' width='225'></div>
         <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/up_preview_10.png"; ?>' width='225'></div>        
         <div style='clear:both'>&nbsp;</div>
-        <div style='margin:10px;text-align:center;'><input id="submit" class="pm_primary_buttons" type="button" value="Upgrade Get Them Now!" onclick="location.href='http://plugmatter.com/feature-box#plans&pricing'" name="submit"></div>    
+        <div style='margin:10px;text-align:center;'><input id="submit" class="pm_primary_buttons" type="button" value="Upgrade To Get More Templates!" onclick="location.href='http://plugmatter.com/feature-box#plans&pricing'" name="submit"></div>    
     </div>
 <?php } ?>
