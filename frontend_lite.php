@@ -65,13 +65,69 @@
 	 	  		$gwf2 = urlencode($doc->params->font_family);	 	  			  
 	 	  	} else if($doc->type == "color") {
 				if($doc->params->gradient == "yes"){
-					$custom_css.= "#".$doc->id."{background: -moz-linear-gradient(left,  ".$doc->params->bgcolor." 57%, rgba(255,255,255,0.48) 72%, rgba(255,255,255,0.03) 85%, rgba(255,255,255,0) 86%); /* FF3.6+ */
-					background: -webkit-gradient(linear, left top, right top, color-stop(57%,".$doc->params->bgcolor."), color-stop(72%,rgba(255,255,255,0.48)), color-stop(85%,rgba(255,255,255,0.03)), color-stop(86%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
-					background: -webkit-linear-gradient(left,  ".$doc->params->bgcolor." 57%,rgba(255,255,255,0.48) 72%,rgba(255,255,255,0.03) 85%,rgba(255,255,255,0) 86%); /* Chrome10+,Safari5.1+ */
-					background: -o-linear-gradient(left,  ".$doc->params->bgcolor." 57%,rgba(255,255,255,0.48) 72%,rgba(255,255,255,0.03) 85%,rgba(255,255,255,0) 86%); /* Opera 11.10+ */
-					background: -ms-linear-gradient(left,  ".$doc->params->bgcolor." 57%,rgba(255,255,255,0.48) 72%,rgba(255,255,255,0.03) 85%,rgba(255,255,255,0) 86%); /* IE10+ */
-					background: linear-gradient(to right,  ".$doc->params->bgcolor." 57%,rgba(255,255,255,0.48) 72%,rgba(255,255,255,0.03) 85%,rgba(255,255,255,0) 86%); /* W3C */
-					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=".$doc->params->bgcolor.", endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 */
+					$custom_css.= "#".$doc->id."{
+						background: linear-gradient(to right,  ".$doc->params->bgcolor." 57%,rgba(255,255,255,0.48) 72%,rgba(255,255,255,0.03) 85%,rgba(255,255,255,0) 86%); /* W3C */
+						background: -moz-linear-gradient(left,  ".$doc->params->bgcolor." 57%, rgba(255,255,255,0.48) 72%, rgba(255,255,255,0.03) 85%, rgba(255,255,255,0) 86%); /* FF3.6+ */
+						background: -webkit-gradient(linear, left top, right top, color-stop(57%,".$doc->params->bgcolor."), color-stop(72%,rgba(255,255,255,0.48)), color-stop(85%,rgba(255,255,255,0.03)), color-stop(86%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+						background: -webkit-linear-gradient(left,  ".$doc->params->bgcolor." 57%,rgba(255,255,255,0.48) 72%,rgba(255,255,255,0.03) 85%,rgba(255,255,255,0) 86%); /* Chrome10+,Safari5.1+ */
+						background: -o-linear-gradient(left,  ".$doc->params->bgcolor." 57%,rgba(255,255,255,0.48) 72%,rgba(255,255,255,0.03) 85%,rgba(255,255,255,0) 86%); /* Opera 11.10+ */
+						background: -ms-linear-gradient(left,  ".$doc->params->bgcolor." 57%,rgba(255,255,255,0.48) 72%,rgba(255,255,255,0.03) 85%,rgba(255,255,255,0) 86%); /* IE10+ */						
+						filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=".$doc->params->bgcolor.", endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 */
+	 	  			}";
+	 	  			$custom_css.="@media only screen and (min-width : 768px) and (max-width : 1023px) { ".
+	 	  				"#".$doc->id. " {
+							    background: linear-gradient(to right, ".$doc->params->bgcolor." 60%, rgba(255, 255, 255, 0.48) 70%, rgba(255, 255, 255, 0.03) 85%, rgba(255, 255, 255, 0) 86%) repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+							    background: -moz-linear-gradient(left,  ".$doc->params->bgcolor.") 60%, ".$doc->params->bgcolor.") 70%, rgba(255,255,255,0.03) 85%, rgba(255,255,255,0) 86%) !important;
+								background: -webkit-gradient(linear, left top, right top, color-stop(60%,rgba(255,255,255,1)), color-stop(70%,rgba(255,255,255,0.48)), color-stop(85%,rgba(255,255,255,0.03)), color-stop(86%,rgba(255,255,255,0))) !important;
+								background: -webkit-linear-gradient(left,  ".$doc->params->bgcolor." 60%,rgba(255,255,255,0.48) 70%,rgba(255,255,255,0.03) 85%,rgba(255,255,255,0) 86%) !important;
+								background: -o-linear-gradient(left,  ".$doc->params->bgcolor." 60%,rgba(255,255,255,0.48) 70%,rgba(255,255,255,0.03) 85%,rgba(255,255,255,0) 86%); !important;
+								background: -ms-linear-gradient(left,  ".$doc->params->bgcolor." 60%,rgba(255,255,255,0.48) 70%,rgba(255,255,255,0.03) 85%,rgba(255,255,255,0) 86%); !important;
+								height: 338px !important;
+
+							}
+							#pm_content { background-color :  ".$doc->params->bgcolor." }
+	 	  			}  ";
+	 	  			$custom_css.= "@media only screen and (min-width : 480px) and (max-width : 767px) {".
+	 	  				"#".$doc->id. " {
+							padding-top:339px !important;
+							background: linear-gradient(to top, ".$doc->params->bgcolor." 52%, rgba(255, 255, 255, 0.48) 65%, rgba(255, 255, 255, 0.03) 80%, rgba(255, 255, 255, 0) 86%) repeat scroll 0 0 rgba(0, 0, 0, 0) !important; /* W3C */
+						    background: -moz-linear-gradient(center bottom,  ".$doc->params->bgcolor." 12%, rgba(255,255,255,0.48) 45%, rgba(255,255,255,0.03) 80%, rgba(255,255,255,0) 86%) !important; 
+							background: -webkit-gradient(linear, bottom top, right top, color-stop(52%,".$doc->params->bgcolor."), color-stop(65%,rgba(255,255,255,0.48)), color-stop(80%,rgba(255,255,255,0.03)), color-stop(86%,rgba(255,255,255,0))) !important; /* Chrome,Safari4+ */
+							background: -webkit-linear-gradient(bottom,  ".$doc->params->bgcolor." 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important; /* Chrome10+,Safari5.1+ */
+							background: -o-linear-gradient(bottom, ".$doc->params->bgcolor." 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important; /* Opera 11.10+ */
+							background: -ms-linear-gradient(bottom, ".$doc->params->bgcolor." 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important; /* IE10+ */
+							top: 0px !important;
+							left: 0px !important;
+						}
+						#pm_content { background-color :  ".$doc->params->bgcolor." }
+	 	  			}";
+	 	  			$custom_css.= "@media only screen and (min-width : 320px) and (max-width : 479px) { ".
+	 	  				"#".$doc->id. " {
+							padding-top:350px;
+							background: linear-gradient(to top, ".$doc->params->bgcolor." 52%, rgba(255, 255, 255, 0.48) 65%, rgba(255, 255, 255, 0.03) 80%, rgba(255, 255, 255, 0) 86%) repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+						    background: -moz-linear-gradient(center bottom,  ".$doc->params->bgcolor." 13%, rgba(255,255,255,0.48) 45%, rgba(255,255,255,0.03) 80%, rgba(255,255,255,0) 86%) !important; 
+							background: -webkit-gradient(linear, bottom top, right top, color-stop(52%, ".$doc->params->bgcolor." ), color-stop(65%,rgba(255,255,255,0.48)), color-stop(80%,rgba(255,255,255,0.03)), color-stop(86%,rgba(255,255,255,0))) !important;
+							background: -webkit-linear-gradient(bottom,  ".$doc->params->bgcolor." 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important;
+							background: -o-linear-gradient(bottom, ".$doc->params->bgcolor." 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important;
+							background: -ms-linear-gradient(bottom, ".$doc->params->bgcolor." 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important;
+							top: 0px !important;
+							left: 0px !important;
+						}
+						#pm_content { background-color :  ".$doc->params->bgcolor." }
+					}";
+					$custom_css.= "@media only screen and (min-width : 240px) and (max-width: 319px){ ".
+	 	  				"#".$doc->id. " {
+							padding-top:350px;
+							background: linear-gradient(to top, ".$doc->params->bgcolor." 52%, rgba(255, 255, 255, 0.48) 65%, rgba(255, 255, 255, 0.03) 80%, rgba(255, 255, 255, 0) 86%) repeat scroll 0 0 rgba(0, 0, 0, 0) !important; /* W3C */
+						    background: -moz-linear-gradient(center bottom,  ".$doc->params->bgcolor." 13%, rgba(255,255,255,0.48) 45%, rgba(255,255,255,0.03) 80%, rgba(255,255,255,0) 86%) !important; /* FF3.6+ */
+							background: -webkit-gradient(linear, bottom top, right top, color-stop(52%,".$doc->params->bgcolor."), color-stop(65%,rgba(255,255,255,0.48)), color-stop(80%,rgba(255,255,255,0.03)), color-stop(86%,rgba(255,255,255,0))) !important; /* Chrome,Safari4+ */
+							background: -webkit-linear-gradient(bottom,  ".$doc->params->bgcolor." 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important; /* Chrome10+,Safari5.1+ */
+							background: -o-linear-gradient(bottom, ".$doc->params->bgcolor." 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important; /* Opera 11.10+ */
+							background: -ms-linear-gradient(bottom, ".$doc->params->bgcolor." 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important; /* IE10+ */
+							top: 0px !important;
+							left: 0px !important;
+						}
+						#pm_content { background-color :  ".$doc->params->bgcolor." }
 	 	  			}";
 				} else {
 					$custom_css.= "#".$doc->id."{background-color:".$doc->params->bgcolor."; }" ;

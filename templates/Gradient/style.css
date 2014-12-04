@@ -27,7 +27,7 @@
 
 #pm_content_con{
 	position:absolute;
-	left:-1px;
+	left:-2px;
 	top:-1px;
 	width:100%;
 	z-index:2;
@@ -44,12 +44,12 @@
 
 #pm_content {
     width:55%;
-	margin-left:40px;
+	padding-left:40px;
 }
 
 #pm_h1_div {
 	word-break: break-word;
-	margin:20px 0px 10px;
+	padding:20px 0px 10px;
 }
 
 h1#pm_h1{
@@ -67,7 +67,7 @@ h1#pm_h1{
 
 .pm_description {
 	overflow: hidden;
-	height:110px;
+	height:115px;
 	font-weight:normal;
 	font-size:13px;
 }
@@ -167,16 +167,7 @@ h1#pm_h1{
 	line-height: 30px !important;
 
 }
-#pm_content_con {
-    background: linear-gradient(to right, #FFFFFF 60%, rgba(255, 255, 255, 0.48) 70%, rgba(255, 255, 255, 0.03) 85%, rgba(255, 255, 255, 0) 86%) repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
-    background: -moz-linear-gradient(left,  rgba(255,255,255,1) 60%, rgba(255,255,255,0.48) 70%, rgba(255,255,255,0.03) 85%, rgba(255,255,255,0) 86%) !important;
-	background: -webkit-gradient(linear, left top, right top, color-stop(60%,rgba(255,255,255,1)), color-stop(70%,rgba(255,255,255,0.48)), color-stop(85%,rgba(255,255,255,0.03)), color-stop(86%,rgba(255,255,255,0))) !important;
-	background: -webkit-linear-gradient(left,  rgba(255,255,255,1) 60%,rgba(255,255,255,0.48) 70%,rgba(255,255,255,0.03) 85%,rgba(255,255,255,0) 86%) !important;
-	background: -o-linear-gradient(left,  rgba(255,255,255,1) 60%,rgba(255,255,255,0.48) 70%,rgba(255,255,255,0.03) 85%,rgba(255,255,255,0) 86%); !important;
-	background: -ms-linear-gradient(left,  rgba(255,255,255,1) 60%,rgba(255,255,255,0.48) 70%,rgba(255,255,255,0.03) 85%,rgba(255,255,255,0) 86%); !important;
-	height: 338px !important;
 
-}
 #pm_image {
     height: 336px !important;
 }
@@ -214,8 +205,8 @@ input[type="button"].pm_default_btn {
 }
 
 #pm_content {
-    margin: 15px !important;
-    width: 94% !important;
+    padding: 15px !important;
+    width: 100% !important;
 }
 
 #pm_image {
@@ -226,17 +217,7 @@ input[type="button"].pm_default_btn {
 	height: 333px !important;
 }
 
-#pm_content_con {
-	padding-top:334px !important;
-	background: linear-gradient(to top, #FFFFFF 52%, rgba(255, 255, 255, 0.48) 65%, rgba(255, 255, 255, 0.03) 80%, rgba(255, 255, 255, 0) 86%) repeat scroll 0 0 rgba(0, 0, 0, 0) !important; /* W3C */
-    background: -moz-linear-gradient(center bottom,  rgba(255,255,255,1) 12%, rgba(255,255,255,0.48) 45%, rgba(255,255,255,0.03) 80%, rgba(255,255,255,0) 86%) !important; 
-	background: -webkit-gradient(linear, bottom top, right top, color-stop(52%,rgba(255,255,255,1)), color-stop(65%,rgba(255,255,255,0.48)), color-stop(80%,rgba(255,255,255,0.03)), color-stop(86%,rgba(255,255,255,0))) !important; /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(bottom,  rgba(255,255,255,1) 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important; /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(bottom, rgba(255,255,255,1) 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important; /* Opera 11.10+ */
-	background: -ms-linear-gradient(bottom, rgba(255,255,255,1) 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important; /* IE10+ */
-	top: 0px !important;
-	left: 0px !important;
-}
+
 
 h1#pm_h1{
 	font-size: 17px !important;
@@ -252,6 +233,7 @@ h1#pm_h1{
 
 #pm_form{
     width: 100% !important;
+    text-align: center;
 }
 #pm_input{
 	width: 350px !important; 
@@ -280,7 +262,10 @@ input[type="button"].pm_default_btn {
      height: auto !important;
     margin: auto !important;
     text-align: center !important;
-    width: 90% !important;
+    width: 100% !important;
+    padding-bottom: 23px;
+    padding-right: 25px;
+    padding-left: 25px;
 }
 
 #pm_image {
@@ -291,17 +276,7 @@ input[type="button"].pm_default_btn {
 	right: 0px !important;
 }
 
-#pm_content_con{
-	padding-top:350px;
-	background: linear-gradient(to top, #FFFFFF 52%, rgba(255, 255, 255, 0.48) 65%, rgba(255, 255, 255, 0.03) 80%, rgba(255, 255, 255, 0) 86%) repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
-    background: -moz-linear-gradient(center bottom,  rgba(255,255,255,1) 13%, rgba(255,255,255,0.48) 45%, rgba(255,255,255,0.03) 80%, rgba(255,255,255,0) 86%) !important; 
-	background: -webkit-gradient(linear, bottom top, right top, color-stop(52%,rgba(255,255,255,1)), color-stop(65%,rgba(255,255,255,0.48)), color-stop(80%,rgba(255,255,255,0.03)), color-stop(86%,rgba(255,255,255,0))) !important;
-	background: -webkit-linear-gradient(bottom,  rgba(255,255,255,1) 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important;
-	background: -o-linear-gradient(bottom, rgba(255,255,255,1) 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important;
-	background: -ms-linear-gradient(bottom, rgba(255,255,255,1) 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important;
-	top: 0px !important;
-	left: 0px !important;
-}
+
 
 #pm_h1_div{
     text-align: left !important;
@@ -369,17 +344,7 @@ input[type="button"].pm_default_btn {
 	right: 0px !important;
 }
 
-#pm_content_con{
-	padding-top:350px;
-	background: linear-gradient(to top, #FFFFFF 52%, rgba(255, 255, 255, 0.48) 65%, rgba(255, 255, 255, 0.03) 80%, rgba(255, 255, 255, 0) 86%) repeat scroll 0 0 rgba(0, 0, 0, 0) !important; /* W3C */
-    background: -moz-linear-gradient(center bottom,  rgba(255,255,255,1) 13%, rgba(255,255,255,0.48) 45%, rgba(255,255,255,0.03) 80%, rgba(255,255,255,0) 86%) !important; /* FF3.6+ */
-	background: -webkit-gradient(linear, bottom top, right top, color-stop(52%,rgba(255,255,255,1)), color-stop(65%,rgba(255,255,255,0.48)), color-stop(80%,rgba(255,255,255,0.03)), color-stop(86%,rgba(255,255,255,0))) !important; /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(bottom,  rgba(255,255,255,1) 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important; /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(bottom, rgba(255,255,255,1) 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important; /* Opera 11.10+ */
-	background: -ms-linear-gradient(bottom, rgba(255,255,255,1) 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important; /* IE10+ */
-	top: 0px !important;
-	left: 0px !important;
-}
+
 
 #pm_h1_div{
     text-align: left !important;
