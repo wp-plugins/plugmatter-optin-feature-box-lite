@@ -103,16 +103,17 @@
 	 	  			}";
 	 	  			$custom_css.= "@media only screen and (min-width : 320px) and (max-width : 479px) { ".
 	 	  				"#".$doc->id. " {
-							padding-top:350px;
-							background: linear-gradient(to top, ".$doc->params->bgcolor." 52%, rgba(255, 255, 255, 0.48) 65%, rgba(255, 255, 255, 0.03) 80%, rgba(255, 255, 255, 0) 86%) repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
-						    background: -moz-linear-gradient(center bottom,  ".$doc->params->bgcolor." 13%, rgba(255,255,255,0.48) 45%, rgba(255,255,255,0.03) 80%, rgba(255,255,255,0) 86%) !important; 
-							background: -webkit-gradient(linear, bottom top, right top, color-stop(52%, ".$doc->params->bgcolor." ), color-stop(65%,rgba(255,255,255,0.48)), color-stop(80%,rgba(255,255,255,0.03)), color-stop(86%,rgba(255,255,255,0))) !important;
-							background: -webkit-linear-gradient(bottom,  ".$doc->params->bgcolor." 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important;
-							background: -o-linear-gradient(bottom, ".$doc->params->bgcolor." 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important;
-							background: -ms-linear-gradient(bottom, ".$doc->params->bgcolor." 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important;
+							padding-top:300px;
+							background: linear-gradient(to top, ".$doc->params->bgcolor." 1%, rgba(255, 255, 255, 0.48) 28%, rgba(255, 255, 255, 0.03) 80%, rgba(255, 255, 255, 0) 86%) repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+						    background: -moz-linear-gradient(center bottom,  ".$doc->params->bgcolor." 13%, rgba(255,255,255,0.48) 28%, rgba(255,255,255,0.03) 80%, rgba(255,255,255,0) 86%) !important; 
+							background: -webkit-gradient(linear, bottom top, right top, color-stop(1%, ".$doc->params->bgcolor." ), color-stop(28%,rgba(255,255,255,0.48)), color-stop(80%,rgba(255,255,255,0.03)), color-stop(86%,rgba(255,255,255,0))) !important;
+							background: -webkit-linear-gradient(bottom,  ".$doc->params->bgcolor." 1%,rgba(255,255,255,0.48) 28%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important;
+							background: -o-linear-gradient(bottom, ".$doc->params->bgcolor." 1%,rgba(255,255,255,0.48) 28%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important;
+							background: -ms-linear-gradient(bottom, ".$doc->params->bgcolor." 1%,rgba(255,255,255,0.48) 28%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important;
 							top: 0px !important;
 							left: 0px !important;
 						}
+						#pm_featurebox { height: 630px !important; }
 						#pm_content { background-color :  ".$doc->params->bgcolor." }
 					}";
 					$custom_css.= "@media only screen and (min-width : 240px) and (max-width: 319px){ ".

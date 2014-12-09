@@ -72,7 +72,9 @@ function  get_graph_data($ab_id){
 	{
 		xaxis: {
         	mode: "time",        	
-        	timeformat: "%b %d",            
+        	timeformat: "%b %d",
+        	tickLength: 1,
+            tickSize: [1, "day"],            
               },
 		lines: { 
            show: true, 
