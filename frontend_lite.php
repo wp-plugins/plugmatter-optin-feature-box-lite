@@ -89,7 +89,7 @@
 	 	  			}  ";
 	 	  			$custom_css.= "@media only screen and (min-width : 480px) and (max-width : 767px) {".
 	 	  				"#".$doc->id. " {
-							padding-top:339px !important;
+							padding-top: 292px !important;
 							background: linear-gradient(to top, ".$doc->params->bgcolor." 52%, rgba(255, 255, 255, 0.48) 65%, rgba(255, 255, 255, 0.03) 80%, rgba(255, 255, 255, 0) 86%) repeat scroll 0 0 rgba(0, 0, 0, 0) !important; /* W3C */
 						    background: -moz-linear-gradient(center bottom,  ".$doc->params->bgcolor." 12%, rgba(255,255,255,0.48) 45%, rgba(255,255,255,0.03) 80%, rgba(255,255,255,0) 86%) !important; 
 							background: -webkit-gradient(linear, bottom top, right top, color-stop(52%,".$doc->params->bgcolor."), color-stop(65%,rgba(255,255,255,0.48)), color-stop(80%,rgba(255,255,255,0.03)), color-stop(86%,rgba(255,255,255,0))) !important; /* Chrome,Safari4+ */
@@ -100,6 +100,9 @@
 							left: 0px !important;
 						}
 						#pm_content { background-color :  ".$doc->params->bgcolor." }
+						#pm_h1_div { padding: 10px 0px; }
+						#pm_featurebox { height: 572px !important; }
+					   .pm_description { height: 78px;}
 	 	  			}";
 	 	  			$custom_css.= "@media only screen and (min-width : 320px) and (max-width : 479px) { ".
 	 	  				"#".$doc->id. " {
@@ -144,6 +147,12 @@
                 $pm_email_input_txt = $doc->params->email_input;
                 $pm_name_input_txt = $doc->params->name_input;
 	 	  	} else if($doc->type == "service") {
+
+	 	  		$http_prep = substr($doc->params->action_url, 0, 5);
+	 	  		if($http_prep != "http:"){
+	 	  			$doc->params->action_url = "http:".$doc->params->action_url;
+	 	  		}
+
 	 	  		$service_meta = array("Aweber" => array("action_url" => "http://www.aweber.com/scripts/addlead.pl","name" => "email", "name_field" => "name"),
 							  "GetResponse" => array("action_url" => "https://app.getresponse.com/add_contact_webform.html","name" => "email", "name_field" => "name"),
 							  "iContact" => array("action_url" => "https://app.icontact.com/icp/signup.php","name" => "fields_email", "name_field" => "fields_fname"),
