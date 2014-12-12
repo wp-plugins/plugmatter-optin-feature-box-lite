@@ -90,12 +90,12 @@
 	 	  			$custom_css.= "@media only screen and (min-width : 480px) and (max-width : 767px) {".
 	 	  				"#".$doc->id. " {
 							padding-top: 292px !important;
-							background: linear-gradient(to top, ".$doc->params->bgcolor." 52%, rgba(255, 255, 255, 0.48) 65%, rgba(255, 255, 255, 0.03) 80%, rgba(255, 255, 255, 0) 86%) repeat scroll 0 0 rgba(0, 0, 0, 0) !important; /* W3C */
-						    background: -moz-linear-gradient(center bottom,  ".$doc->params->bgcolor." 12%, rgba(255,255,255,0.48) 45%, rgba(255,255,255,0.03) 80%, rgba(255,255,255,0) 86%) !important; 
-							background: -webkit-gradient(linear, bottom top, right top, color-stop(52%,".$doc->params->bgcolor."), color-stop(65%,rgba(255,255,255,0.48)), color-stop(80%,rgba(255,255,255,0.03)), color-stop(86%,rgba(255,255,255,0))) !important; /* Chrome,Safari4+ */
-							background: -webkit-linear-gradient(bottom,  ".$doc->params->bgcolor." 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important; /* Chrome10+,Safari5.1+ */
-							background: -o-linear-gradient(bottom, ".$doc->params->bgcolor." 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important; /* Opera 11.10+ */
-							background: -ms-linear-gradient(bottom, ".$doc->params->bgcolor." 52%,rgba(255,255,255,0.48) 65%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important; /* IE10+ */
+							background: linear-gradient(to top, ".$doc->params->bgcolor." 1%, rgba(255, 255, 255, 0.48) 28%, rgba(255, 255, 255, 0.03) 80%, rgba(255, 255, 255, 0) 86%) repeat scroll 0 0 rgba(0, 0, 0, 0) !important; /* W3C */
+						    background: -moz-linear-gradient(center bottom,  ".$doc->params->bgcolor." 13%, rgba(255,255,255,0.48) 28%, rgba(255,255,255,0.03) 80%, rgba(255,255,255,0) 86%) !important; 
+							background: -webkit-gradient(linear, bottom top, right top, color-stop(1%,".$doc->params->bgcolor."), color-stop(28%,rgba(255,255,255,0.48)), color-stop(80%,rgba(255,255,255,0.03)), color-stop(86%,rgba(255,255,255,0))) !important; /* Chrome,Safari4+ */
+							background: -webkit-linear-gradient(bottom,  ".$doc->params->bgcolor." 1%,rgba(255,255,255,0.48) 28%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important; /* Chrome10+,Safari5.1+ */
+							background: -o-linear-gradient(bottom, ".$doc->params->bgcolor." 1%,rgba(255,255,255,0.48) 28%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important; /* Opera 11.10+ */
+							background: -ms-linear-gradient(bottom, ".$doc->params->bgcolor." 1%,rgba(255,255,255,0.48) 28%,rgba(255,255,255,0.03) 80%,rgba(255,255,255,0) 86%) !important; /* IE10+ */
 							top: 0px !important;
 							left: 0px !important;
 						}
@@ -148,8 +148,8 @@
                 $pm_name_input_txt = $doc->params->name_input;
 	 	  	} else if($doc->type == "service") {
 
-	 	  		$http_prep = substr($doc->params->action_url, 0, 5);
-	 	  		if($http_prep != "http:"){
+	 	  		$http_prep = substr($doc->params->action_url, 0, 4);
+	 	  		if($http_prep != "http"){
 	 	  			$doc->params->action_url = "http:".$doc->params->action_url;
 	 	  		}
 
