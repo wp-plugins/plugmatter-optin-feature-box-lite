@@ -10,7 +10,7 @@ service_list.push({"service":"ConstantContact","fields":["list_id","cc_redirect_
 service_list.push({"service":"Feedburner","fields":["uri"]});
 service_list.push({"service":"Feedblitz","fields":["sub"]});
 service_list.push({"service":"GetResponse","fields":["webform_id"]});
-service_list.push({"service":"iContact","fields":["listid","clientid","specialid","formid"]});
+service_list.push({"service":"iContact","fields":["listid","clientid","specialid","formid","redirect_url"]});
 service_list.push({"service":"InfusionSoft","fields":["account_subdomain","inf_form_xid", "infusionsoft_version"]});
 service_list.push({"service":"Jetpack","fields":[]});
 service_list.push({"service":"MadMimi","fields":["webform_id"]});
@@ -41,7 +41,7 @@ var oDoc, sDefTxt;
 //---------------------------------------------------------
 
 jQuery(document).ready(function() {	
-		jQuery.getJSON(site_url+"/wp-admin/admin-ajax.php?action=get_fonts", function(data) {
+		jQuery.getJSON(pm_site_url+"/wp-admin/admin-ajax.php?action=get_fonts", function(data) {
 			fonts = data; 
 		}).fail(function() {
 			fonts = [{"family":"Arial","variants":"regular"},
@@ -120,15 +120,15 @@ jQuery.fn.inlineEdit = function(edit_type) {
 	}
 
 	if(edit_type == "service") {
-		jQuery(this).append("<img src='"+plugin_url+"/images/exclamation.png' id='pm_exclamation_icon' />");
+		jQuery(this).append("<img src='"+pm_plugin_url+"/images/exclamation.png' id='pm_exclamation_icon' />");
 	}
 	
 	if(edit_type == "image") {
-		jQuery("#pm_image").append("<div id='pm_change_picture'><img src='"+plugin_url+"images/change_picture.png' title='Change Picture' /> <div id='pm_picture_size_sug'>"+jQuery("#pm_image").attr("pm_image_size")+"</div></div>");
+		jQuery("#pm_image").append("<div id='pm_change_picture'><img src='"+pm_plugin_url+"images/change_picture.png' title='Change Picture' /> <div id='pm_picture_size_sug'>"+jQuery("#pm_image").attr("pm_image_size")+"</div></div>");
 	}
 	
 	if(edit_type == "video") {
-		jQuery("#pm_video_con").prepend("<img src='"+plugin_url+"/images/exclamation.png' style='position:absolute;left:-40px;' id='pm_video_edit'/>");
+		jQuery("#pm_video_con").prepend("<img src='"+pm_plugin_url+"/images/exclamation.png' style='position:absolute;left:-40px;' id='pm_video_edit'/>");
 	}	
 	
 	if(edit_type == "button") {
@@ -273,10 +273,10 @@ jQuery.fn.inlineEdit = function(edit_type) {
 							       "<div id='pmie_rt_txtbox' contenteditable='true' class='pm_description'></div>" +
 							       "<div id='pmie_rt_tblr_con'>" +
 							           "<div id='pmie_rt_tblr'>" +
-							               "<div class='pmie_rt_tblr' id='pmie_bold' onclick=\"formatDoc('bold');\" ><img src='"+plugin_url+"/images/px.png' /></div>" +
-							               "<div class='pmie_rt_tblr' id='pmie_italic'  onclick=\"formatDoc('italic');\" ><img src='"+plugin_url+"/images/px.png' /></div>" +
-							               "<div class='pmie_rt_tblr' id='pmie_underline'  onclick=\"formatDoc('underline');\" ><img src='"+plugin_url+"/images/px.png' /></div>" +
-							               "<div class='pmie_rt_tblr' id='pmie_list' onclick=\"formatDoc('insertunorderedlist');\" ><img src='"+plugin_url+"/images/px.png' /></div>" +
+							               "<div class='pmie_rt_tblr' id='pmie_bold' onclick=\"formatDoc('bold');\" ><img src='"+pm_plugin_url+"/images/px.png' /></div>" +
+							               "<div class='pmie_rt_tblr' id='pmie_italic'  onclick=\"formatDoc('italic');\" ><img src='"+pm_plugin_url+"/images/px.png' /></div>" +
+							               "<div class='pmie_rt_tblr' id='pmie_underline'  onclick=\"formatDoc('underline');\" ><img src='"+pm_plugin_url+"/images/px.png' /></div>" +
+							               "<div class='pmie_rt_tblr' id='pmie_list' onclick=\"formatDoc('insertunorderedlist');\" ><img src='"+pm_plugin_url+"/images/px.png' /></div>" +
 							               "<div class='pmie_rt_tblr' id='pmie_fontcolor'>&nbsp;</div>" +
 							               
 							               "<div id='pmie_rt_colorpick'></div>" +
@@ -744,7 +744,7 @@ function email_service_select_change() {
 		
 		if(error == '0'){
 			jQuery("#pm_email_service_list").hide();
-			jQuery("#pm_exclamation_icon").attr('src',plugin_url+"/images/tick-icon.png");
+			jQuery("#pm_exclamation_icon").attr('src',pm_plugin_url+"/images/tick-icon.png");
 			jQuery("#pm_send_email").removeAttr('disabled');
 			//jQuery("#pmie_email_service_list_con").remove();
 			jQuery("#pmie_email_service_list_con").hide();

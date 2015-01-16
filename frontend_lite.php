@@ -187,6 +187,9 @@
 						if($service_name == "Aweber" && $key == "redirect_url") {
 							$key = "redirect";
 						}
+						if($service_name == "iContact" && $key == "redirect_url") {
+							$key = "redirect";
+						}
 						if($service_name == "iContact" && $key == "specialid") {
 							$key = "specialid:" . $doc->params->listid;
 						}

@@ -4,7 +4,7 @@ Plugin Name: Plugmatter Feature Box Lite
 Plugin URI: http://plugmatter.com/feature-box
 Description: Plugmatter Optin Feature Box is the Only List Building Plugin that Allows You to Create High Converting Optin Feature Boxes for Your WordPress Site.
 Author: Plugmatter
-Version: 1.6.0
+Version: 1.6.1
 Author URI: http://plugmatter.com/
 */
 
@@ -208,8 +208,8 @@ function support_submenu_page_callback(){
 
 function set_js_globals() {
 	echo "<script type='text/javascript'>
-			var plugin_url = '".plugins_url(Plugmatter_DIR_NAME.'/')."';
-			var site_url = '".admin_url('admin-ajax.php')."';
+			var pm_plugin_url = '".plugins_url(Plugmatter_DIR_NAME.'/')."';
+			var pm_site_url = '".admin_url('admin-ajax.php')."';
 		  </script>";
 }
 

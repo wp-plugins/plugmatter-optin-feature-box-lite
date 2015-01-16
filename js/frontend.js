@@ -16,10 +16,10 @@ jQuery(document).ready(function() {
 
 
 	jQuery(".pm_form_track").submit(function(event){
-		jQuery.post(site_url,{"action":"pm_ab_track","track":"conv","ab_meta":jQuery("#pm_featurebox").attr("ab_meta")}).done(function(data) {});
+		jQuery.post(pm_site_url,{"action":"pm_ab_track","track":"conv","ab_meta":jQuery("#pm_featurebox").attr("ab_meta")}).done(function(data) {});
 	}); 
 		
-  jQuery.post(site_url,{"action":"pm_ab_track","track":"imp","ab_meta":jQuery("#pm_featurebox").attr("ab_meta")}).done(function(data) {
+  jQuery.post(pm_site_url,{"action":"pm_ab_track","track":"imp","ab_meta":jQuery("#pm_featurebox").attr("ab_meta")}).done(function(data) {
 		 //alert(data);
 	});
 
@@ -40,7 +40,7 @@ jQuery(document).ready(function() {
 		if (e_patt.test(email)) { 
 			pm_setCookie("plugmatter_conv_done",1,365);
 
-			jQuery.post(site_url,{"action":"pm_ab_track","track":"conv","ab_meta":jQuery("#pm_featurebox").attr("ab_meta")}).done(function(data) {
+			jQuery.post(pm_site_url,{"action":"pm_ab_track","track":"conv","ab_meta":jQuery("#pm_featurebox").attr("ab_meta")}).done(function(data) {
 			
 				/* MailPoet Subscription */ 
 				if(jQuery("#pm_form_submit").attr("action") == "#pm_mailpoet") {
@@ -50,7 +50,7 @@ jQuery(document).ready(function() {
 					var fname = jQuery("#pm_featurebox").find('input[name="name"]').val();
 					var list_id = jQuery("#pm_featurebox").find('input[name="list_id"]').val();
 					var redirect_url = jQuery("#pm_featurebox").find('input[name="redirect_url"]').val();
-					jQuery.get(site_url,{"action":"wysija_ajax","controller":"subscribers","task":"save","data[0][name]":"wysija[user][firstname]", "data[0][value]":fname,"data[1][name]":"wysija[user][email]", "data[1][value]":email, "data[2][name]":"wysija[user_list][list_ids]", "data[2][value]": list_id}).done(function(data) {
+					jQuery.get(pm_site_url,{"action":"wysija_ajax","controller":"subscribers","task":"save","data[0][name]":"wysija[user][firstname]", "data[0][value]":fname,"data[1][name]":"wysija[user][email]", "data[1][value]":email, "data[2][name]":"wysija[user_list][list_ids]", "data[2][value]": list_id}).done(function(data) {
 						if(data.result === true) {
 							location.href = redirect_url;
 						} else {
@@ -102,7 +102,7 @@ function pm_getCookie(c_name){
 function pm_ValidateEmail(email) {  
 	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {  			
 		pm_setCookie("plugmatter_conv_done",1,365);
-		jQuery.post(site_url,{"action":"pm_ab_track","track":"conv","ab_meta":jQuery("#pm_featurebox").attr("ab_meta")}).done(function(data) {
+		jQuery.post(pm_site_url,{"action":"pm_ab_track","track":"conv","ab_meta":jQuery("#pm_featurebox").attr("ab_meta")}).done(function(data) {
 		
 		/* MailPoet Subscription */
 		if(jQuery("#pm_form_submit").attr("action") == "#pm_mailpoet") {
@@ -110,7 +110,7 @@ function pm_ValidateEmail(email) {
 			var fname = jQuery("#pm_featurebox").find('input[name="name"]').val();
 			var list_id = jQuery("#pm_featurebox").find('input[name="list_id"]').val();
 			var redirect_url = jQuery("#pm_featurebox").find('input[name="redirect_url"]').val();
-			jQuery.get(site_url,{"action":"wysija_ajax","controller":"subscribers","task":"save","data[0][name]":"wysija[user][firstname]", "data[0][value]":fname,"data[1][name]":"wysija[user][email]", "data[1][value]":email, "data[2][name]":"wysija[user_list][list_ids]", "data[2][value]": list_id}).done(function(data) {		
+			jQuery.get(pm_site_url,{"action":"wysija_ajax","controller":"subscribers","task":"save","data[0][name]":"wysija[user][firstname]", "data[0][value]":fname,"data[1][name]":"wysija[user][email]", "data[1][value]":email, "data[2][name]":"wysija[user_list][list_ids]", "data[2][value]": list_id}).done(function(data) {		
 				if(data.result == true) {
 					location.href = redirect_url;
 				} else {

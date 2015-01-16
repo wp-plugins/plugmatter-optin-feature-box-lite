@@ -150,7 +150,7 @@ jQuery(document).ready(function(){
   document.getElementsByTagName('head')[0].appendChild(pm_custom_style);
 
 	var temp_name = '<?php echo $temp_name; ?>';
-	var site_url = '<?php echo get_option('siteurl');?>';
+	var pm_site_url = '<?php echo get_option('siteurl');?>';
 	var admin_url = '<?php echo admin_url("admin-ajax.php?action=plug_load_template&data=$base_temp_name") ?>';
 	
 	var pm_codemirror = CodeMirror.fromTextArea(document.getElementById("pm_custom_css"), {
@@ -201,9 +201,9 @@ jQuery(document).ready(function(){
     
    
     if(user_designed_template != true) {
-      var filename = plugin_url+'templates/'+base_temp_name+"/style.css";
+      var filename = pm_plugin_url+'templates/'+base_temp_name+"/style.css";
       pm_temp_style.setAttribute("href", filename);			
-      jQuery('#ajax_load_temp').html("<div class ='pm_loading' style='width:100%;height:300px; background:url("+plugin_url+"images/loading.gif"+") no-repeat scroll center;'>&nbsp;</div>").show();
+      jQuery('#ajax_load_temp').html("<div class ='pm_loading' style='width:100%;height:300px; background:url("+pm_plugin_url+"images/loading.gif"+") no-repeat scroll center;'>&nbsp;</div>").show();
       setTimeout(function() {
       jQuery('#ajax_load_temp').load(admin_url,function(){			
           for(var i=0;i<params.length;i++) {
@@ -237,7 +237,7 @@ jQuery(document).ready(function(){
                   });
                   var id = params[i]["id"]; 
                   jQuery("#"+id).inlineEdit(params[i]["type"]);
-               jQuery("#pm_exclamation_icon").attr('src',plugin_url+"/images/tick-icon.png").css("opacity","1");
+               jQuery("#pm_exclamation_icon").attr('src',pm_plugin_url+"/images/tick-icon.png").css("opacity","1");
               } else if(params[i]["type"] == "color") {							   		
                   var bgcolor = params[i]["params"]["bgcolor"];			           
                   var id = params[i]["id"]; 		                       
@@ -287,7 +287,7 @@ jQuery(document).ready(function(){
 
 	jQuery("select#base_temp_name").change(function(){
 		jQuery('#ajax_load_temp').html("<div class ='pm_loading' style='width:100%;height:300px;"+ 
-				"background:url("+plugin_url+"images/loading.gif"+") no-repeat scroll center;'>&nbsp;</div>").show();
+				"background:url("+pm_plugin_url+"images/loading.gif"+") no-repeat scroll center;'>&nbsp;</div>").show();
 		
 		var template = jQuery("select#base_temp_name option:selected").val(); 
 		if(document.getElementById("select_page") != null){
@@ -317,7 +317,7 @@ jQuery(document).ready(function(){
 			
 			jQuery("select#select_page").change(function(){				
 				var page_id = jQuery("select#select_page").val();
-				jQuery('#ajax_load_temp').html("<div class ='pm_loading' style='width:100%;height:300px; background:url("+plugin_url+"images/loading.gif"+") no-repeat scroll center;'>&nbsp;</div>").show();
+				jQuery('#ajax_load_temp').html("<div class ='pm_loading' style='width:100%;height:300px; background:url("+pm_plugin_url+"images/loading.gif"+") no-repeat scroll center;'>&nbsp;</div>").show();
 				jQuery.post("<?php echo admin_url("admin-ajax.php?action=plug_get_page_content") ?>",{"page_id":page_id},function(result){
 					jQuery('#ajax_load_temp').html(result).show();
 				  });						
@@ -326,10 +326,10 @@ jQuery(document).ready(function(){
 			//return false;
 
 		} else {		
-			var filename = plugin_url+'templates/'+template+"/style.css";
+			var filename = pm_plugin_url+'templates/'+template+"/style.css";
 			template_type = template.split("_")[0];
 			pm_temp_style.setAttribute("href", filename);
-			jQuery('#ajax_load_temp').load(plugin_url+'templates/'+template+'/template.php',function(){
+			jQuery('#ajax_load_temp').load(pm_plugin_url+'templates/'+template+'/template.php',function(){
 			if(template_type != "mini") {
 				jQuery("#pm_h1").text("Lorem ipsum dolor sit amet, consectetur adipisicing elit");
 				jQuery("#pm_description").html("<ul><li>Fusce vel sapien vehicula, consequat massa eu, pellentesque mauris.</li><li>Ut fermentum dui nec neque blandit, a consequat tortor vestibulum.</li><li>Aenean et nibh rutrum, faucibus sapien non, placerat lectus.</li></ul>");
