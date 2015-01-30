@@ -218,9 +218,10 @@
 		
         if($doc->type != "user_designed_template") {
 	 		wp_enqueue_style('pm_button_style', plugins_url('/css/pm_btn_style.css', __FILE__));
-	 		
-	 		wp_enqueue_style('custom-style', plugins_url('/templates/'.$base_temp_name.'/style.css', __FILE__));
-	 		wp_add_inline_style( 'custom-style', $custom_css );
+
+	 		wp_register_style('pm_custom-style', plugins_url('/templates/'.$base_temp_name.'/style.css', __FILE__));
+			wp_add_inline_style('pm_custom-style', $custom_css );
+			wp_enqueue_style('pm_custom-style');
             
             wp_register_style('pm_bootstrap', plugins_url('/css/pm_bootstrap.css', __FILE__));
 	 		wp_enqueue_style('pm_bootstrap');            

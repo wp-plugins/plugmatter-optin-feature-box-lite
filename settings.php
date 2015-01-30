@@ -125,6 +125,17 @@ if(isset($_POST["plugmatter_show_on_sections"] ) && ($_POST["plugmatter_show_on_
 			jQuery("#pm_enabled_div").hide();
 		}
 	});
+
+	$(".plugmatter_show_temp_optinuser").click(function(){
+		if($(this).val() == "0") {
+			if(confirm("WARNING: Enabling this feature will make the feature box disappear from your site once the visitor subscribes using the optin form (including yourself)")) {
+				
+			} else {
+				$('#pm_disable_box').attr('checked',true);
+			}
+			
+		}
+	});
 	
 	if(jQuery("#home_template option:selected").val() == "-1" && 
 	   jQuery("#post_template option:selected").val() == "-1" && 
@@ -248,9 +259,20 @@ if(isset($_POST["plugmatter_show_on_sections"] ) && ($_POST["plugmatter_show_on_
 				<td><label>Turn off Feature Box for Subscribed Visitors:</label></td>
 				<td width='10'>&nbsp;</td>
 				<td>
-					<input type="radio" value="1" name="plugmatter_show_temp_optinuser"	<?php if(get_option('plugmatter_show_temp_optinuser') != 0) echo "checked"; ?>>&nbsp;Disable &nbsp;&nbsp; 
-					<input type="radio" value="0" name="plugmatter_show_temp_optinuser"	<?php if(get_option('plugmatter_show_temp_optinuser') == 0) echo "checked"; ?>>&nbsp;Enable
+					<input type="radio" id="pm_disable_box" class="plugmatter_show_temp_optinuser" value="1" name="plugmatter_show_temp_optinuser"	<?php if(get_option('plugmatter_show_temp_optinuser') != 0) echo "checked"; ?>>&nbsp;Disable &nbsp;&nbsp; 
+					<input type="radio" class="plugmatter_show_temp_optinuser" value="0" name="plugmatter_show_temp_optinuser"	<?php if(get_option('plugmatter_show_temp_optinuser') == 0) echo "checked"; ?>>&nbsp;Enable
 				</td>
+				</tr>
+				
+				<tr>
+					<td colspan='3'>
+				<?php	$plugmatter_show_temp_optinuser = get_option('plugmatter_show_temp_optinuser');
+						if(isset($_COOKIE['plugmatter_conv_done']) && $_COOKIE['plugmatter_conv_done'] == '1' && $plugmatter_show_temp_optinuser == '0' ){	 
+							 echo "<div style='margin-top:10px;color:gray;background:#fff;padding:15px'>
+							 		<b>Note:</b> You are not shown the feature box on your site <br> as the above feature is Enabled and you have subscribed using it.
+							 		</div>";
+						} ?>
+					</td>
 				</tr>
 				
 				<tr><td style='border-bottom:0px solid #dddddd;' colspan='3'>&nbsp;</td></tr>

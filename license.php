@@ -66,7 +66,7 @@ if(isset($_POST["license_key"] ) && ($_POST["license_key"]!="")) {
         If yes, then <b>Get Started</b> below.        
         <br><br>
 		<div class="pmadmin_submit">
-			<input id="submit" class="pm_primary_buttons" type="submit" value=" Get Started " onclick="location.href='<?php echo get_option('siteurl'); ?>/wp-admin/admin.php?page=settings_submenu-page'" name="submit">
+			<input id="submit" class="pm_primary_buttons" type="submit" value=" Get Started " onclick="location.href='<?php echo get_option('siteurl'); ?>/wp-admin/admin.php?page=edit_template_submenu-page&action=insert'" name="submit">
 		</div>        
         <br><br>
         <b>OR</b>

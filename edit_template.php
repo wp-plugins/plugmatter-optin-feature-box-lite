@@ -329,7 +329,7 @@ jQuery(document).ready(function(){
 			var filename = pm_plugin_url+'templates/'+template+"/style.css";
 			template_type = template.split("_")[0];
 			pm_temp_style.setAttribute("href", filename);
-			jQuery('#ajax_load_temp').load(pm_plugin_url+'templates/'+template+'/template.php',function(){
+			jQuery('#ajax_load_temp').load('<?php echo admin_url("admin-ajax.php?action=plug_load_template&data=") ?>'+template,function(){
 			if(template_type != "mini") {
 				jQuery("#pm_h1").text("Lorem ipsum dolor sit amet, consectetur adipisicing elit");
 				jQuery("#pm_description").html("<ul><li>Fusce vel sapien vehicula, consequat massa eu, pellentesque mauris.</li><li>Ut fermentum dui nec neque blandit, a consequat tortor vestibulum.</li><li>Aenean et nibh rutrum, faucibus sapien non, placerat lectus.</li></ul>");
