@@ -116,7 +116,7 @@ if(isset($_POST["plugmatter_show_on_sections"] ) && ($_POST["plugmatter_show_on_
 
 
 <script>
-	jQuery(document).ready(function(){
+	jQuery(document).ready(function($){
 
 	jQuery("#plugmatter_enable").click(function() {
 		if(jQuery(this).attr("checked") == "checked") {
