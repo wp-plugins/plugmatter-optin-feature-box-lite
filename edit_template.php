@@ -113,7 +113,24 @@ function escapeJsonString($value) {
 			    Top Margin: <input type='text' size='3' maxlength='3' name='pm_box_tmargin' id='pm_box_tmargin' value='<?php echo $pm_box_tmargin; ?>' >&nbsp;&nbsp;&nbsp;&nbsp;
 				Bottom Margin: <input type='text' size='3' maxlength='3' name='pm_box_bmargin' id='pm_box_bmargin' value='<?php echo $pm_box_bmargin; ?>'>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
-		</tr>		
+		</tr>
+		<?php if($base_temp_name == "") { ?>
+		<tr valign="top">
+			<th scope="row">
+				<label for="base_template">
+					Select Fields to display
+				</label>
+			</th>
+			<td>
+				<input type='radio' class="pm_display_fields" name='pm_display_fields' value='pm_email_fname' 
+			    	<?php if($pm_display_fields == 'pm_email_fname') echo "checked"?> > Email and First Name &nbsp;&nbsp;&nbsp;&nbsp;
+				<input type='radio' class="pm_display_fields" name='pm_display_fields' value='pm_email_only' 
+					<?php if($pm_display_fields == 'pm_email_only') echo "checked"?> > Email  &nbsp;&nbsp;&nbsp;&nbsp;			    
+			</td>
+		</tr> 	
+		<?php } else { ?>
+				<input type="hidden" id="pm_display_fields" name="pm_display_fields" value="" >
+		<?} ?>		
 		<tr>
 			<td colspan="2">
 				<div id="ajax_load_temp"></div>
@@ -143,11 +160,15 @@ jQuery(document).ready(function(){
 	pm_temp_style.setAttribute("type", "text/css");
 	document.getElementsByTagName("head")[0].appendChild(pm_temp_style);
 
+	pm_temp_style2=document.createElement("link");
+	pm_temp_style2.setAttribute("rel", "stylesheet");
+	pm_temp_style2.setAttribute("type", "text/css");
+	document.getElementsByTagName("head")[0].appendChild(pm_temp_style2);
 
-  pm_custom_style = document.createElement("STYLE");
-  pm_custom_style.setAttribute("id", "pm_custom_style");
-  pm_custom_style.type = 'text/css';
-  document.getElementsByTagName('head')[0].appendChild(pm_custom_style);
+	pm_custom_style = document.createElement("STYLE");
+	pm_custom_style.setAttribute("id", "pm_custom_style");
+	pm_custom_style.type = 'text/css';
+	document.getElementsByTagName('head')[0].appendChild(pm_custom_style);
 
 	var temp_name = '<?php echo $temp_name; ?>';
 	var pm_site_url = '<?php echo get_option('siteurl');?>';
@@ -201,8 +222,12 @@ jQuery(document).ready(function(){
     
    
     if(user_designed_template != true) {
-      var filename = pm_plugin_url+'templates/'+base_temp_name+"/style.css";
-      pm_temp_style.setAttribute("href", filename);			
+      	var pm_fields_required = jQuery("input[type=radio][name='pm_display_fields']:checked").val();
+    	
+    	var filename = pm_plugin_url+'templates/'+base_temp_name+"/style.css";
+		pm_temp_style.setAttribute("href", filename); 
+    	var pmformfields;      
+
       jQuery('#ajax_load_temp').html("<div class ='pm_loading' style='width:100%;height:300px; background:url("+pm_plugin_url+"images/loading.gif"+") no-repeat scroll center;'>&nbsp;</div>").show();
       setTimeout(function() {
       jQuery('#ajax_load_temp').load(admin_url,function(){			
@@ -218,6 +243,20 @@ jQuery(document).ready(function(){
                   jQuery("#"+id).css("font-family", font_family);
                   jQuery("#"+id).text(text);
                   jQuery("#"+id).inlineEdit(params[i]["type"]);
+              } else if(params[i]["type"] == "pm_form_fields") {
+              		var fields_required_select = params[i]["fields_required"];
+              		if(fields_required_select == "pm_email_only") {
+			    		pmformfields = pm_plugin_url+'templates/'+base_temp_name+"/onefield.css";
+			    	} 
+
+			    	if(fields_required_select == "pm_email_fname") {
+			    		pmformfields = pm_plugin_url+'templates/'+base_temp_name+"/twofields.css";
+			    	}
+              		
+					pm_temp_style2.setAttribute("href", pmformfields);		
+					jQuery("#pm_display_fields").val(fields_required_select);	
+					//jQuery('input:radio[name=pm_display_fields][value='+fields_required_select+']').click();
+					
               } else if(params[i]["type"] == "textarea") {
                   var html = params[i]["params"]["html"];
                   jQuery('#pm_description').html(html);
@@ -283,13 +322,33 @@ jQuery(document).ready(function(){
 	  
   }
 
- 
 
-	jQuery("select#base_temp_name").change(function(){
+  jQuery("select#base_temp_name").change(function(){
+  	pm_load_template();
+  });
+
+  	if (!jQuery("input[name='pm_display_fields']:checked").val()) {
+  		jQuery('input:radio[name=pm_display_fields][value=pm_email_fname]').click();
+	}
+
+  jQuery("input:radio[name=pm_display_fields]").click(function() {
+    	pm_load_template();  	
+  }); 
+
+	function pm_load_template() {
 		jQuery('#ajax_load_temp').html("<div class ='pm_loading' style='width:100%;height:300px;"+ 
 				"background:url("+pm_plugin_url+"images/loading.gif"+") no-repeat scroll center;'>&nbsp;</div>").show();
 		
-		var template = jQuery("select#base_temp_name option:selected").val(); 
+		var pm_element = jQuery("#base_temp_name").get(0).tagName;
+		var template;
+		if(pm_element == "SELECT") {
+			template = jQuery('#base_temp_name :selected').text();
+		}
+
+		if(pm_element == "DIV") {
+			template = jQuery("#base_temp_name").text();
+		}
+
 		if(document.getElementById("select_page") != null){
 			jQuery('#select_page').remove();
 			jQuery('#ajax_load_temp').css("border","solid 0px grey");
@@ -326,9 +385,25 @@ jQuery(document).ready(function(){
 			//return false;
 
 		} else {		
-			var filename = pm_plugin_url+'templates/'+template+"/style.css";
+			var pmtempcss = pm_plugin_url+'templates/'+template+"/style.css";
+			pm_temp_style.setAttribute("href", pmtempcss);
+
+			//this is new code
+	    	var pm_fields_required = jQuery("input[type=radio][name='pm_display_fields']:checked").val();
+	    	var filename;
+
+	    	if(pm_fields_required == "pm_email_only") {
+	    		
+	    		filename = pm_plugin_url+'templates/'+template+"/onefield.css";
+	    	} 
+
+	    	if(pm_fields_required == "pm_email_fname") {
+
+	    		filename = pm_plugin_url+'templates/'+template+"/twofields.css";
+	    	}
+
 			template_type = template.split("_")[0];
-			pm_temp_style.setAttribute("href", filename);
+			pm_temp_style2.setAttribute("href", filename);
 			jQuery('#ajax_load_temp').load('<?php echo admin_url("admin-ajax.php?action=plug_load_template&data=") ?>'+template,function(){
 			if(template_type != "mini") {
 				jQuery("#pm_h1").text("Lorem ipsum dolor sit amet, consectetur adipisicing elit");
@@ -368,8 +443,8 @@ jQuery(document).ready(function(){
 		   		
 			});   
 			}).show();	
-	}	
-	}); 	
+		}	
+	} 	
 
 	
 	jQuery("#save_btn").click(function() { 
@@ -396,6 +471,14 @@ jQuery(document).ready(function(){
 		
 		var pm_code = pm_codemirror.getValue();
 		if(pm_code != ""){var pm_custom_css = pm_code;} else { var pm_custom_css = "";}
+
+		var pm_fields_required = jQuery("input[type=radio][name='pm_display_fields']:checked").val();
+
+		if(pm_fields_required == undefined ) {
+			pm_fields_required = jQuery("#pm_display_fields").val();
+		}
+		
+		json_params.push({"type":"pm_form_fields","fields_required": pm_fields_required});
 				
 		json_params.push({"type":"alignment","width": pm_box_width, "top_margin":pm_box_tmargin, "bottom_margin":pm_box_bmargin});
 		

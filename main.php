@@ -4,7 +4,7 @@ Plugin Name: Plugmatter Feature Box Lite
 Plugin URI: http://plugmatter.com/feature-box
 Description: Plugmatter Optin Feature Box is the Only List Building Plugin that Allows You to Create High Converting Optin Feature Boxes for Your WordPress Site.
 Author: Plugmatter
-Version: 1.6.3
+Version: 1.6.4
 Author URI: http://plugmatter.com/
 */
 
@@ -347,8 +347,72 @@ function pm_save_postdata( $post_id ) {
 	}	
 }
 
+add_action( 'wp_ajax_pmfb_cc', 'pmfb_cc' );
+add_action('wp_ajax_nopriv_pmfb_cc', 'pmfb_cc');
 add_action( 'wp_ajax_pm_ab_track', 'pm_ab_track' );
 add_action('wp_ajax_nopriv_pm_ab_track', 'pm_ab_track');
+
+
+function pmfb_cc () {
+	global $wpdb;
+	//print_r($_POST);
+	$table = $wpdb->prefix.'plugmatter_templates';
+	$cc_url = "http://ccprod.roving.com/roving/wdk/API_AddSiteVisitor.jsp";
+	$fname = $_POST["fname"];
+	$email 	= $_POST["email"];
+
+	$temp_id = $_POST["pmfb_tid"];
+	$temp_params = $wpdb->get_row("SELECT params FROM $table WHERE id= $temp_id");
+	
+	$pm_params = json_decode($temp_params->params);
+	//print_r($pm_params);
+	if(!empty($pm_params)) {
+		foreach ($pm_params as $param_values) {
+			if($param_values->type == "service") {
+				if($param_values->params->service == "ConstantContact") {
+					$username = $param_values->params->cc_username;
+					$password = $param_values->params->cc_password;
+					$category = $param_values->params->cc_list_name;
+
+					if(trim($username) === "" || trim($password) === "" || trim($category) === "") {
+						//echo "Empty Constant Contact Login Credentials";
+						echo 0;
+						die();
+					}
+
+					if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+						//echo "Invalid Email";
+						echo 0;
+					  	die();
+					}
+
+					$response = wp_remote_post( $cc_url, array(
+						'method' => 'POST',
+						'timeout' => 45,
+						'redirection' => 5,
+						'httpversion' => '1.0',
+						'blocking' => true,
+						'headers' => array(),
+						'body' => array( 'loginName' => $username, 'loginPassword' => $password, 'First_Name' => $fname, 'ea' => $email, 'ic' => $category ),
+						'cookies' => array()
+					    )
+					);
+
+					if ( is_wp_error( $response ) ) {
+					   $error_message = $response->get_error_message();
+					   echo "Something went wrong: $error_message";
+					} else {
+					   echo 'Response:<pre>';
+					   print_r( $response );
+					   echo '</pre>';
+					}
+				}
+			}
+		}
+	}
+	
+	die();
+}
 
 function pm_ab_track() {
 	global $wpdb;	

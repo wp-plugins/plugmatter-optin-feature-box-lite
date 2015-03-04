@@ -116,7 +116,7 @@
 							top: 0px !important;
 							left: 0px !important;
 						}
-						#pm_featurebox { height: 630px !important; }
+						#pm_featurebox { height: 680px !important; }
 						#pm_content { background-color :  ".$doc->params->bgcolor." }
 					}";
 					$custom_css.= "@media only screen and (min-width : 240px) and (max-width: 319px){ ".
@@ -157,7 +157,7 @@
 							  "GetResponse" => array("action_url" => "https://app.getresponse.com/add_contact_webform.html","name" => "email", "name_field" => "name"),
 							  "iContact" => array("action_url" => "https://app.icontact.com/icp/signup.php","name" => "fields_email", "name_field" => "fields_fname"),
 							  "MailChimp" => array("action_url" => $doc->params->action_url, "name" => "EMAIL", "name_field" => "FNAME"),
-							  "ConstantContact" => array("action_url" => "","name" => "fields[email_address][value]", "name_field" => "fields[first_name][value]"),
+							  "ConstantContact" => array("action_url" => "#pm_constantcontact","name" => "cc_email", "name_field" => "cc_firstname"),
                               "CampaignMonitor" => array("action_url" => "http://".$doc->params->cm_account_name.".createsend.com/t/r/s/".$doc->params->cm_id."/","name" => "cm-".$doc->params->cm_id."-".$doc->params->cm_id, "name_field" => "cm-name"),
 	 	  					  "InfusionSoft" => array("action_url" => "https://".$doc->params->account_subdomain.".infusionsoft.com/app/form/process/".$doc->params->inf_form_xid, "name" => "inf_field_Email", "name_field" => "inf_field_FirstName"),
 	 	  					  "Feedburner" => array("action_url" => "http://feedburner.google.com/fb/a/mailverify","name" => "email", "name_field" => "name"),	 	  				
@@ -178,24 +178,22 @@
                     $pm_service_hiddens.="<input type='hidden' name='jetpack_subscriptions_widget' value='subscribe' />";
                 }
                 if($doc->params->service == "ConstantContact") {
-                    $pm_service_hiddens.="<input type='hidden' name='uniqueformid' value='Plugmatter' />";
+                    $pm_service_hiddens.="<input type='hidden' name='cc_pmfb_tid' value='".$template_id."' />";
                 }                
                 
-                
-				foreach($doc->params as $key=>$value){
+                foreach($doc->params as $key=>$value){
 				 	if($key != "service"){
 						if($service_name == "Aweber" && $key == "redirect_url") {
 							$key = "redirect";
 						}
 						if($service_name == "iContact" && $key == "redirect_url") {
 							$key = "redirect";
-						}
+						}						
 						if($service_name == "iContact" && $key == "specialid") {
 							$key = "specialid:" . $doc->params->listid;
-						}
-						if($service_name == "ConstantContact" && $key == "list_id") {
-							$key = "cc_newsletter[]";
-						}                        
+						}      
+
+
 				 		if($service_name == "Custom") {
 							if(strpos($key, "value") !== false) {
 								$tmp_custom_key = substr($key,0, -6);
@@ -203,7 +201,12 @@
 								$custom_value = $value;
 								$pm_service_hiddens.="<input type='hidden' name='".$custom_key."' value='".$custom_value."' />";
 							}
-						} else {  
+						} else if ($doc->params->service == "ConstantContact") {
+							if($key == "cc_redirect_url") {
+								$pm_service_hiddens.="<input type='hidden' name='".$key."' value='".$value."' />";					
+							}
+							// ignore all the other fields ... not add in hidden fields
+						}else {  
                             if($key != "action_url") {
 				 			    $pm_service_hiddens.="<input type='hidden' name='".$key."' value='".$value."' />";					
                             }
@@ -218,10 +221,19 @@
 		
         if($doc->type != "user_designed_template") {
 	 		wp_enqueue_style('pm_button_style', plugins_url('/css/pm_btn_style.css', __FILE__));
-
 	 		wp_register_style('pm_custom-style', plugins_url('/templates/'.$base_temp_name.'/style.css', __FILE__));
+
 			wp_add_inline_style('pm_custom-style', $custom_css );
 			wp_enqueue_style('pm_custom-style');
+
+			if($pm_load_style == "pm_email_fname") {
+	 			wp_register_style('pm_custom-style2', plugins_url('/templates/'.$base_temp_name.'/twofields.css', __FILE__));
+	 		} 
+
+	 		if($pm_load_style == "pm_email_only") {
+	 			wp_register_style('pm_custom-style2', plugins_url('/templates/'.$base_temp_name.'/onefield.css', __FILE__));
+	 		}
+	 		wp_enqueue_style('pm_custom-style2');
             
             wp_register_style('pm_bootstrap', plugins_url('/css/pm_bootstrap.css', __FILE__));
 	 		wp_enqueue_style('pm_bootstrap');            

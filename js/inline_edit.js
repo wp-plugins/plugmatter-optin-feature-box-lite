@@ -6,7 +6,7 @@ var service_list = [];
 
 service_list.push({"service":"Aweber","fields":["listname","redirect_url","meta_adtracking"]});
 service_list.push({"service":"CampaignMonitor","fields":["cm_account_name","cm_id"]});
-service_list.push({"service":"ConstantContact","fields":["list_id","cc_redirect_url"]});
+service_list.push({"service":"ConstantContact","fields":["cc_username","cc_password","cc_list_name","cc_redirect_url"]});
 service_list.push({"service":"Feedburner","fields":["uri"]});
 service_list.push({"service":"Feedblitz","fields":["sub"]});
 service_list.push({"service":"GetResponse","fields":["webform_id"]});
@@ -400,7 +400,7 @@ jQuery.fn.inlineEdit = function(edit_type) {
 	       } else if(edit_type == "video") {
 				jQuery("#pmie_video_edit_con").remove();
 				var curvideo_url = jQuery("#pm_video").attr("video_url");
-	    		var video_edit_div = "<div id='pmie_video_edit_con' ><div id='pmie_video_edit_inner' >Enter YouTube Or Vimeo URL:<br>" +
+	    		var video_edit_div = "<div id='pmie_video_edit_con' ><div id='pmie_video_edit_inner' >Enter YouTube, Vimeo Or Wistia URL:<br>" +
 									 "<input type='text' id='pm_video_url' size='30' value='"+curvideo_url+"'>&nbsp; <input type='button' value='save' id='pm_video_save'>" +
 									 "</div></div>";
 	   			elem.append(video_edit_div);
@@ -566,7 +566,7 @@ jQuery.fn.inlineEdit = function(edit_type) {
 function pm_is_video(video_url) {
     var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
     if (pattern.test(video_url)) {
-    }else{
+    } else {
         return false;
     } 
 	   
@@ -584,6 +584,8 @@ function pm_is_video(video_url) {
 		}else{
 			return false;
 		}
+	} else if(video_url.indexOf("fast.wistia.net/embed/iframe/") != -1) {
+		return video_url;
 	} else {
 		return false;
 	}
