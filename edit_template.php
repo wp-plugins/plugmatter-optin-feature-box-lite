@@ -342,7 +342,7 @@ jQuery(document).ready(function(){
 		var pm_element = jQuery("#base_temp_name").get(0).tagName;
 		var template;
 		if(pm_element == "SELECT") {
-			template = jQuery('#base_temp_name :selected').text();
+			template = jQuery('#base_temp_name :selected').val();
 		}
 
 		if(pm_element == "DIV") {
