@@ -49,8 +49,9 @@
 			if($doc->type == "alignment") {
 				if($doc->width != 0) $pm_box_width = "max-width:".$doc->width."px;max-width:".$doc->width."px;";
 				$custom_css.= "#pm_featurebox { $pm_box_width margin: ".$doc->top_margin."px auto ".$doc->bottom_margin."px; }"; 
-			} 
-			else if($doc->type == "pm_custom_css") {
+			} else if($doc->type == "pm_form_fields") {
+				$pm_load_style  = $doc->fields_required;
+			} else if($doc->type == "pm_custom_css") {
 				$pm_custom_css  = $doc->pm_custom_css;
 			} else if($doc->type == "text") {
                 $objid = $doc->id;
