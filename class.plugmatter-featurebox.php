@@ -501,6 +501,8 @@ class Plugmatter_FeatureBox {
 
 }else{ // checking packing version before installation
 
+	require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	
 	$pmfb_active_pkg = get_option("PMFB_Plugin_Slug");
 	 	
  	if(is_plugin_active($pmfb_active_pkg.'/main.php')){
