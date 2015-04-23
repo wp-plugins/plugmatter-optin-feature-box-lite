@@ -514,47 +514,46 @@ class Plugmatter_FeatureBox {
 	 		
 	 		switch ($pmfb_pkg) {
 		 		case 'lite':
-		 			if($pmfb_installing_pkg == "lite"){
-		 				$msg = "<div class='error'><p>You already have this plugin installed!</p></div>";	
-		 			}else if($pmfb_installing_pkg == "single" || $pmfb_installing_pkg == "pro" || $pmfb_installing_pkg == "dev"){
-		 				$msg = "<div class='error'><p>To install this plugin please deactivate the lower packge installed and then try activating it.</p></div>";
+		 			if($pmfb_installing_pkg == "single" || $pmfb_installing_pkg == "pro" || $pmfb_installing_pkg == "dev"){
+		 				$msg = "<div class='error'><p>Oops, looks like you already have a Lite version this plugin installed! If you want to install it, first deactivate the previously installed feature box plugin.</p></div>";
 		 				$deactivate = true;
 		 			}	
 		 			break;
 		 		case 'single':
 		 			if($pmfb_installing_pkg == "lite"){
-		 				$msg = "<div class='error'><p>You already have a higher version of this plugin installed! if you want to install it anyway, first deactivate it.</p></div>";
+		 				$msg = "<div class='error'><p>Oops, looks like you already have a 'Single' License of this plugin installed! If you want to install it, first deactivate the previously installed feature box plugin.</p></div>";
 		 				$deactivate = true;
 		 			}else if($pmfb_installing_pkg == "single"){
-		 				$msg = "<div class='error'><p>You already have this plugin installed!.</p></div>";
+		 				$msg = "<div class='error'><p>Oops, looks like you already have the 'Single' License of this plugin installed! If you want to re-install it, first deactivate the previously installed feature box plugin.</p></div>";
 		 				$deactivate = true;
 		 			}else if($pmfb_installing_pkg == "pro" || $pmfb_installing_pkg == "dev"){
-		 				$msg = "<div class='error'><p>To install this plugin please deactivate the lower packge installed and then try activating it.</p></div>";
+		 				$msg = "<div class='error'><p>Oops, looks like you already have a 'Single' License of this plugin installed! If you want to install it, first deactivate the previously installed feature box plugin.</p></div>";
 		 				$deactivate = true;
 		 			}
 		 			break;
 		 		case 'pro':
 		 			if($pmfb_installing_pkg == "lite"){
-		 				$msg = "<div class='error'><p>You already have a higher version of this plugin installed! if you want to install it anyway, first deactivate it.</p></div>";	
+		 				$msg = "<div class='error'><p>Oops, looks like you already have the 'Pro' License of this plugin installed! If you want to install it, first deactivate the previously installed feature box plugin.</p></div>";	
 		 				$deactivate = true;
 		 			}elseif($pmfb_installing_pkg == "single"){
-		 				$msg = "<div class='error'><p>You already have a higher version of this plugin installed! if you want to install it anyway, first deactivate it.</div>";
+		 				$msg = "<div class='error'><p>Oops, looks like you already have the 'Pro' License of this plugin installed! If you want to install it, first deactivate the previously installed feature box plugin.</div>";
 		 				$deactivate = true;
 		 			}else if($pmfb_installing_pkg == "pro"){
-		 				$msg = "<div class='error'><p>You already have this plugin installed!</p></div>";
+		 				$msg = "<div class='error'><p>Oops, looks like you already have the 'Pro' License of this plugin installed! If you want to re-install it, first deactivate the previously installed feature box plugin.</p></div>";
 		 				$deactivate = true;
 		 			} elseif($pmfb_installing_pkg == "dev"){
-		 				$msg = "<div class='error'><p>To install this plugin please deactivate the lower packge installed and then try activating it.</p></div>";
+		 				$msg = "<div class='error'><p>Oops, looks like you already have the 'Pro' License of this plugin installed! If you want to install it, first deactivate the previously installed feature box plugin.</p></div>";
 		 				$deactivate = true;
 		 			}
 		 			break;
 		 		case 'dev':
 		 			if($pmfb_installing_pkg == "lite" || $pmfb_installing_pkg == "single" || $pmfb_installing_pkg == "pro"){
-		 				$msg = "<div class='error'><p>You already have a higher version of this plugin installed! if you want to install it anyway, first deactivate it.</p></div>";
+		 				$msg = "<div class='error'><p>Oops, looks like you already have the 'Dev' License of this plugin installed! If you want to install it, first deactivate the previously installed feature box plugin.</p></div>";
 		 				$deactivate = true;
 		 			}
 		 			break;
 		 		}	
+
 
 		 	if($deactivate){
 		 		delete_option("PMFB_INSTALLING_PKG");

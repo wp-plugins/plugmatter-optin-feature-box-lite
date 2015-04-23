@@ -3,7 +3,7 @@ Contributors: SNaimath, Akramquraishi
 Tags: optin, optin popup, aweber, constant contact, dashboard, email, getresponse, icontact, mailchimp, onclick popup, page, pages, pop-up, popup, popup box, popup message, popup window, popups, post, posts, shortcode, unblockable, hover, lightbox, widget, mailpoet, wordpress popup, email list, build email list, grow email list, email list building, list building, email marketing, mailing list, email subscriptions, feature box, optin feature box, wp feature box, thesis feature box, list building plugin, optin box, optin form, forms, conversion, subscribers, subscriptions, newsletter.
 Requires at least: 3.7 and above
 Tested up to: 4.1.2
-Stable tag: 2.0
+Stable tag: 2.0.1
 License: Premium
 License URI: http://plugmatter.com/feature-box/
 Donate Link: http://plugmatter.com/
@@ -147,8 +147,8 @@ At Plugmatter, we take Customer Support very seriously, even for our free users.
 
 == Changelog ==
 
-### 2.0 ###
-
+### 2.0.1 ###
+* Bugs Fixed. 
 
 #### 2.0 ####
 * A new inline support widget is added.
@@ -329,7 +329,7 @@ At Plugmatter, we take Customer Support very seriously, even for our free users.
 * Fixed Aweber redirection issue.
 
 == Upgrade Notice ==
-There's a new version of Plugmatter Feature Box Lite i.e., version 2.0
+There's a new version of Plugmatter Feature Box Lite i.e., version 2.0.1
 
 
 
