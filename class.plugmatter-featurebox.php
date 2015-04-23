@@ -55,7 +55,7 @@ class Plugmatter_FeatureBox {
 	static function on_install() {
 	    global $wpdb;
 
-	    self:: 
+	    self:: check_pmfb_pkg_version();
 	    	   
 	    $template_tbl_name = $wpdb->prefix.'plugmatter_templates';
 	    $abtest_tbl_name = $wpdb->prefix.'plugmatter_ab_test';
