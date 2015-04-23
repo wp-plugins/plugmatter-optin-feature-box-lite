@@ -81,6 +81,22 @@ if(isset($_POST["archieve_template_review"] ) && ($_POST["archieve_template_revi
 	//echo $variable = get_option('plugmatter_archieve_temp_review');
 	$saved++;
 }
+
+
+if(isset($_POST["pmfb_track_analytics"] ) && ($_POST["pmfb_track_analytics"]!="")) {
+	$pmfb_track_analytics = $_POST['pmfb_track_analytics'];
+	update_option('plugmatter_track_analytics', $pmfb_track_analytics);
+	//echo "pmfb_track_analytics -->".$variable = get_option('pmfb_track_analytics');
+	$saved++;
+}
+
+if(isset($_POST["pmfb_remove_data"] ) && ($_POST["pmfb_remove_data"]!="")) {
+	$pmfb_remove_data = $_POST['pmfb_remove_data'];
+	update_option('plugmatter_remove_data', $pmfb_remove_data);
+	//echo "pmfb_remove_data --->" . $variable = get_option('pmfb_remove_data');
+	$saved++;
+}
+
 //------------------------------------------------------------------------------------------------------
 
 if(isset($_POST["plugmatter_returning"] ) && ($_POST["plugmatter_returning"]!="")) {
@@ -110,10 +126,6 @@ if(isset($_POST["plugmatter_show_on_sections"] ) && ($_POST["plugmatter_show_on_
 }
 
 ?>  
-
-
-
-
 
 <script>
 	jQuery(document).ready(function($){
@@ -202,6 +214,12 @@ if(isset($_POST["plugmatter_show_on_sections"] ) && ($_POST["plugmatter_show_on_
 	<div class='pm_msg_success'><strong>Settings saved successfully.</strong></div>
 	<?php 
 	}
+
+	if(!get_option("PMFB_CODE_READY")){
+		
+		include "iscodeready.php";
+	
+	}
 	
 	if(get_option('plugmatter_ab_test_onoffswitch')=='1') {
 		echo "<div class='pm_msg_error' >
@@ -215,263 +233,286 @@ if(isset($_POST["plugmatter_show_on_sections"] ) && ($_POST["plugmatter_show_on_
 			echo "<div class='pm_settings_overlay'>&nbsp;</div>";
 		}
 	?>	
-		<form action="<?php $siteurl = get_option('siteurl');echo admin_url("admin.php?page=".Plugmatter_DIR_NAME."/main.php"); ?>" id='pm_settings' method="post"
+		<form action="<?php $siteurl = get_option('siteurl');echo admin_url("admin.php?page=pmfb_settings"); ?>" id='pm_settings' method="post"
 	onsubmit="javascript:if(jQuery('#global_template').val() == ''){ alert('Please select a default template'); return false;}">
-	
-		<div>
-			<div class='plug_enable_lable'>Enable Feature Box</div>
-			<div class='plug_tgl_btn'>
-				<input type="hidden" name="plugmatter_enable" value='0'/>
-				<input type="checkbox" id="plugmatter_enable" name="plugmatter_enable" class="switch" <?php if(get_option('plugmatter_enable') == 1) echo "checked"; ?> value='1' />
-				<label for="plugmatter_enable">&nbsp;</label>
+		
+			<div>
+				<div class='plug_enable_lable'>Enable Feature Box</div>
+				<div class='plug_tgl_btn'>
+					<input type="hidden" name="plugmatter_enable" value='0'/>
+					<input type="checkbox" id="plugmatter_enable" name="plugmatter_enable" class="switch" <?php if(get_option('plugmatter_enable') == 1) echo "checked"; ?> value='1' />
+					<label for="plugmatter_enable">&nbsp;</label>
+				</div>
+				<div style='clear:both'>&nbsp;</div>
 			</div>
-			<div style='clear:both'>&nbsp;</div>
-		</div>
-		<div id='pm_enabled_div' <?php if(get_option('plugmatter_enable') != 1) echo "style='display:none'"; ?>>
-			<table border='0' style='margin-top:10px;'>
-			    <tr>
-				<td width='285'><label for="Select Default Template">Select Default Template:</label></td>
-				<td width='10'>&nbsp;</td>
-				<td>
-					<select id="global_template" name="global_template">
-						<option value=''>Select Templates</option>
-						<?php 
-						global $wpdb;
-						$table = $wpdb->prefix.'plugmatter_templates';
-						$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name	FROM $table	ORDER BY id DESC");
-						foreach ( $resultss as $fivesdraft ) {
-							$id=$fivesdraft->id;
-							$temp_name=$fivesdraft->temp_name;
-							$base_temp_name=$fivesdraft->base_temp_name;
-						?>
-						<option value="<?php echo $id; ?>"
-						<?php if(($variable = get_option('plugmatter_global_template'))==$id){echo "selected=selected";} ?>>
-							<?php echo $temp_name; ?>
-						</option>
-						<?php 
-						}
-						?>
-					</select>
-				</td>
-				</tr>
-				<tr><td style='line-height:5px'>&nbsp;</td></tr>
-				<tr>
-				<td><label>Turn off Feature Box for Subscribed Visitors:</label></td>
-				<td width='10'>&nbsp;</td>
-				<td>
-					<input type="radio" id="pm_disable_box" class="plugmatter_show_temp_optinuser" value="1" name="plugmatter_show_temp_optinuser"	<?php if(get_option('plugmatter_show_temp_optinuser') != 0) echo "checked"; ?>>&nbsp;Disable &nbsp;&nbsp; 
-					<input type="radio" class="plugmatter_show_temp_optinuser" value="0" name="plugmatter_show_temp_optinuser"	<?php if(get_option('plugmatter_show_temp_optinuser') == 0) echo "checked"; ?>>&nbsp;Enable
-				</td>
-				</tr>
-				
-				<tr>
-					<td colspan='3'>
-				<?php	$plugmatter_show_temp_optinuser = get_option('plugmatter_show_temp_optinuser');
-						if(isset($_COOKIE['plugmatter_conv_done']) && $_COOKIE['plugmatter_conv_done'] == '1' && $plugmatter_show_temp_optinuser == '0' ){	 
-							 echo "<div style='margin-top:10px;color:gray;background:#fff;padding:15px'>
-							 		<b>Note:</b> You are not shown the feature box on your site <br> as the above feature is Enabled and you have subscribed using it.
-							 		</div>";
-						} ?>
+			<div id='pm_enabled_div' <?php if(get_option('plugmatter_enable') != 1) echo "style='display:none'"; ?>>
+				<h3>Display Settings: </h3>	
+				<div style="padding-left:30px;">
+				<table border='0' style='margin-top:10px;'>
+				    <tr>
+					<td width='285'><label for="Select Default Template">Select Default Template:</label></td>
+					<td width='10'>&nbsp;</td>
+					<td>
+						<select id="global_template" name="global_template">
+							<option value=''>Select Templates</option>
+							<?php 
+							global $wpdb;
+							$table = $wpdb->prefix.'plugmatter_templates';
+							$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name	FROM $table	ORDER BY id DESC");
+							foreach ( $resultss as $fivesdraft ) {
+								$id=$fivesdraft->id;
+								$temp_name=$fivesdraft->temp_name;
+								$base_temp_name=$fivesdraft->base_temp_name;
+							?>
+							<option value="<?php echo $id; ?>"
+							<?php if(($variable = get_option('plugmatter_global_template'))==$id){echo "selected=selected";} ?>>
+								<?php echo $temp_name; ?>
+							</option>
+							<?php 
+							}
+							?>
+						</select>
 					</td>
-				</tr>
-				
-				<tr><td style='border-bottom:0px solid #dddddd;' colspan='3'>&nbsp;</td></tr>
-				<tr><td style='padding-top:20px;' colspan='3'>
-					<div class='plug_enable_lable' <?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite") echo "style='color:gray'";?>>Target Different Sections</div>
-					<div class='plug_tgl_btn'>
-						<input type="hidden" name="plugmatter_show_on_sections" value='0'/>
-						<input type="checkbox" id="plugmatter_show_on_sections" name="plugmatter_show_on_sections" class="switch"  value='1' <?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite") echo "disabled";?>/>
-						<label for="plugmatter_show_on_sections">&nbsp;</label>
-					</div>
-					<div style='float:left;padding-top:5px;'><?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite") echo Plugmatter_UPNOTE;?></div>
-					<div style='clear:both'>&nbsp;</div>				
-				</td></tr>	
-				<tr class='target_dsections'>
-					<td valign='top'>Choose Templates:</td>
-					<td>&nbsp;</td>
-				<td>
-					<table>
-						<tr><td>Home:</td><td>&nbsp;</td>
-						<td>
-							<select id="home_template" name="home_template">
-							<option value="-1" <?php if(($variable = get_option('plugmatter_home_temp')) == "-1"){echo "selected=selected";} ?>>Default Template</option>
-							<option value="-2" <?php if(($variable = get_option('plugmatter_home_temp')) == "-2"){echo "selected=selected";} ?>>Disable</option>
-							<?php 
-							global $wpdb;
-							$table = $wpdb->prefix.'plugmatter_templates';
-							$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name FROM $table ORDER BY id DESC");
-							foreach ( $resultss as $fivesdraft ) {
-								if(($variable = get_option('plugmatter_home_temp'))==$fivesdraft->id ){ $selected = "selected"; } else { $selected = ""; }
-								echo "<option value='$fivesdraft->id' $selected>$fivesdraft->temp_name</option>"; 
-							}
-							?>
-							</select>
+					</tr>
+					<tr><td style='line-height:5px'>&nbsp;</td></tr>
+					<tr>
+					<td><label>Turn off Feature Box for Subscribed Visitors:</label></td>
+					<td width='10'>&nbsp;</td>
+					<td>
+						<input type="radio" id="pm_disable_box" class="plugmatter_show_temp_optinuser" value="1" name="plugmatter_show_temp_optinuser"	<?php if(get_option('plugmatter_show_temp_optinuser') == '1' || get_option('plugmatter_show_temp_optinuser') == '' ) echo "checked"; ?>>&nbsp;Disable &nbsp;&nbsp; 
+						<input type="radio" class="plugmatter_show_temp_optinuser" value="0" name="plugmatter_show_temp_optinuser"	<?php if(get_option('plugmatter_show_temp_optinuser') == 0 && get_option('plugmatter_show_temp_optinuser') != '') echo "checked"; ?>>&nbsp;Enable
+					</td>
+					</tr>
+					
+					<tr>
+						<td colspan='3'>
+					<?php	$plugmatter_show_temp_optinuser = get_option('plugmatter_show_temp_optinuser');
+							if(isset($_COOKIE['plugmatter_conv_done']) && $_COOKIE['plugmatter_conv_done'] == '1' && $plugmatter_show_temp_optinuser === '0' ){	 
+								 echo "<div style='margin-top:10px;color:gray;background:#fff;padding:15px'>
+								 		<b>Note:</b> You are not shown the feature box on your site <br> as the above feature is Enabled and you have subscribed using it.
+								 		</div>";
+							} ?>
 						</td>
-						</tr>
-						<tr><td style='line-height:5px;'>&nbsp;</td></tr>
-						<tr><td>Post:</td><td>&nbsp;</td>
-						<td>
-							<select id="post_template" name="post_template">
-							<option value="-1" <?php if(($variable = get_option('plugmatter_post_temp')) == "-1"){echo "selected=selected";} ?>>Default Template</option>
-							<option value="-2" <?php if(($variable = get_option('plugmatter_post_temp')) == "-2"){echo "selected=selected";} ?>>Disable</option>
-							<?php 
-							global $wpdb;
-							$table = $wpdb->prefix.'plugmatter_templates';
-							$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name FROM $table ORDER BY id DESC");
-							foreach ( $resultss as $fivesdraft ) {
-								if(($variable = get_option('plugmatter_post_temp'))==$fivesdraft->id ){ $selected = "selected"; } else { $selected = ""; }
-								echo "<option value='$fivesdraft->id' $selected>$fivesdraft->temp_name</option>"; 
-							}
-							?>
-							</select>
-						</td>
-						</tr>
-						<tr><td style='line-height:5px;'>&nbsp;</td></tr>
-						<tr><td>Pages:</td><td>&nbsp;</td>
-						<td>
-							<select id="page_template" name="page_template">
-							<option value="-1" <?php if(($variable = get_option('plugmatter_page_temp')) == "-1"){echo "selected=selected";} ?>>Default Template</option>
-							<option value="-2" <?php if(($variable = get_option('plugmatter_page_temp')) == "-2"){echo "selected=selected";} ?>>Disable</option>
-							<?php 
-							global $wpdb;
-							$table = $wpdb->prefix.'plugmatter_templates';
-							$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name FROM $table ORDER BY id DESC");
-							foreach ( $resultss as $fivesdraft ) {
-								if(($variable = get_option('plugmatter_page_temp'))==$fivesdraft->id ){ $selected = "selected"; } else { $selected = ""; }
-								echo "<option value='$fivesdraft->id' $selected>$fivesdraft->temp_name</option>"; 
-							}
-							?>
-							</select>
-						</td>
-						</tr>
-						<tr><td style='line-height:5px;'>&nbsp;</td></tr>
-						<tr><td>Archive:</td><td>&nbsp;</td>
-						<td>
-							<select id="archieve_template" name="archieve_template">
-							<option value="-1" <?php if(($variable = get_option('plugmatter_archieve_temp')) == "-1"){echo "selected=selected";} ?>>Default Template</option>
-							<option value="-2" <?php if(($variable = get_option('plugmatter_archieve_temp')) == "-2"){echo "selected=selected";} ?>>Disable</option>
-							<?php 
-							global $wpdb;
-							$table = $wpdb->prefix.'plugmatter_templates';
-							$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name FROM $table ORDER BY id DESC");
-							foreach ( $resultss as $fivesdraft ) {
-								if(($variable = get_option('plugmatter_archieve_temp'))==$fivesdraft->id ){ $selected = "selected"; } else { $selected = ""; }
-								echo "<option value='$fivesdraft->id' $selected>$fivesdraft->temp_name</option>"; 
-							}
-							?>
-							</select>
-						</td>
-						</tr>
-						<tr><td style='line-height:5px;'>&nbsp;</td></tr>						
-					</table>
-				</td>
-				</tr>
+					</tr>
+					
+					<tr><td style='border-bottom:0px solid #dddddd;' colspan='3'>&nbsp;</td></tr>
+					<tr><td style='padding-top:20px;' colspan='3'>
+						<div class='plug_enable_lable' <?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite") echo "style='color:gray'";?>>Target Different Sections</div>
+						<div class='plug_tgl_btn'>
+							<input type="hidden" name="plugmatter_show_on_sections" value='0'/>
+							<input type="checkbox" id="plugmatter_show_on_sections" name="plugmatter_show_on_sections" class="switch"  value='1' <?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite") echo "disabled";?>/>
+							<label for="plugmatter_show_on_sections">&nbsp;</label>
+						</div>
+						<div style='float:left;padding-top:5px;'><?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite") echo Plugmatter_UPNOTE;?></div>
+						<div style='clear:both'>&nbsp;</div>				
+					</td></tr>	
+					<tr class='target_dsections'>
+						<td valign='top'>Choose Templates:</td>
+						<td>&nbsp;</td>
+					<td>
+						<table>
+							<tr><td>Home:</td><td>&nbsp;</td>
+							<td>
+								<select id="home_template" name="home_template">
+								<option value="-1" <?php if(($variable = get_option('plugmatter_home_temp')) == "-1"){echo "selected=selected";} ?>>Default Template</option>
+								<option value="-2" <?php if(($variable = get_option('plugmatter_home_temp')) == "-2"){echo "selected=selected";} ?>>Disable</option>
+								<?php 
+								global $wpdb;
+								$table = $wpdb->prefix.'plugmatter_templates';
+								$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name FROM $table ORDER BY id DESC");
+								foreach ( $resultss as $fivesdraft ) {
+									if(($variable = get_option('plugmatter_home_temp'))==$fivesdraft->id ){ $selected = "selected"; } else { $selected = ""; }
+									echo "<option value='$fivesdraft->id' $selected>$fivesdraft->temp_name</option>"; 
+								}
+								?>
+								</select>
+							</td>
+							</tr>
+							<tr><td style='line-height:5px;'>&nbsp;</td></tr>
+							<tr><td>Post:</td><td>&nbsp;</td>
+							<td>
+								<select id="post_template" name="post_template">
+								<option value="-1" <?php if(($variable = get_option('plugmatter_post_temp')) == "-1"){echo "selected=selected";} ?>>Default Template</option>
+								<option value="-2" <?php if(($variable = get_option('plugmatter_post_temp')) == "-2"){echo "selected=selected";} ?>>Disable</option>
+								<?php 
+								global $wpdb;
+								$table = $wpdb->prefix.'plugmatter_templates';
+								$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name FROM $table ORDER BY id DESC");
+								foreach ( $resultss as $fivesdraft ) {
+									if(($variable = get_option('plugmatter_post_temp'))==$fivesdraft->id ){ $selected = "selected"; } else { $selected = ""; }
+									echo "<option value='$fivesdraft->id' $selected>$fivesdraft->temp_name</option>"; 
+								}
+								?>
+								</select>
+							</td>
+							</tr>
+							<tr><td style='line-height:5px;'>&nbsp;</td></tr>
+							<tr><td>Pages:</td><td>&nbsp;</td>
+							<td>
+								<select id="page_template" name="page_template">
+								<option value="-1" <?php if(($variable = get_option('plugmatter_page_temp')) == "-1"){echo "selected=selected";} ?>>Default Template</option>
+								<option value="-2" <?php if(($variable = get_option('plugmatter_page_temp')) == "-2"){echo "selected=selected";} ?>>Disable</option>
+								<?php 
+								global $wpdb;
+								$table = $wpdb->prefix.'plugmatter_templates';
+								$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name FROM $table ORDER BY id DESC");
+								foreach ( $resultss as $fivesdraft ) {
+									if(($variable = get_option('plugmatter_page_temp'))==$fivesdraft->id ){ $selected = "selected"; } else { $selected = ""; }
+									echo "<option value='$fivesdraft->id' $selected>$fivesdraft->temp_name</option>"; 
+								}
+								?>
+								</select>
+							</td>
+							</tr>
+							<tr><td style='line-height:5px;'>&nbsp;</td></tr>
+							<tr><td>Archive:</td><td>&nbsp;</td>
+							<td>
+								<select id="archieve_template" name="archieve_template">
+								<option value="-1" <?php if(($variable = get_option('plugmatter_archieve_temp')) == "-1"){echo "selected=selected";} ?>>Default Template</option>
+								<option value="-2" <?php if(($variable = get_option('plugmatter_archieve_temp')) == "-2"){echo "selected=selected";} ?>>Disable</option>
+								<?php 
+								global $wpdb;
+								$table = $wpdb->prefix.'plugmatter_templates';
+								$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name FROM $table ORDER BY id DESC");
+								foreach ( $resultss as $fivesdraft ) {
+									if(($variable = get_option('plugmatter_archieve_temp'))==$fivesdraft->id ){ $selected = "selected"; } else { $selected = ""; }
+									echo "<option value='$fivesdraft->id' $selected>$fivesdraft->temp_name</option>"; 
+								}
+								?>
+								</select>
+							</td>
+							</tr>
+							<tr><td style='line-height:5px;'>&nbsp;</td></tr>						
+						</table>
+					</td>
+					</tr>
 
-				
-				<tr><td style='border-bottom:0px solid #dddddd;' colspan='3'>&nbsp;</td></tr>
-				<tr><td style='padding-top:20px;' colspan='3'>
-					<div class='plug_enable_lable' <?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite") echo "style='color:gray'";?>>Target Returning Visitors</div>
-					<div class='plug_tgl_btn'>
-						<input type="hidden" name="plugmatter_returning" value='0'/>
-						<input type="checkbox" id="plugmatter_returning" name="plugmatter_returning" class="switch" <?php if(get_option('plugmatter_returning') == 1) echo "checked"; ?> value='1' <?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite") echo "disabled";?>/>
-						<label for="plugmatter_returning">&nbsp;</label>
+					
+					<tr><td style='border-bottom:0px solid #dddddd;' colspan='3'>&nbsp;</td></tr>
+					<tr><td style='padding-top:20px;' colspan='3'>
+						<div class='plug_enable_lable' <?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite") echo "style='color:gray'";?>>Target Returning Visitors</div>
+						<div class='plug_tgl_btn'>
+							<input type="hidden" name="plugmatter_returning" value='0'/>
+							<input type="checkbox" id="plugmatter_returning" name="plugmatter_returning" class="switch" <?php if(get_option('plugmatter_returning') == 1) echo "checked"; ?> value='1' <?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite") echo "disabled";?>/>
+							<label for="plugmatter_returning">&nbsp;</label>
+						</div>
+						<div style='float:left;padding-top:5px;'><?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite") echo Plugmatter_UPNOTE;?></div>
+						<div style='clear:both'>&nbsp;</div>				
+					</td></tr>
+					
+					
+					
+					<tr class='target_returning'>
+					<td valign='top'>Number of Visits:</td>
+					<td>&nbsp;</td>
+					<td><input type="text" name="reviews" id="pm_reviews" maxlength='3' value="<?php if(get_option('plugmatter_num_of_reviews')){echo $variable =  get_option('plugmatter_num_of_reviews');}else{echo 0;} ?>" size='10' />
+					</td>				
+					</tr>
+					<tr class='target_returning'><td style='line-height:5px;'>&nbsp;</td></tr>						
+					<tr class='target_returning'>
+					<td  valign='top'>Choose Templates:</td>
+					<td>&nbsp;</td>
+					<td>
+						<table>
+							<tr><td>Home:</td><td>&nbsp;</td>
+							<td>
+								<select id="home_template_review" name="home_template_review">
+								<option value="-1" <?php if(($variable = get_option('plugmatter_home_temp_review')) == "-1"){echo "selected=selected";} ?>>Default Template</option>
+								<option value="-2" <?php if(($variable = get_option('plugmatter_home_temp_review')) == "-2"){echo "selected=selected";} ?>>Disable</option>
+								<?php 
+								global $wpdb;
+								$table = $wpdb->prefix.'plugmatter_templates';
+								$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name FROM $table ORDER BY id DESC");
+								foreach ( $resultss as $fivesdraft ) {
+									if(($variable = get_option('plugmatter_home_temp_review'))==$fivesdraft->id ){ $selected = "selected"; } else { $selected = ""; }
+									echo "<option value='$fivesdraft->id' $selected>$fivesdraft->temp_name</option>"; 
+								}
+								?>
+								</select>
+							</td>
+							</tr>
+							<tr><td style='line-height:5px;'>&nbsp;</td></tr>
+							<tr><td>Post:</td><td>&nbsp;</td>
+							<td>
+								<select id="post_template_review" name="post_template_review">
+								<option value="-1" <?php if(($variable = get_option('plugmatter_post_temp_review')) == "-1"){echo "selected=selected";} ?>>Default Template</option>
+								<option value="-2" <?php if(($variable = get_option('plugmatter_post_temp_review')) == "-2"){echo "selected=selected";} ?>>Disable</option>
+								<?php 
+								global $wpdb;
+								$table = $wpdb->prefix.'plugmatter_templates';
+								$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name FROM $table ORDER BY id DESC");
+								foreach ( $resultss as $fivesdraft ) {
+									if(($variable = get_option('plugmatter_post_temp_review'))==$fivesdraft->id ){ $selected = "selected"; } else { $selected = ""; }
+									echo "<option value='$fivesdraft->id' $selected>$fivesdraft->temp_name</option>"; 
+								}
+								?>
+								</select>
+							</td>
+							</tr>
+							<tr><td style='line-height:5px;'>&nbsp;</td></tr>
+							<tr><td>Pages:</td><td>&nbsp;</td>
+							<td>
+								<select id="page_template_review" name="page_template_review">
+								<option value="-1" <?php if(($variable = get_option('plugmatter_page_temp_review')) == "-1"){echo "selected=selected";} ?>>Default Template</option>
+								<option value="-2" <?php if(($variable = get_option('plugmatter_page_temp_review')) == "-2"){echo "selected=selected";} ?>>Disable</option>
+								<?php 
+								global $wpdb;
+								$table = $wpdb->prefix.'plugmatter_templates';
+								$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name FROM $table ORDER BY id DESC");
+								foreach ( $resultss as $fivesdraft ) {
+									if(($variable = get_option('plugmatter_page_temp_review'))==$fivesdraft->id ){ $selected = "selected"; } else { $selected = ""; }
+									echo "<option value='$fivesdraft->id' $selected>$fivesdraft->temp_name</option>"; 
+								}
+								?>
+								</select>
+							</td>
+							</tr>
+							<tr><td style='line-height:5px;'>&nbsp;</td></tr>
+							<tr><td>Archive:</td><td>&nbsp;</td>
+							<td>
+								<select id="archieve_template_review" name="archieve_template_review">
+								<option value="-1" <?php if(($variable = get_option('plugmatter_archieve_temp_review')) == "-1"){echo "selected=selected";} ?>>Default Template</option>
+								<option value="-2" <?php if(($variable = get_option('plugmatter_archieve_temp_review')) == "-2"){echo "selected=selected";} ?>>Disable</option>
+								<?php 
+								global $wpdb;
+								$table = $wpdb->prefix.'plugmatter_templates';
+								$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name FROM $table ORDER BY id DESC");
+								foreach ( $resultss as $fivesdraft ) {
+									if(($variable = get_option('plugmatter_archieve_temp_review'))==$fivesdraft->id ){ $selected = "selected"; } else { $selected = ""; }
+									echo "<option value='$fivesdraft->id' $selected>$fivesdraft->temp_name</option>"; 
+								}
+								?>
+								</select>
+							</td>
+							</tr>
+							<tr><td style='line-height:5px;'>&nbsp;</td></tr>						
+						</table>
+					</td>
+					</tr>				
+					<tr><td style='' colspan='3'>&nbsp;</td></tr>				
+				</table>
+				</div>
+				<div class="pmfb_track_analytics">
+					<h3>Track Analytics:</h3>
+					<div style="padding-left:30px;">
+						<label for="pmfb_track_analytics">Enable Google Analyltics:</label>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="pmfb_track_analytics" id="" value="1" <?php if(get_option('plugmatter_track_analytics') != 0) echo "checked"; ?> /> &nbsp; Enable &nbsp;&nbsp;
+						<input type="radio" name="pmfb_track_analytics" id="" value="0" <?php if(get_option('plugmatter_track_analytics') == 0) echo "checked"; ?> /> &nbsp; Disable
 					</div>
-					<div style='float:left;padding-top:5px;'><?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite") echo Plugmatter_UPNOTE;?></div>
-					<div style='clear:both'>&nbsp;</div>				
-				</td></tr>
-				
-				
-				
-				<tr class='target_returning'>
-				<td valign='top'>Number of Visits:</td>
-				<td>&nbsp;</td>
-				<td><input type="text" name="reviews" id="pm_reviews" maxlength='3' value="<?php if(get_option('plugmatter_num_of_reviews')){echo $variable =  get_option('plugmatter_num_of_reviews');}else{echo 0;} ?>" size='10' />
-				</td>				
-				</tr>
-				<tr class='target_returning'><td style='line-height:5px;'>&nbsp;</td></tr>						
-				<tr class='target_returning'>
-				<td  valign='top'>Choose Templates:</td>
-				<td>&nbsp;</td>
-				<td>
-					<table>
-						<tr><td>Home:</td><td>&nbsp;</td>
-						<td>
-							<select id="home_template_review" name="home_template_review">
-							<option value="-1" <?php if(($variable = get_option('plugmatter_home_temp_review')) == "-1"){echo "selected=selected";} ?>>Default Template</option>
-							<option value="-2" <?php if(($variable = get_option('plugmatter_home_temp_review')) == "-2"){echo "selected=selected";} ?>>Disable</option>
-							<?php 
-							global $wpdb;
-							$table = $wpdb->prefix.'plugmatter_templates';
-							$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name FROM $table ORDER BY id DESC");
-							foreach ( $resultss as $fivesdraft ) {
-								if(($variable = get_option('plugmatter_home_temp_review'))==$fivesdraft->id ){ $selected = "selected"; } else { $selected = ""; }
-								echo "<option value='$fivesdraft->id' $selected>$fivesdraft->temp_name</option>"; 
-							}
-							?>
-							</select>
-						</td>
-						</tr>
-						<tr><td style='line-height:5px;'>&nbsp;</td></tr>
-						<tr><td>Post:</td><td>&nbsp;</td>
-						<td>
-							<select id="post_template_review" name="post_template_review">
-							<option value="-1" <?php if(($variable = get_option('plugmatter_post_temp_review')) == "-1"){echo "selected=selected";} ?>>Default Template</option>
-							<option value="-2" <?php if(($variable = get_option('plugmatter_post_temp_review')) == "-2"){echo "selected=selected";} ?>>Disable</option>
-							<?php 
-							global $wpdb;
-							$table = $wpdb->prefix.'plugmatter_templates';
-							$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name FROM $table ORDER BY id DESC");
-							foreach ( $resultss as $fivesdraft ) {
-								if(($variable = get_option('plugmatter_post_temp_review'))==$fivesdraft->id ){ $selected = "selected"; } else { $selected = ""; }
-								echo "<option value='$fivesdraft->id' $selected>$fivesdraft->temp_name</option>"; 
-							}
-							?>
-							</select>
-						</td>
-						</tr>
-						<tr><td style='line-height:5px;'>&nbsp;</td></tr>
-						<tr><td>Pages:</td><td>&nbsp;</td>
-						<td>
-							<select id="page_template_review" name="page_template_review">
-							<option value="-1" <?php if(($variable = get_option('plugmatter_page_temp_review')) == "-1"){echo "selected=selected";} ?>>Default Template</option>
-							<option value="-2" <?php if(($variable = get_option('plugmatter_page_temp_review')) == "-2"){echo "selected=selected";} ?>>Disable</option>
-							<?php 
-							global $wpdb;
-							$table = $wpdb->prefix.'plugmatter_templates';
-							$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name FROM $table ORDER BY id DESC");
-							foreach ( $resultss as $fivesdraft ) {
-								if(($variable = get_option('plugmatter_page_temp_review'))==$fivesdraft->id ){ $selected = "selected"; } else { $selected = ""; }
-								echo "<option value='$fivesdraft->id' $selected>$fivesdraft->temp_name</option>"; 
-							}
-							?>
-							</select>
-						</td>
-						</tr>
-						<tr><td style='line-height:5px;'>&nbsp;</td></tr>
-						<tr><td>Archive:</td><td>&nbsp;</td>
-						<td>
-							<select id="archieve_template_review" name="archieve_template_review">
-							<option value="-1" <?php if(($variable = get_option('plugmatter_archieve_temp_review')) == "-1"){echo "selected=selected";} ?>>Default Template</option>
-							<option value="-2" <?php if(($variable = get_option('plugmatter_archieve_temp_review')) == "-2"){echo "selected=selected";} ?>>Disable</option>
-							<?php 
-							global $wpdb;
-							$table = $wpdb->prefix.'plugmatter_templates';
-							$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name FROM $table ORDER BY id DESC");
-							foreach ( $resultss as $fivesdraft ) {
-								if(($variable = get_option('plugmatter_archieve_temp_review'))==$fivesdraft->id ){ $selected = "selected"; } else { $selected = ""; }
-								echo "<option value='$fivesdraft->id' $selected>$fivesdraft->temp_name</option>"; 
-							}
-							?>
-							</select>
-						</td>
-						</tr>
-						<tr><td style='line-height:5px;'>&nbsp;</td></tr>						
-					</table>
-				</td>
-				</tr>				
-				<tr><td style='' colspan='3'>&nbsp;</td></tr>				
-			</table>
-		</div>
+				</div>
+				<div class="pmfb_remove_data">
+					<h3>Remove Data:</h3>
+					<div style="padding-left:30px;">
+						<label for="pmfb_remove_data">Remove all templates and split test data on Uninstall:</label>&nbsp;&nbsp;
+						<input type="radio" name="pmfb_remove_data" id="" value="1" <?php if(get_option('plugmatter_remove_data') != 0) echo "checked"; ?> /> &nbsp; Enable &nbsp;&nbsp;
+						<input type="radio" name="pmfb_remove_data" id="" value="0" <?php if(get_option('plugmatter_remove_data') == 0) echo "checked"; ?> /> &nbsp; Disable 
+					</div>
+				</div>
+			</div>
+			<br/><br/>	
+			
+			
 		<div class="pmadmin_submit">
 			<input id="submit" class="pm_primary_buttons" type="submit" value="   Save All Changes   " name="submit">
 		</div>

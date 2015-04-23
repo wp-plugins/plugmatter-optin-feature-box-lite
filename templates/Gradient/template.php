@@ -1,4 +1,4 @@
-	<div id="pm_featurebox" ab_meta="<?php echo $ab_meta ?>">
+	<div id="pm_featurebox" ab_meta="<?php echo $ab_meta ?>" pm_meta_tid="<?php echo $pm_meta_tid; ?>">
 		<div class="pmedit" pm_meta="image" id="pm_image" pm_image_size="500x336">
 		<div class="pmedit" pm_meta="color" gradient="#ffffff" id="pm_content_con">
 			<div id="pm_content">

@@ -49,7 +49,7 @@ if(isset($_POST['action'])) {
 ?>
 <div class='pmadmin_wrap'>
 	<div class='pmadmin_headbar'>
-		<div class='pmadmin_pagetitle'><h2>Templates <a href="<?php echo admin_url("admin.php?page=edit_template_submenu-page&action=insert"); ?>">Add New</a></h2></div>
+		<div class='pmadmin_pagetitle'><h2>Templates <a href="<?php echo admin_url("admin.php?page=pmfb_edit_template&action=insert"); ?>">Add New</a></h2></div>
 	    <div class='pmadmin_logodiv'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/logo.png";?>' height='35'></div>
 	</div>
 	<div class='pmadmin_body'>
@@ -61,6 +61,7 @@ $resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name	FROM $plugmat
 $result_count = count($resultss);
 if($result_count != 0) {
 ?>
+
 <table class="widefat">
 	<thead>
 		<tr style="">
@@ -91,18 +92,18 @@ foreach ( $resultss as $fivesdraft ) {
 	<tr>
 		<td class="post-title column-title">
 			<strong>
-			    <a title="Edit" href="<?php echo admin_url("admin.php?page=edit_template_submenu-page&action=edit&template_id=$id"); ?>"><?php echo $temp_name;  ?></a>
+			    <a title="Edit" href="<?php echo admin_url("admin.php?page=pmfb_edit_template&action=edit&template_id=$id"); ?>"><?php echo $temp_name;  ?></a>
 			</strong>
 		</td>
 		<td><?php echo $base_temp_name; ?></td>
 		<td>
-			<a title="Edit" href="<?php echo admin_url("admin.php?page=edit_template_submenu-page&action=edit&template_id=$id"); ?>">Edit</a>
+			<a title="Edit" href="<?php echo admin_url("admin.php?page=pmfb_edit_template&action=edit&template_id=$id"); ?>">Edit</a>
 		</td>
 		<td>
-			<a title="Clone" href="<?php echo admin_url("admin.php?page=template_submenu-page&action=clone&clone_id=$id"); ?>">Clone</a>
+			<a title="Clone" href="<?php echo admin_url("admin.php?page=pmfb_template&action=clone&clone_id=$id"); ?>">Clone</a>
 		</td>
 		<td>
-			<a title="Delete"  onclick="javascript:check=confirm('Are you sure you want to delete it?');if(check==false) return false;" href="<?php echo admin_url("admin.php?page=template_submenu-page&action=delete&delete_id=$id"); ?>">Delete</a>
+			<a title="Delete"  onclick="javascript:check=confirm('Are you sure you want to delete it?');if(check==false) return false;" href="<?php echo admin_url("admin.php?page=pmfb_template&action=delete&delete_id=$id"); ?>">Delete</a>
 		</td>
 	</tr>
 <?php 

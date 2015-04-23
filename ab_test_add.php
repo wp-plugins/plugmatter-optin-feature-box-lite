@@ -49,7 +49,7 @@ jQuery(document).ready(function(){
 	    <div class='pmadmin_logodiv'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/logo.png";?>' height='35'></div>
 	</div>
 	<div class='pmadmin_body'>
-	<form action="<?php $siteurl = get_option('siteurl');echo admin_url("admin.php?page=ab_test_submenu_page&action=add_new"); ?>"	method="POST">
+	<form action="<?php $siteurl = get_option('siteurl');echo admin_url("admin.php?page=pmfb_ab_test&action=add_new"); ?>"	method="POST">
 		<table class="form-table">
 			<tbody>
 				<tr valign="top">
@@ -121,7 +121,7 @@ jQuery(document).ready(function(){
 					</th>
 					<td colspan="2">
 						<input class="pm_primary_buttons" id="save_btn" type="submit" value=" Save "> &nbsp;&nbsp;
-						<input class="pm_secondary_buttons" id="cancel_btn" type="button" value=" Cancel " onclick="location.href='<?php $siteurl = get_option('siteurl');echo admin_url("admin.php?page=ab_test_submenu_page"); ?>'">					
+						<input class="pm_secondary_buttons" id="cancel_btn" type="button" value=" Cancel " onclick="location.href='<?php $siteurl = get_option('siteurl');echo admin_url("admin.php?page=pmfb_ab_test"); ?>'">					
 					</td>
 				</tr>
 			</tbody>

@@ -16,6 +16,8 @@ if(isset($_POST["license_key"] ) && ($_POST["license_key"]!="")) {
 	if($res_arr[0] == "VERIFIED") {
 		update_option('Plugmatter_PACKAGE', $res_arr[1]);
 		update_option('Plugmatter_Featurebox_License', $_POST["license_key"]);
+		update_option('PMFB_Plugin_Slug',dirname(plugin_basename(__FILE__)));
+
 		$msg="<div class='pm_msg_success'><strong>Plugmatter Feature Box activated successfully</strong></div>";
 	} else {
 		$msg="<div class='pm_msg_error'><strong>Invalid License Key</strong></div>";
@@ -66,7 +68,7 @@ if(isset($_POST["license_key"] ) && ($_POST["license_key"]!="")) {
         If yes, then <b>Get Started</b> below.        
         <br><br>
 		<div class="pmadmin_submit">
-			<input id="submit" class="pm_primary_buttons" type="submit" value=" Get Started " onclick="location.href='<?php echo get_option('siteurl'); ?>/wp-admin/admin.php?page=edit_template_submenu-page&action=insert'" name="submit">
+			<input id="submit" class="pm_primary_buttons" type="submit" value=" Get Started " onclick="location.href='<?php echo get_option('siteurl'); ?>/wp-admin/admin.php?page=pmfb_edit_template&action=insert'" name="submit">
 		</div>        
         <br><br>
         <b>OR</b>
@@ -88,7 +90,7 @@ if(isset($_POST["license_key"] ) && ($_POST["license_key"]!="")) {
     <div style='padding-bottom:30px;'>
         To get Support for your plugin from Plugmatter, you need to enter your Plugmatter License Key sent to you in your "License Key Email". Please contact <a href='http://plugmatter.com/support' target='_blank'>support</a> if you're unable to find your License Key.
     </div>        
-	<form action="<?php $siteurl = get_option('siteurl');echo $siteurl."/wp-admin/admin.php?page=license_submenu_page"; ?>" id='pm_settings' method="post">	
+	<form action="<?php $siteurl = get_option('siteurl');echo $siteurl."/wp-admin/admin.php?page=pmfb_license"; ?>" id='pm_settings' method="post">	
 		<div>
 			<div class='plug_enable_lable' style='width:250px'>Enter Your License Key</div>
 			<div class='plug_tgl_btn'>
@@ -111,7 +113,7 @@ if(isset($_POST["license_key"] ) && ($_POST["license_key"]!="")) {
 	} 
     if($reg_done != true) {
     ?><br><br>
-	<form action="<?php $siteurl = get_option('siteurl');echo $siteurl."/wp-admin/admin.php?page=license_submenu_page"; ?>" id='pm_settings' method="post">	
+	<form action="<?php $siteurl = get_option('siteurl');echo $siteurl."/wp-admin/admin.php?page=pmfb_license"; ?>" id='pm_settings' method="post">	
 		<div>
 			<div class='plug_enable_lable' style='width:150px'>First Name</div>
 			<div class='plug_tgl_btn'>

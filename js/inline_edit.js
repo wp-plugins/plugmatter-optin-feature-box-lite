@@ -728,6 +728,9 @@ function email_service_select_change() {
 				jQuery('#'+"service_lable_"+name).css("color","red");
 				error = '1';
 			}else if(name.split("_")[1] == "url"){ 
+				
+	    		value = value.replace(/^["'](.*)["']$/, '$1');
+	    		   			
 				var check = validate(value);
 				if(check == true){
 					jQuery('#'+"service_lable_"+name).css("color","black");
@@ -821,7 +824,8 @@ function font_txt_family(family, pid){
 	document.getElementById(id).style.fontFamily=family;
 }
 
-function validate(url) {		       
+function validate(url) {		 
+
     var pattern = /((ftp|http|https):\/\/)?(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
        if (pattern.test(url)) {
            return true;

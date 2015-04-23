@@ -2,8 +2,8 @@
 Contributors: SNaimath, Akramquraishi
 Tags: optin, optin popup, aweber, constant contact, dashboard, email, getresponse, icontact, mailchimp, onclick popup, page, pages, pop-up, popup, popup box, popup message, popup window, popups, post, posts, shortcode, unblockable, hover, lightbox, widget, mailpoet, wordpress popup, email list, build email list, grow email list, email list building, list building, email marketing, mailing list, email subscriptions, feature box, optin feature box, wp feature box, thesis feature box, list building plugin, optin box, optin form, forms, conversion, subscribers, subscriptions, newsletter.
 Requires at least: 3.7
-Tested up to: 4.1 and above
-Stable tag: 1.6.7
+Tested up to: 4.1.2 and above
+Stable tag: 2.0
 License: Premium
 License URI: http://plugmatter.com/feature-box/
 Donate Link: http://plugmatter.com/
@@ -146,6 +146,19 @@ At Plugmatter, we take Customer Support very seriously, even for our free users.
 7. Plugmatter Feature box - Feature-Loaded to Take Your List Building to the Next Level
 
 == Changelog ==
+
+### 2.0 ###
+
+
+#### 2.0 ####
+* A new inline support widget is added.
+* Support for Google Analytic Events.  
+* Improved performance
+* lazy loading of feature box on the front end
+* code snippet verification added
+* Notification on trying to install on top of an existing package
+* Option added to retain data on plugin uninstall
+
 
 #### 1.6.7 ####
 * Fixed front-end CSS loading issue.
@@ -316,7 +329,7 @@ At Plugmatter, we take Customer Support very seriously, even for our free users.
 * Fixed Aweber redirection issue.
 
 == Upgrade Notice ==
-There's a new version of Plugmatter Feature Box Lite i.e., version 1.6.7
+There's a new version of Plugmatter Feature Box Lite i.e., version 2.0
 
 
 

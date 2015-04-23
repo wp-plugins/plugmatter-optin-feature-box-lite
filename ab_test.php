@@ -73,7 +73,7 @@ if(isset($_GET['action'])) {
 <div class='pmadmin_wrap'>
 	<div class='pmadmin_headbar'>
 		<div class='pmadmin_pagetitle'><h2>Split-Testing 
-		<?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_pro" || get_option("Plugmatter_PACKAGE") == "plug_featurebox_dev") { ?><a href="<?php echo admin_url('admin.php?page=add_ab_test_submenu_page'); ?>">Add New</a><?php }?>
+		<?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_pro" || get_option("Plugmatter_PACKAGE") == "plug_featurebox_dev") { ?><a href="<?php echo admin_url('admin.php?page=pmfb_add_ab_test'); ?>">Add New</a><?php }?>
 		</h2></h2></div>
 	    <div class='pmadmin_logodiv'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/logo.png";?>' height='35'></div>
 	</div>
@@ -144,7 +144,7 @@ if(isset($_GET['action'])) {
 				?>
 				<tr>
 					<td class="post-title column-title">
-						<strong><a href="<?php echo admin_url("admin.php?page=ab_test_stats_page&ab_id=".$id); ?>" ><?php echo $compaign_name;?></a></strong>
+						<strong><a href="<?php echo admin_url("admin.php?page=pmfb_ab_test_stats&ab_id=".$id); ?>" ><?php echo $compaign_name;?></a></strong>
 					</td>
 					<td>
 						<?php echo $boxA_name =  $results3->temp_name; ?>
@@ -156,10 +156,10 @@ if(isset($_GET['action'])) {
 						<?php  echo implode(", ",$list); ?>	
 						<?php 
 							if($active=="yes"){
-								$ap_test_tmp_url = admin_url("admin.php?page=ab_test_submenu_page&action=deactivate&update_id=".$id);
+								$ap_test_tmp_url = admin_url("admin.php?page=pmfb_add_ab_test&action=deactivate&update_id=".$id);
 								$ap_test_tmp_status = "Deactivate";
 							} else { 
-								$ap_test_tmp_url = admin_url("admin.php?page=ab_test_submenu_page&action=activate&update_id=".$id);
+								$ap_test_tmp_url = admin_url("admin.php?page=pmfb_add_ab_test&action=activate&update_id=".$id);
 								$ap_test_tmp_status = "Activate";
 							} 
 						?>	
@@ -170,7 +170,7 @@ if(isset($_GET['action'])) {
 					<td>								
 						<a title="Activate/Deactivate" id="act_deact_btn" href="<?php echo $ap_test_tmp_url; ?>" ><?php echo $ap_test_tmp_status; ?></a> / 
 						<a title="Delete" onclick="javascript:check=confirm('Are you sure you want to delete this campaign?');if(check==false) return false;"
-						href="<?php echo admin_url("admin.php?page=ab_test_submenu_page&action=delete&delete_id=$id"); ?>">Delete</a>
+						href="<?php echo admin_url("admin.php?page=pmfb_add_ab_test&action=delete&delete_id=$id"); ?>">Delete</a>
 					</td>
 				</tr>
 				<?php 

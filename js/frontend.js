@@ -19,8 +19,8 @@ jQuery(document).ready(function() {
 		jQuery.post(pm_site_url,{"action":"pm_ab_track","track":"conv","ab_meta":jQuery("#pm_featurebox").attr("ab_meta")}).done(function(data) {});
 	}); 
 		
-  jQuery.post(pm_site_url,{"action":"pm_ab_track","track":"imp","ab_meta":jQuery("#pm_featurebox").attr("ab_meta")}).done(function(data) {
-		 //alert(data);
+  	jQuery.post(pm_site_url,{"action":"pm_ab_track","track":"imp","ab_meta":jQuery("#pm_featurebox").attr("ab_meta")}).done(function(data) {
+		//alert(data);
 	});
 
 	if(pm_getCookie("plugmatter_num_of_revisits") == "undefined") {
@@ -29,7 +29,13 @@ jQuery(document).ready(function() {
 		var cvcnt = +pm_getCookie("plugmatter_num_of_revisits") + 1;
 		pm_setCookie("plugmatter_num_of_revisits",cvcnt,365);
 	}
+
+	jQuery("#pm_featurebox").children('#loading_pmfb').remove();
+	jQuery("#pm_featurebox").children().show();	
 });
+	
+	jQuery("#pm_featurebox").children().hide().parent().append("<div id='loading_pmfb'><img src='"+pm_plugin_url+"/images/loading.gif' /></div>");
+	
 
 	jQuery("#pm_form_submit").submit(function (event){ 
 				
@@ -38,6 +44,16 @@ jQuery(document).ready(function() {
 		var e_patt = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
 		if (e_patt.test(email)) { 
 			pm_setCookie("plugmatter_conv_done",1,365);
+
+			/* Analytics Tracking */
+				var tid = jQuery("#pm_featurebox").attr("pm_meta_tid");
+				
+				if(tid) {
+					var	temp_name = tid.split("_")[1];	
+					_gaq.push(['_trackEvent', 'Plugmatter Feature Box', 'Subscription', temp_name]);
+				}
+				
+			/*--------------------------*/
 
 			if(jQuery("#pm_form_submit").attr("action") == "#pm_mailpoet" || jQuery("#pm_form_submit").attr("action") == "#pm_constantcontact") {  
         		event.preventDefault();      

@@ -61,7 +61,7 @@ function escapeJsonString($value) {
 	    <div class='pmadmin_logodiv'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/logo.png";?>' height='35'></div>
 	</div>
 	<div class='pmadmin_body'>
-<form name='form1' action="<?php echo admin_url("admin.php?page=template_submenu-page"); ?>" method="POST">
+<form name='form1' action="<?php echo admin_url("admin.php?page=pmfb_template"); ?>" method="POST">
 
 <table class="pm_form_table">
 	<tbody>
@@ -130,7 +130,7 @@ function escapeJsonString($value) {
 		</tr> 	
 		<?php } else { ?>
 				<input type="hidden" id="pm_display_fields" name="pm_display_fields" value="" >
-		<?} ?>		
+		<?php } ?>		
 		<tr>
 			<td colspan="2">
 				<div id="ajax_load_temp"></div>
@@ -144,7 +144,7 @@ function escapeJsonString($value) {
 		<tr>
 			<td colspan="2"><br>
 				<input class="pm_primary_buttons" id="save_btn" type="button" value="     Save Template    "> &nbsp;&nbsp;
-				<input class="pm_secondary_buttons" id="cancel_btn" type="button" value=" Cancel " onclick="location.href='<?php echo admin_url("admin.php?page=template_submenu-page"); ?>'">
+				<input class="pm_secondary_buttons" id="cancel_btn" type="button" value=" Cancel " onclick="location.href='<?php echo admin_url("admin.php?page=pmfb_template"); ?>'">
 			</td>
 		</tr>
 </tbody>
