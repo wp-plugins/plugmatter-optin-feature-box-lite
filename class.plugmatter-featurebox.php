@@ -48,6 +48,8 @@ class Plugmatter_FeatureBox {
 	public function redirect_oninstall() {
 		if ( is_plugin_active( dirname(plugin_basename( __FILE__ ) )."/main.php" )) {
 	  		remove_action( 'update_option_active_plugins', array('Plugmatter_FeatureBox','redirect_oninstall'));
+	  		update_option('Plugmatter_PACKAGE', Plugmatter_PACKAGE);
+	  		update_option('PMFB_Plugin_Slug',dirname(plugin_basename(__FILE__)));
 	      	exit( wp_redirect(admin_url('admin.php?page=pmfb_settings')));	
 	    }
 	}
@@ -502,7 +504,7 @@ class Plugmatter_FeatureBox {
 		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		$pmfb_active_pkg = get_option("PMFB_Plugin_Slug");
 
-		$pmfb_installing_pkg = strtolower(get_option("PMFB_INSTALLING_PKG"));
+		$pmfb_installing_pkg = end(explode("_", get_option("PMFB_INSTALLING_PKG"))); //strtolower(get_option("PMFB_INSTALLING_PKG"));
 		 	
 	 	if(is_plugin_active($pmfb_active_pkg.'/main.php')){
 	 		$pmfb_pkg = end(explode("_", get_option("Plugmatter_PACKAGE")));
