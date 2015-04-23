@@ -55,6 +55,7 @@ class Plugmatter_FeatureBox {
 	static function on_install() {
 	    global $wpdb;
 
+	    self:: 
 	    	   
 	    $template_tbl_name = $wpdb->prefix.'plugmatter_templates';
 	    $abtest_tbl_name = $wpdb->prefix.'plugmatter_ab_test';
@@ -497,67 +498,69 @@ class Plugmatter_FeatureBox {
 			  </script>";
 	}
 
+	public function check_pmfb_pkg_version(){
+		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		$pmfb_active_pkg = get_option("PMFB_Plugin_Slug");
+
+		$pmfb_installing_pkg = strtolower(get_option("PMFB_INSTALLING_PKG"));
+		 	
+	 	if(is_plugin_active($pmfb_active_pkg.'/main.php')){
+	 		$pmfb_pkg = end(explode("_", get_option("Plugmatter_PACKAGE")));
+	 		
+	 		$msg = '';
+	 		$deactivate = false;
+	 		
+	 		switch ($pmfb_pkg) {
+		 		case 'lite':
+		 			if($pmfb_installing_pkg == "lite"){
+		 				$msg = "<div class='error'><p>You already have this plugin installed!</p></div>";	
+		 			}else if($pmfb_installing_pkg == "single" || $pmfb_installing_pkg == "pro" || $pmfb_installing_pkg == "dev"){
+		 				$msg = "<div class='error'><p>To install this plugin please deactivate the lower packge installed and then try activating it.</p></div>";
+		 				$deactivate = true;
+		 			}	
+		 			break;
+		 		case 'single':
+		 			if($pmfb_installing_pkg == "lite"){
+		 				$msg = "<div class='error'><p>You already have a higher version of this plugin installed! if you want to install it anyway, first deactivate it.</p></div>";
+		 				$deactivate = true;
+		 			}else if($pmfb_installing_pkg == "single"){
+		 				$msg = "<div class='error'><p>You already have this plugin installed!.</p></div>";
+		 				$deactivate = true;
+		 			}else if($pmfb_installing_pkg == "pro" || $pmfb_installing_pkg == "dev"){
+		 				$msg = "<div class='error'><p>To install this plugin please deactivate the lower packge installed and then try activating it.</p></div>";
+		 				$deactivate = true;
+		 			}
+		 			break;
+		 		case 'pro':
+		 			if($pmfb_installing_pkg == "lite"){
+		 				$msg = "<div class='error'><p>You already have a higher version of this plugin installed! if you want to install it anyway, first deactivate it.</p></div>";	
+		 				$deactivate = true;
+		 			}elseif($pmfb_installing_pkg == "single"){
+		 				$msg = "<div class='error'><p>You already have a higher version of this plugin installed! if you want to install it anyway, first deactivate it.</div>";
+		 				$deactivate = true;
+		 			}else if($pmfb_installing_pkg == "pro"){
+		 				$msg = "<div class='error'><p>You already have this plugin installed!</p></div>";
+		 				$deactivate = true;
+		 			} elseif($pmfb_installing_pkg == "dev"){
+		 				$msg = "<div class='error'><p>To install this plugin please deactivate the lower packge installed and then try activating it.</p></div>";
+		 				$deactivate = true;
+		 			}
+		 			break;
+		 		case 'dev':
+		 			if($pmfb_installing_pkg == "lite" || $pmfb_installing_pkg == "single" || $pmfb_installing_pkg == "pro"){
+		 				$msg = "<div class='error'><p>You already have a higher version of this plugin installed! if you want to install it anyway, first deactivate it.</p></div>";
+		 				$deactivate = true;
+		 			}
+		 			break;
+		 		}	
+
+		 	if($deactivate){
+		 		delete_option("PMFB_INSTALLING_PKG");
+		 		wp_die($msg);		 	
+		 	}	
+		}
+	}
+
 } // class ends
 
-}else{ // checking packing version before installation
-
-	require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-	
-	$pmfb_active_pkg = get_option("PMFB_Plugin_Slug");
-	 	
- 	if(is_plugin_active($pmfb_active_pkg.'/main.php')){
- 		$pmfb_pkg = end(explode("_", get_option("Plugmatter_PACKAGE")));
- 	
- 		$pmfb_installing_pkg = end(explode("_",dirname(plugin_basename(__FILE__))));
-	 	$msg = '';
- 		$deactivate = false;
- 		
- 		switch ($pmfb_pkg) {
-	 		case 'lite':
-	 			if($pmfb_installing_pkg == "lite"){
-	 				$msg = "<div class='error'><p>You already have this plugin installed!</p></div>";	
-	 			}else if($pmfb_installing_pkg == "single" || $pmfb_installing_pkg == "pro" || $pmfb_installing_pkg == "dev"){
-	 				$msg = "<div class='error'><p>To install this plugin please deactivate the lower packge installed and then try activating it.</p></div>";
-	 				$deactivate = true;
-	 			}	
-	 			break;
-	 		case 'single':
-	 			if($pmfb_installing_pkg == "lite"){
-	 				$msg = "<div class='error'><p>You already have a higher version of this plugin installed! if you want to install it anyway, first deactivate it.</p></div>";
-	 				$deactivate = true;
-	 			}else if($pmfb_installing_pkg == "single"){
-	 				$msg = "<div class='error'><p>You already have this plugin installed!.</p></div>";
-	 				$deactivate = true;
-	 			}else if($pmfb_installing_pkg == "pro" || $pmfb_installing_pkg == "dev"){
-	 				$msg = "<div class='error'><p>To install this plugin please deactivate the lower packge installed and then try activating it.</p></div>";
-	 				$deactivate = true;
-	 			}
-	 			break;
-	 		case 'pro':
-	 			if($pmfb_installing_pkg == "lite"){
-	 				$msg = "<div class='error'><p>You already have a higher version of this plugin installed! if you want to install it anyway, first deactivate it.</p></div>";	
-	 				$deactivate = true;
-	 			}elseif($pmfb_installing_pkg == "single"){
-	 				$msg = "<div class='error'><p>You already have a higher version of this plugin installed! if you want to install it anyway, first deactivate it.</div>";
-	 				$deactivate = true;
-	 			}else if($pmfb_installing_pkg == "pro"){
-	 				$msg = "<div class='error'><p>You already have this plugin installed!</p></div>";
-	 				$deactivate = true;
-	 			} elseif($pmfb_installing_pkg == "dev"){
-	 				$msg = "<div class='error'><p>To install this plugin please deactivate the lower packge installed and then try activating it.</p></div>";
-	 				$deactivate = true;
-	 			}
-	 			break;
-	 		case 'dev':
-	 			if($pmfb_installing_pkg == "lite" || $pmfb_installing_pkg == "single" || $pmfb_installing_pkg == "pro"){
-	 				$msg = "<div class='error'><p>You already have a higher version of this plugin installed! if you want to install it anyway, first deactivate it.</p></div>";
-	 				$deactivate = true;
-	 			}
-	 			break;
-	 		}	
-
-	 	if($deactivate){
-	 		wp_die($msg);		 	
-	 	}	
-	}		
-} // else ends
+} // if ends
