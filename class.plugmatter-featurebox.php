@@ -442,7 +442,8 @@ class Plugmatter_FeatureBox {
 		/* pm support script */
   		wp_register_style('pmfb_support_style', 'http://plugmatter.com/css/pm_support_widget.css',array(),PMFB_VERSION);
   		if(get_option('Plugmatter_Featurebox_License') != ''){
-  			wp_register_script('pmfb_pmsupport','http://plugmatter.com/js/pm_support_widget.js?pid=pmfb&pkg='.Plugmatter_PACKAGE.'&hash='.explode("-",get_option('Plugmatter_Featurebox_License'))[0]."-".explode("-",get_option('Plugmatter_Featurebox_License'))[5], array('jquery'),PMFB_VERSION,true);	
+  			$pmfb_hash = explode("-",get_option('Plugmatter_Featurebox_License'));
+ 			wp_register_script('pmfb_pmsupport','http://plugmatter.com/js/pm_support_widget.js?pid=pmfb&pkg='.Plugmatter_PACKAGE.'&hash='.$pmfb_hash[0].'-'.$pmfb_hash[5], array('jquery'),PMFB_VERSION,true);	
   		} else{
   			wp_register_script('pmfb_pmsupport','http://plugmatter.com/js/pm_support_widget.js?pid=pmfb&pkg='.Plugmatter_PACKAGE, array('jquery'),PMFB_VERSION,true);
   		}
