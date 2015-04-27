@@ -509,10 +509,12 @@ class Plugmatter_FeatureBox {
 		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		$pmfb_active_pkg = get_option("PMFB_Plugin_Slug");
 
-		$pmfb_installing_pkg = end(explode("_", get_option("PMFB_INSTALLING_PKG"))); //strtolower(get_option("PMFB_INSTALLING_PKG"));
-		 	
+		$get_pmfb_installing_pkg = explode("_", get_option("PMFB_INSTALLING_PKG"));
+		$pmfb_installing_pkg = end($get_pmfb_installing_pkg);	
+
 	 	if(is_plugin_active($pmfb_active_pkg.'/main.php')){
-	 		$pmfb_pkg = end(explode("_", get_option("Plugmatter_PACKAGE")));
+	 		$get_pmfb_pkg = explode("_",get_option("Plugmatter_PACKAGE"));
+	 		$pmfb_pkg = end($get_pmfb_pkg);
 	 		
 	 		$msg = '';
 	 		$deactivate = false;

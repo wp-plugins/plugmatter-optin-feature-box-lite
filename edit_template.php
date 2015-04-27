@@ -11,6 +11,7 @@ $pm_box_tmargin="0";
 $pm_box_bmargin="0";
 $params = "";
 $pm_custom_css = "\" \"";
+$pm_display_fields = '';
 //------------------
 if($_GET['action']=="edit" && $_GET['template_id']!='') {
 	 $temp_id= $_GET['template_id'];

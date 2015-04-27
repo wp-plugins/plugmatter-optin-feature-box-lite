@@ -66,7 +66,7 @@
 			</div>
 		</div>
 			<p style='border-top:1px solid #dddddd;padding:20px;'> 
-				<b>Done adding the code? <a href="<?php echo get_option('siteurl'); ?>" target="_blank">Click to Verify</a>
+				<b>Done adding the code? <a href="<?php echo get_option('siteurl'); ?>" id='pmfb_code_verify' target="_blank">Click to Verify</a>
 				<br><br>
 				Don't want to do it yourself? No worries, we can set it up for you. Just <a href="http://plugmatter.com/support" target="_blank">contact support</a>.
 				</b>

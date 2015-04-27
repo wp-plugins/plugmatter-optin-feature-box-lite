@@ -2,6 +2,7 @@
 $msg = '';
 $msg_reg='';
 $reg_done = false;
+$lc_key = '';
 
 if(isset($_POST["license_key"] ) && ($_POST["license_key"]!="")) {
 	$res = wp_remote_post("http://plugmatter.com/activate",
