@@ -1,5 +1,7 @@
 <?php 
 	$plugmatter_enable = get_option('plugmatter_enable');	
+	$pm_post_meta = "";
+	$pm_box_width = "";
 	
 	if($plugmatter_enable != '1') {
 		return;
@@ -48,7 +50,7 @@
 		foreach($obj as $doc){
 			if($doc->type == "alignment") {
 				if($doc->width != 0) $pm_box_width = "max-width:".$doc->width."px;max-width:".$doc->width."px;";
-				$custom_css.= "#pm_featurebox { $pm_box_width margin: ".$doc->top_margin."px auto ".$doc->bottom_margin."px; }"; 
+				@$custom_css.= "#pm_featurebox { $pm_box_width margin: ".$doc->top_margin."px auto ".$doc->bottom_margin."px; }"; 
 			} else if($doc->type == "pm_form_fields") {
 				$pm_load_style  = $doc->fields_required;
 			} else if($doc->type == "pm_custom_css") {
@@ -58,7 +60,7 @@
 	 	  		$$objid = $doc->params->text;		 	  			  			
                 $elem_type = explode("_", $objid);
                 $pre_selector = $elem_type[1]."#";
-	 	  		$custom_css.= $pre_selector.$doc->id."{color:".$doc->params->color."; font-family:".$doc->params->font_family."; font-weight:".$doc->params->variant." }" ;
+	 	  		@$custom_css.= $pre_selector.$doc->id."{color:".$doc->params->color."; font-family:".$doc->params->font_family."; font-weight:".$doc->params->variant." }" ;
 	 	  		$gwf1arr[] = urlencode($doc->params->font_family);
 	 	  	} else if($doc->type == "textarea") {
 	 	  		$pm_description = $doc->params->html;	 	  			  
@@ -149,12 +151,12 @@
                 $pm_name_input_txt = $doc->params->name_input;
 	 	  	} else if($doc->type == "service") {
 
-	 	  		$http_prep = substr($doc->params->action_url, 0, 4);
+	 	  		@$http_prep = substr($doc->params->action_url, 0, 4);
 	 	  		if($http_prep != "http"){
-	 	  			$doc->params->action_url = "http:".$doc->params->action_url;
+	 	  			@$doc->params->action_url = "http:".$doc->params->action_url;
 	 	  		}
 
-	 	  		$service_meta = array("Aweber" => array("action_url" => "http://www.aweber.com/scripts/addlead.pl","name" => "email", "name_field" => "name"),
+	 	  		@$service_meta = array("Aweber" => array("action_url" => "http://www.aweber.com/scripts/addlead.pl","name" => "email", "name_field" => "name"),
 							  "GetResponse" => array("action_url" => "https://app.getresponse.com/add_contact_webform.html","name" => "email", "name_field" => "name"),
 							  "iContact" => array("action_url" => "https://app.icontact.com/icp/signup.php","name" => "fields_email", "name_field" => "fields_fname"),
 							  "MailChimp" => array("action_url" => $doc->params->action_url, "name" => "EMAIL", "name_field" => "FNAME"),

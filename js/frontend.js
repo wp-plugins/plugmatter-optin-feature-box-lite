@@ -48,11 +48,19 @@ jQuery(document).ready(function() {
 			/* Analytics Tracking */
 				var tid = jQuery("#pm_featurebox").attr("pm_meta_tid");
 				
-				if(tid) {
-					var	temp_name = tid.split("_")[1];	
-					_gaq.push(['_trackEvent', 'Plugmatter Feature Box', 'Subscription', temp_name]);
+				if (typeof ga !== 'undefined') {
+					if(tid) {
+						var	temp_name = tid.split("_")[1];	
+						ga('send','event', 'Plugmatter Feature Box', 'Subscription', temp_name);
+					}	
 				}
-				
+
+				if (typeof _gaq !== 'undefined') {
+					if(tid) {
+						var	temp_name = tid.split("_")[1];	
+						_gaq.push(['_trackEvent', 'Plugmatter Feature Box', 'Subscription', temp_name]);
+					}	
+				}
 			/*--------------------------*/
 
 			if(jQuery("#pm_form_submit").attr("action") == "#pm_mailpoet" || jQuery("#pm_form_submit").attr("action") == "#pm_constantcontact") {  
