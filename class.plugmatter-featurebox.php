@@ -445,7 +445,7 @@ class Plugmatter_FeatureBox {
   			$pmfb_hash = explode("-",get_option('Plugmatter_Featurebox_License'));
  			wp_register_script('pmfb_pmsupport','http://plugmatter.com/js/pm_support_widget.js?pid=pmfb&pkg='.Plugmatter_PACKAGE.'&hash='.$pmfb_hash[0].'-'.$pmfb_hash[5], array('jquery'),PMFB_VERSION,true);	
   		} else{
-  			wp_register_script('pmfb_pmsupport','http://plugmatter.com/js/pm_support_widget.js?pid=pmfb&pkg='.Plugmatter_PACKAGE, array('jquery'),PMFB_VERSION,true);
+  			wp_register_script('pmfb_pmsupport','http://plugmatter.com/js/pm_support_widget.js?pid=pmfb&pkg='.Plugmatter_PACKAGE.'&hash=undefined', array('jquery'),PMFB_VERSION,true);
   		}
   		  		 
 		if('admin_page_pmfb_edit_template' == $hook ) {
