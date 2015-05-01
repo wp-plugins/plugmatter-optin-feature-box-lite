@@ -495,7 +495,7 @@ if(isset($_POST["plugmatter_show_on_sections"] ) && ($_POST["plugmatter_show_on_
 				<div class="pmfb_track_analytics">
 					<h3>Track Analytics:</h3>
 					<div style="padding-left:30px;">
-						<label for="pmfb_track_analytics">Enable Google Analyltics:</label>
+						<label for="pmfb_track_analytics">Enable Google Analyltics Events:</label>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<input type="radio" name="pmfb_track_analytics" id="" value="1" <?php if(get_option('plugmatter_track_analytics') != 0) echo "checked"; ?> /> &nbsp; Enable &nbsp;&nbsp;
 						<input type="radio" name="pmfb_track_analytics" id="" value="0" <?php if(get_option('plugmatter_track_analytics') == 0) echo "checked"; ?> /> &nbsp; Disable
@@ -504,9 +504,9 @@ if(isset($_POST["plugmatter_show_on_sections"] ) && ($_POST["plugmatter_show_on_
 				<div class="pmfb_remove_data">
 					<h3>Remove Data:</h3>
 					<div style="padding-left:30px;">
-						<label for="pmfb_remove_data">Remove all templates and split test data on Uninstall:</label>&nbsp;&nbsp;
-						<input type="radio" name="pmfb_remove_data" id="" value="1" <?php if(get_option('plugmatter_remove_data') != 0) echo "checked"; ?> /> &nbsp; Enable &nbsp;&nbsp;
-						<input type="radio" name="pmfb_remove_data" id="" value="0" <?php if(get_option('plugmatter_remove_data') == 0) echo "checked"; ?> /> &nbsp; Disable 
+						<label for="pmfb_remove_data">Remove templates and split test data on uninstall:</label>&nbsp;&nbsp;
+						<input type="radio" name="pmfb_remove_data" id="" value="1" <?php if(get_option('plugmatter_remove_data') != 0) echo "checked"; ?> /> &nbsp; Yes &nbsp;&nbsp;
+						<input type="radio" name="pmfb_remove_data" id="" value="0" <?php if(get_option('plugmatter_remove_data') == 0) echo "checked"; ?> /> &nbsp; No
 					</div>
 				</div>
 			</div>

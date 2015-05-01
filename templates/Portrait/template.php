@@ -13,7 +13,7 @@
 			<div>
 				<form id="pm_form_submit" action='<?php echo $pm_service_action; ?>'  method="post" >				
 				<div class="pmedit pm_input_div" pm_meta="service" id="pm_form">
-					<input type="text" name="<?php echo $pm_input_name_field_name; ?>" placeholder="<?php echo $pm_name_input_txt ?>" size="25"id='pm_name_field' />      
+					<input type="text" name="<?php echo $pm_input_name_field_name; ?>" placeholder="<?php echo $pm_name_input_txt ?>" size="25" id='pm_name_field' />      
 				    <input type="text" name='<?php echo $pm_input_name; ?>' placeholder="<?php echo $pm_email_input_txt ?>" size='55' id="pm_input" /> 
 				</div>
 				<div id="pm_button_div" class="pmedit" pm_meta="button" >

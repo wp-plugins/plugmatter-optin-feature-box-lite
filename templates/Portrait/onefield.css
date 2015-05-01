@@ -1,6 +1,6 @@
 
 #pm_name_field {
-	display: none;
+    display: none !important;
 }
 
 .pm_input_div {
