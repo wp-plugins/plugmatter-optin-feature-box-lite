@@ -63,7 +63,7 @@ jQuery(document).ready(function() {
 				}
 			/*--------------------------*/
 
-			if(jQuery("#pm_form_submit").attr("action") == "#pm_mailpoet" || jQuery("#pm_form_submit").attr("action") == "#pm_constantcontact") {  
+			if(jQuery("#pm_form_submit").attr("action") == "#pm_mailpoet" || jQuery("#pm_form_submit").attr("action") == "#pm_constantcontact" || jQuery("#pm_form_submit").attr("action") == "#pm_mailchimp_singloptin" || jQuery("#pm_form_submit").attr("action") == "#pm_jetpack") {  
         		event.preventDefault();      
       		}
 
@@ -85,7 +85,7 @@ jQuery(document).ready(function() {
 				} else if(jQuery("#pm_form_submit").attr("action") == "#pm_constantcontact") {
 					var pmcc_email = jQuery("#pm_featurebox").find('input[name="cc_email"]').val();
 					var pmcc_fname = jQuery("#pm_featurebox").find('input[name="cc_firstname"]').val();
-					var pmfb_tid = jQuery("#pm_featurebox").find('input[name="cc_pmfb_tid"]').val();
+					var pmfb_tid = jQuery("#pm_featurebox").find('input[name="pmfb_tid"]').val();
 					var pmcc_redirect_url = jQuery("#pm_featurebox").find('input[name="cc_redirect_url"]').val();
 
 					jQuery.post(pm_site_url,{"action":"pmfb_cc","email":pmcc_email,"fname":pmcc_fname,"pmfb_tid":pmfb_tid}).done(function(data) {
@@ -97,7 +97,36 @@ jQuery(document).ready(function() {
 							location.href = pmcc_redirect_url;
 						}
 					});
-				} 
+				} else if(jQuery("#pm_form_submit").attr("action") == "#pm_mailchimp_singloptin") {
+					var pm_mailchimp_email = jQuery("#pm_featurebox").find('input[name="MERGE0"]').val();
+					var pm_mailchimp_fname = jQuery("#pm_featurebox").find('input[name="MERGE1"]').val();
+					var pmfb_tid = jQuery("#pm_featurebox").find('input[name="pmfb_tid"]').val();
+					var pm_mailchimp_redirect_url = jQuery("#pm_featurebox").find('input[name="redirect_url"]').val();
+
+					jQuery.post(pm_site_url,{"action":"pmfb_mailchimp","MERGE0":pm_mailchimp_email,"MERGE1":pm_mailchimp_fname,"pmfb_tid":pmfb_tid}).done(function(data) {
+						
+						if(data === "0") {
+							alert("Error Subscribing User");	
+							return false;
+						} else {
+							location.href = pm_mailchimp_redirect_url;
+						}
+					});
+				} else if(jQuery("#pm_form_submit").attr("action") == "#pm_jetpack") {
+					var pm_jetpack_email = jQuery("#pm_featurebox").find('input[name="email"]').val();
+					var pm_jetpack_fname = jQuery("#pm_featurebox").find('input[name="name"]').val();
+					var pmfb_tid = jQuery("#pm_featurebox").find('input[name="pmfb_tid"]').val();
+					var pm_jetpack_redirect_url = jQuery("#pm_featurebox").find('input[name="redirect_url"]').val();
+
+					jQuery.post(pm_site_url,{"action":"pm_jetpack","email":pm_jetpack_email,"name":pm_jetpack_fname,"pmfb_tid":pmfb_tid}).done(function(data) {
+						if(data === "0") {
+							alert("Error Subscribing User");	
+							return false;
+						} else {
+							location.href = pm_jetpack_redirect_url;
+						}
+					});
+				}
 			});
 			return true;
 		} else {

@@ -497,8 +497,9 @@ if(isset($_POST["plugmatter_show_on_sections"] ) && ($_POST["plugmatter_show_on_
 					<div style="padding-left:30px;">
 						<label for="pmfb_track_analytics">Enable Google Analyltics Events:</label>
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="radio" name="pmfb_track_analytics" id="" value="1" <?php if(get_option('plugmatter_track_analytics') != 0) echo "checked"; ?> /> &nbsp; Enable &nbsp;&nbsp;
-						<input type="radio" name="pmfb_track_analytics" id="" value="0" <?php if(get_option('plugmatter_track_analytics') == 0) echo "checked"; ?> /> &nbsp; Disable
+						<input type="radio" name="pmfb_track_analytics" id="" value="1" <?php if(get_option('plugmatter_track_analytics') != 0) echo "checked"; ?> <?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite" || get_option("Plugmatter_PACKAGE") == "plug_featurebox_single") echo "disabled";?> /> &nbsp; Enable &nbsp;&nbsp;
+						<input type="radio" name="pmfb_track_analytics" id="" value="0" <?php if(get_option('plugmatter_track_analytics') == 0) echo "checked"; ?> <?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite" || get_option("Plugmatter_PACKAGE") == "plug_featurebox_single") echo "disabled";?>/> &nbsp; Disable
+						&nbsp;&nbsp;<?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite" || get_option("Plugmatter_PACKAGE") == "plug_featurebox_single") echo Plugmatter_UPNOTE;?>
 					</div>
 				</div>
 				<div class="pmfb_remove_data">

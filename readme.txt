@@ -3,7 +3,7 @@ Contributors: SNaimath, Akramquraishi
 Tags: optin, optin popup, aweber, constant contact, dashboard, email, getresponse, icontact, mailchimp, onclick popup, page, pages, pop-up, popup, popup box, popup message, popup window, popups, post, posts, shortcode, unblockable, hover, lightbox, widget, mailpoet, wordpress popup, email list, build email list, grow email list, email list building, list building, email marketing, mailing list, email subscriptions, feature box, optin feature box, wp feature box, thesis feature box, list building plugin, optin box, optin form, forms, conversion, subscribers, subscriptions, newsletter.
 Requires at least: 3.7 and above
 Tested up to: 4.2
-Stable tag: 2.0.5
+Stable tag: 2.0.6
 License: Premium
 License URI: http://plugmatter.com/feature-box/
 Donate Link: http://plugmatter.com/
@@ -44,6 +44,24 @@ You’ll start with the free version of Plugmatter Optin Feature Box. It will he
 * Simple integration with popular email services
 * Highly cost effective
 * Awesome 24/7 support
+
+<h3> Supported Email Services </h3>
+
+* Aweber
+* MailChimp Single / Double Optin
+* Constant Contact
+* Infusionsoft
+* Ontraport
+* iContact
+* Google FeedBurner
+* GetResponse
+* Mad Mimi
+* Jetpack
+* Mail Poet
+* Campaign Monitor
+* Feedblitz
+* Send In Blue
+
 
 
 <h3>Here's what you get with the LITE version:</h3>
@@ -138,14 +156,20 @@ At Plugmatter, we take Customer Support very seriously, even for our free users.
 == Screenshots ==
 
 1. Plugmatter Feature box - Template Preview
-2. Plugmatter Feature box - "What You See is What You Get" Template Editor
-3. Plugmatter Feature box - Over 630 Amazing, High Quality Google Web Fonts for You to Use
-4. Plugmatter Feature box - Eye-Catchy Button Styles That Help Improve Conversion
-5. Plugmatter Feature box - The ONLY In-line Editor for Optin Forms in the Industry
-6. Plugmatter Feature box - Supports All the Major Mailing List Services
-7. Plugmatter Feature box - Feature-Loaded to Take Your List Building to the Next Level
+2. Plugmatter Feature box - LITE Version License Key
+3. Plugmatter Feature box - "What You See is What You Get" Template Editor
+4. Plugmatter Feature box - Over 630 Amazing, High Quality Google Web Fonts for You to Use
+5. Plugmatter Feature box - Eye-Catchy Button Styles That Help Improve Conversion
+6. Plugmatter Feature box - The ONLY In-line Editor for Optin Forms in the Industry
+7. Plugmatter Feature box - Supports All the Major Mailing List Services
+8. Plugmatter Feature box - Feature-Loaded to Take Your List Building to the Next Level
 
 == Changelog ==
+
+### 2.0.6 ###
+* Added Mailchimp Single Optin support
+* Added Jetpack Subscription support
+
 
 ### 2.0.5 ###
 * Fixed bugs. 
@@ -344,7 +368,7 @@ At Plugmatter, we take Customer Support very seriously, even for our free users.
 * Fixed Aweber redirection issue.
 
 == Upgrade Notice ==
-There's a new version of Plugmatter Feature Box Lite i.e., version 2.0.5
+There's a new version of Plugmatter Feature Box Lite i.e., version 2.0.6
 
 
 

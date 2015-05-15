@@ -11,6 +11,13 @@ class Plugmatter_FeatureBox {
 		add_action( 'wp_ajax_get_fonts', array($this,'get_fonts'));
 		add_action( 'wp_ajax_pmfb_cc', array($this,'pmfb_cc'));
 		add_action( 'wp_ajax_nopriv_pmfb_cc', array($this,'pmfb_cc'));
+
+		add_action( 'wp_ajax_pmfb_mailchimp', array($this,'pmfb_mailchimp'));
+		add_action( 'wp_ajax_nopriv_pmfb_mailchimp', array($this,'pmfb_mailchimp'));
+
+		add_action( 'wp_ajax_pm_jetpack', array($this,'pm_jetpack'));
+		add_action( 'wp_ajax_nopriv_pm_jetpack', array($this,'pm_jetpack'));
+
 		add_action( 'wp_ajax_pm_ab_track', array($this,'pm_ab_track'));
 		add_action( 'wp_ajax_nopriv_pm_ab_track', array($this,'pm_ab_track'));
 
@@ -368,6 +375,72 @@ class Plugmatter_FeatureBox {
 		}
 		
 		die();
+	}
+
+
+	public function pmfb_mailchimp () {
+		global $wpdb;
+		
+		$table = $wpdb->prefix.'plugmatter_templates';
+		$fname = $_POST["MERGE1"];
+		$email 	= $_POST["MERGE0"];
+
+		$temp_id = $_POST["pmfb_tid"];
+		$temp_params = $wpdb->get_row("SELECT params FROM $table WHERE id= $temp_id");
+		
+		$pm_params = json_decode($temp_params->params);
+		
+		if(!empty($pm_params)) {
+			foreach ($pm_params as $param_values) {
+				if($param_values->type == "service") {
+					if($param_values->params->service == "MailChimp_SingleOptin") {
+						$api_key = $param_values->params->api_key;
+						$list_id = $param_values->params->list_id;
+
+						if(trim($api_key) === "" || trim($list_id) === "") {
+							echo 0;
+							die();
+						}
+
+						if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+							echo 0;
+						  	die();
+						}
+
+
+						require_once('MCAPI.class.php');
+						$api = new MCAPI($api_key);
+						$list_id = $list_id;
+						
+						$merge_vars = array('MERGE1'=> $fname);
+						$retval = $api->listSubscribe( $list_id, $email,$merge_vars,'','false');
+
+
+						if ( !$retval ) {
+							echo "Something went wrong: $error_message";
+						} 
+					}
+				}
+			}
+		}
+		
+		die();
+	}
+
+	public function pm_jetpack(){
+		global $wpdb;
+		
+		$table = $wpdb->prefix.'plugmatter_templates';
+		$fname = $_POST["name"];
+		$email 	= $_POST["email"];
+		
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			echo 0;
+		 	die();
+		}
+
+		$retval = Jetpack_Subscriptions::subscribe( $email, 0, false );
+		die();    	
 	}
 
 	public function pm_ab_track() {

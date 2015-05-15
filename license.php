@@ -106,8 +106,8 @@ if(isset($_POST["license_key"] ) && ($_POST["license_key"]!="")) {
 	</form>
     <?php if(Plugmatter_PACKAGE == "plug_featurebox_lite") { ?>
     <div style="border-top:1px solid #ddd;padding-bottom:10px;">&nbsp;</div>
-    <div class='plug_enable_lable' style='font-weight:bold;width:350px;'>Don't Have a License Key? Register Now!</div>
-    <div style='padding-bottom:15px;clear:both;padding-top:10px;'>Your license key will be sent to your registered email.</div>
+    <div class='plug_enable_lable' style='font-weight:bold;width:350px;'>Don't Have a License Key? Register Now to get the Free version License Key!</div>
+    <div style='padding-bottom:15px;clear:both;padding-top:10px;'>Your free version license key will be sent to your registered email.</div>
     <?php
     if($msg_reg!='') { 
 		echo $msg_reg;
