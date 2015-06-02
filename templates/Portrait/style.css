@@ -125,7 +125,7 @@ input[type="text"]#pm_input{
     margin-left:20px;
 }
  
-input[type="button"].pm_default_btn {
+input[type="button"].pm_default_btn, a.pm_default_btn {
     padding: 9px 20px;  
     border:0px;
     -webkit-border-radius: 20px; 
@@ -151,7 +151,7 @@ input[type="button"].pm_default_btn {
     cursor:pointer;
 }
 
-input[type="button"].pm_default_btn:hover {
+input[type="button"].pm_default_btn:hover, a.pm_default_btn:hover, input[type="button"].pm_default_btn:active, a.pm_default_btn:active {
     background-color: #2786EC; 
 }
 
@@ -220,7 +220,7 @@ input#pm_input[type="text"] {
     margin-left: 10px !important;
 }
  
-input[type="button"].pm_default_btn {
+input[type="button"].pm_default_btn, a.pm_default_btn {
     padding: 6px 20px !important;
     font-size: 13px !important;
 }
@@ -301,7 +301,7 @@ input[type="button"].pm_default_btn {
         margin-left: 5px !important;
        
     }
-    input[type="button"].pm_default_btn {
+    input[type="button"].pm_default_btn, a.pm_default_btn {
         font-size: 12px !important;
         padding: 5px 20px !important;
         width: 100% !important; 
@@ -377,7 +377,7 @@ input[type="button"].pm_default_btn {
         float: none !important;
         margin: auto !important;
     }
-    input[type="button"].pm_default_btn {
+    input[type="button"].pm_default_btn, a.pm_default_btn {
         font-size: 12px !important;
         margin-bottom: 10px;
         padding: 5px 20px !important;
@@ -452,7 +452,7 @@ input[type="button"].pm_default_btn {
         float: none !important;
         margin: auto !important;
     }
-    input[type="button"].pm_default_btn {
+    input[type="button"].pm_default_btn, a.pm_default_btn {
         font-size: 12px !important;
         padding: 5px 10px !important;
         margin-bottom:10px;

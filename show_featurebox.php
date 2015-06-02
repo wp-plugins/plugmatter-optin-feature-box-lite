@@ -132,6 +132,27 @@ function show_template($template_id, $ab_meta="") {
 				$pm_btn_class = $doc->params->btn_class;
                 $pm_email_input_txt = $doc->params->email_input;
                 $pm_name_input_txt = $doc->params->name_input;                
+	 	  	}  else if($doc->type == "cta_button") {
+				$pm_cta_btn_txt      = $doc->params->text;
+				$check_type 		 = $doc->params->button_fluid;
+				if($check_type!='1'){
+					$pm_cta_inline_style = 'auto';
+					$pm_cta_sub_btn_txt = $doc->params->sub_text;	
+					$pm_cta_left_icon 	= $doc->params->left_icon;
+					$pm_cta_right_icon	= $doc->params->right_icon;
+				}else{
+					$pm_cta_inline_style = '100%';	
+				}
+				
+				$pm_cta_btn_class 	= $doc->params->btn_class;
+                $pm_cta_btn_url 	= $doc->params->url;
+                $pm_cta_lead_id 	= $doc->params->lead_id; 
+            	
+            	$pm_cta_style  	= json_decode($doc->params->button_style);
+
+				echo "<style>$pm_cta_style</style>";
+				
+			   
 	 	  	} else if($doc->type == "service") {
 
 	 	  		@$http_prep = substr($doc->params->action_url, 0, 4);
@@ -207,10 +228,12 @@ function show_template($template_id, $ab_meta="") {
 		if($pm_custom_css) $custom_css .= $pm_custom_css;
 		
 	 	if($doc->type != "user_designed_template") {
+
+	 		wp_register_style('pm_bootstrap', plugins_url('/css/pm_bootstrap.css', __FILE__));
+	 		wp_enqueue_style('pm_bootstrap');
+
 	 		wp_enqueue_style('pm_button_style', plugins_url('/css/pm_btn_style.css', __FILE__));	 		
 	 		wp_register_style('pm_custom-style', plugins_url('/templates/'.$base_temp_name.'/style.css', __FILE__));
-
-			wp_add_inline_style('pm_custom-style', $custom_css );
 			wp_enqueue_style('pm_custom-style');
 
 			if($pm_load_style == "pm_email_fname") {
@@ -220,10 +243,16 @@ function show_template($template_id, $ab_meta="") {
 	 		if($pm_load_style == "pm_email_only") {
 	 			wp_register_style('pm_custom-style2', plugins_url('/templates/'.$base_temp_name.'/onefield.css', __FILE__));
 	 		}
+
+	 		if($pm_load_style == "pm_cta_btn") {
+	 			wp_register_style('pm_custom-style2', plugins_url('/templates/'.$base_temp_name.'/cta_btn.css', __FILE__));
+	 		}
+
 	 		wp_enqueue_style('pm_custom-style2');
 
-            wp_register_style('pm_bootstrap', plugins_url('/css/pm_bootstrap.css', __FILE__));
-	 		wp_enqueue_style('pm_bootstrap');
+	 		wp_register_style('pm_temp_custcss', plugins_url('/css/custom.css', __FILE__));
+	 	  	wp_add_inline_style('pm_temp_custcss', $custom_css );
+	 	  	wp_enqueue_style('pm_temp_custcss');            
 	 	  	  
 	 		wp_register_style('pm_gwf1', "//fonts.googleapis.com/css?family=".implode("|", $gwf1arr));
 	 		wp_enqueue_style('pm_gwf1');
@@ -235,6 +264,7 @@ function show_template($template_id, $ab_meta="") {
 	    }
 	    wp_register_script('pm_frontend_js',plugins_url('js/frontend.js', __FILE__), array('jquery'));
 	    wp_enqueue_script('pm_frontend_js');
+	    wp_enqueue_style('pm_fontawesome','//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 	}
 
 ?>

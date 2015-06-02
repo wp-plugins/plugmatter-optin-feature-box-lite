@@ -1,3 +1,5 @@
+
+
 #pmie_h1_div {
 	position: relative;
 }
@@ -136,7 +138,11 @@
 	z-index:100;
 }
 
-#pmie_button_selection_con{
+#pm_cta_button_div {
+	position: relative;
+}
+
+#pmie_button_selection_con, #pmie_cta_button_selection_con {
 	background: url("../images/up.png") no-repeat scroll 20px 0 transparent;
 	clear: both;
 	padding: 5px;
@@ -206,7 +212,7 @@
 	padding: 8px;	
 }
 
-#pmie_button_selection_inner{
+#pmie_button_selection_inner, #pmie_cta_button_selection_inner {
 	background: #fff;
 	box-shadow: 0 3px 2px #444444;
 	margin-top: 5px;
@@ -335,4 +341,106 @@
 	position:relative;
 	top:-7px;
 	border-radius:5px;
+}
+
+/*-----------button editor------------*/
+.pmfb_button_editor:after, 
+.pmfb_button_editor:before {
+    bottom: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.pmfb_button_editor:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: #ffffff;
+    border-width: 11px;
+    left: 22px;
+    margin-left: -11px;
+}
+
+.pmfb_button_editor:before {
+    border-color: rgba(113, 158, 206, 0);
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    border-width: 12px;
+    left: 22px;
+    margin-left: -12px;
+}
+
+
+.pmfb_button_editor{
+    position: absolute;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.2); /*set border colour here*/
+    height: auto;
+    border-radius: 2px;
+    -webkit-box-shadow:0px 1px 2px rgba(0, 0, 0, 0.2); /*set shadow colour  and size here*/
+    -moz-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.2));
+    padding: 5px;
+    text-align: left;
+    z-index:999;
+    position: absolute;
+} 
+
+
+#pmfb_btn_details,#pmfb_btn_design{
+  font-size: 10px;
+}
+
+#pmfb_btn_tabs{
+  margin: 0px 0px 10px 0px;
+  padding: 0px;
+  border-bottom: 1px solid #dddddd;
+}
+
+#pmfb_btn_tabs li{
+  list-style: none;
+  display: inline-block;
+  padding: 5px;
+  border: 1px solid #ddd;
+  text-transform: uppercase;
+  font-size: 10px;
+  border-bottom: none;
+  margin: 0px;
+  background-color: #dddddd;
+  position: relative;
+  top: 1px;
+}
+#pmfb_btn_tabs li:hover{
+  cursor: pointer;
+}
+
+#pmfb_btn_tabs li.pmfb_active{
+  background-color: #ffffff !important;
+  color: #333;
+}
+
+#pmfb_btn_tbl{
+  width: 300px;
+}
+
+#pmfb_btn_tbl ul li{
+  display: inline-block;
+  list-style: none;
+  padding: 5px;
+  text-align: center;
+  width: 50px;
+}
+
+#pmfb_btn_tbl .pmfb_btn {
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 12px;
+  padding: 4px;
+}
+
+#pmfb_btn_tbl .pmfb_btn span{
+  font-size: 10px;
+  line-height: 10px;
+  padding: 0px;
 }

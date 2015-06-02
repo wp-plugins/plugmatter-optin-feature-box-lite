@@ -5,6 +5,19 @@
 	margin: 0px 20px 20px 25px;
 }
 
+#pmie_btn_tbl a {
+    font-size: 12px !important; 
+    font-weight: bold !important; 
+    padding: 6px !important; 
+    margin-right: 4px;
+    margin-bottom: 6px;
+    display: block;
+    text-transform: uppercase !important;
+}
+
+#pm_cta_button_div #pm_cta_button {
+    text-decoration: none;
+}
 
 .pm_form_table {
     border-collapse: collapse;
@@ -24,6 +37,10 @@
     text-align: left;
     vertical-align: top;
     width: 135px;
+}
+
+.pm_clearboth {
+	clear: both;
 }
 
 .pm_form_table td {

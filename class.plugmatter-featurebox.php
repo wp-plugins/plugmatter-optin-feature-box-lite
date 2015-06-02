@@ -500,13 +500,15 @@ class Plugmatter_FeatureBox {
 			wp_enqueue_style('pm_inline_edit_style');
 			wp_enqueue_style('pm_button_style', plugins_url('/css/pm_btn_style.css', __FILE__));		
 	    	wp_enqueue_style('pm_bootstrap', plugins_url('/css/pm_bootstrap.css', __FILE__));        
-	    	wp_enqueue_style('pm_codemirror', plugins_url('/css/pm_codemirror.css', __FILE__));        		
+	    	wp_enqueue_style('pm_codemirror', plugins_url('/css/pm_codemirror.css', __FILE__));  
+	    	wp_enqueue_style('pm_fontawesome','//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');      		
 		}
 		
 		wp_register_style('pm_settings', plugins_url('css/style.css', __FILE__));
 		wp_enqueue_style('pm_settings');	
 		wp_register_style('pm_headfont', "http://fonts.googleapis.com/css?family=Fauna+One");
-		wp_enqueue_style('pm_headfont');		
+		wp_enqueue_style('pm_headfont');
+		wp_enqueue_style( 'wp-color-picker' );			
 	}
 
 	public function admin_scripts($hook) {
@@ -532,6 +534,8 @@ class Plugmatter_FeatureBox {
 			wp_enqueue_script('pm__farbtastic_js');
 			wp_register_script('pm_image_uploader', plugins_url('js/image_uploader.js', __FILE__), array('jquery','media-upload','thickbox'),PMFB_VERSION);
 			wp_enqueue_script('pm_image_uploader');
+			wp_register_script('pm_button_editor', plugins_url('/js/pm_button_editor.js', __FILE__),array('jquery','wp-color-picker'),PMFB_VERSION);
+			wp_enqueue_script('pm_button_editor');
 
 			wp_register_script('pm_codemirror_js',plugins_url('js/pm_codemirror.js', __FILE__), array('jquery'),PMFB_VERSION);
 		    wp_enqueue_script('pm_codemirror_js');
