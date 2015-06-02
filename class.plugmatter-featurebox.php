@@ -579,6 +579,7 @@ class Plugmatter_FeatureBox {
 		echo "<script type='text/javascript'>
 				var pm_plugin_url = '".plugins_url(Plugmatter_DIR_NAME.'/')."';
 				var pm_site_url = '".admin_url('admin-ajax.php')."';
+				var button_fluid = 0;
 			  </script>";
 	}
 
