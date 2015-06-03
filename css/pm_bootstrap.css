@@ -7,6 +7,11 @@
 #pm_featurebox {
   /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 }
+
+#pm_cta_btn_wrapper {
+    display: none;
+}
+
 #pm_featurebox html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
@@ -44,13 +49,7 @@
 #pm_featurebox template {
   display: none;
 }
-#pm_featurebox a {
-  background: transparent;
-}
-#pm_featurebox a:active,
-#pm_featurebox a:hover {
-  outline: 0;
-}
+
 #pm_featurebox abbr[title] {
   border-bottom: 1px dotted;
 }
@@ -228,20 +227,7 @@
 }
 
 */
-#pm_featurebox a {
-  color: #428bca;
-  text-decoration: none;
-}
-#pm_featurebox a:hover,
-#pm_featurebox a:focus {
-  color: #2a6496;
-  text-decoration: underline;
-}
-#pm_featurebox a:focus {
-  outline: thin dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-}
+
 #pm_featurebox figure {
   margin: 0;
 }
