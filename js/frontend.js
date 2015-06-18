@@ -30,11 +30,11 @@ jQuery(document).ready(function() {
 		pm_setCookie("plugmatter_num_of_revisits",cvcnt,365);
 	}
 
-	jQuery("#pm_featurebox").children('#loading_pmfb').remove();
-	jQuery("#pm_featurebox").children().show();	
+	//jQuery("#pm_featurebox").children('#loading_pmfb').remove();
+	jQuery("#pm_featurebox").show(100);	
 });
 	
-	jQuery("#pm_featurebox").children().hide().parent().append("<div id='loading_pmfb'><img src='"+pm_plugin_url+"/images/loading.gif' /></div>");
+	jQuery("#pm_featurebox").hide(); //children().hide().parent().append("<div id='loading_pmfb'><img src='"+pm_plugin_url+"/images/loading.gif' /></div>");
 	
 
 	jQuery("#pm_form_submit").submit(function (event){ 
