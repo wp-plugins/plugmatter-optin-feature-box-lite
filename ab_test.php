@@ -184,7 +184,7 @@ if(isset($_GET['action'])) {
 		}
 	?>	
 	<br><br>
-	<form action="?page=ab_test_submenu_page" method="post" id="pm_ab_form">
+	<form action="?page=pmfb_ab_test" method="post" id="pm_ab_form">
 		<div class='plug_enable_con'>
 			<div class='plug_enable_lable'>Enable Split-Testing</div>
 			<div class='plug_tgl_btn'>

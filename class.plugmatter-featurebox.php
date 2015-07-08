@@ -299,7 +299,7 @@ class Plugmatter_FeatureBox {
 	}
 
 	public function get_fonts() {
-		$google_fonts = wp_remote_get('https://www.googleapis.com/webfonts/v1/webfonts?key='.Plugmatter_GOOGLE_FONTS_KEY, array( 'sslverify' => false ));
+		$google_fonts = wp_remote_get('//www.googleapis.com/webfonts/v1/webfonts?key='.Plugmatter_GOOGLE_FONTS_KEY, array( 'sslverify' => false ));
 		$fonts = json_decode($google_fonts["body"]);
 		$json_fonts = array();
 		foreach($fonts->items as $itm) {
@@ -320,7 +320,7 @@ class Plugmatter_FeatureBox {
 		global $wpdb;
 		
 		$table = $wpdb->prefix.'plugmatter_templates';
-		$cc_url = "http://ccprod.roving.com/roving/wdk/API_AddSiteVisitor.jsp";
+		$cc_url = "//ccprod.roving.com/roving/wdk/API_AddSiteVisitor.jsp";
 		$fname = $_POST["fname"];
 		$email 	= $_POST["email"];
 
@@ -506,7 +506,7 @@ class Plugmatter_FeatureBox {
 		
 		wp_register_style('pm_settings', plugins_url('css/style.css', __FILE__));
 		wp_enqueue_style('pm_settings');	
-		wp_register_style('pm_headfont', "http://fonts.googleapis.com/css?family=Fauna+One");
+		wp_register_style('pm_headfont', "//fonts.googleapis.com/css?family=Fauna+One");
 		wp_enqueue_style('pm_headfont');
 		wp_enqueue_style( 'wp-color-picker' );			
 	}
@@ -515,12 +515,12 @@ class Plugmatter_FeatureBox {
 		
 		wp_enqueue_script('jquery');						
 		/* pm support script */
-  		wp_register_style('pmfb_support_style', 'http://plugmatter.com/css/pm_support_widget.css',array(),PMFB_VERSION);
+  		wp_register_style('pmfb_support_style', '//plugmatter.com/css/pm_support_widget.css',array(),PMFB_VERSION);
   		if(get_option('Plugmatter_Featurebox_License') != ''){
   			$pmfb_hash = explode("-",get_option('Plugmatter_Featurebox_License'));
- 			wp_register_script('pmfb_pmsupport','http://plugmatter.com/js/pm_support_widget.js?pid=pmfb&pkg='.Plugmatter_PACKAGE.'&hash='.$pmfb_hash[0].'-'.$pmfb_hash[5], array('jquery'),PMFB_VERSION,true);	
+ 			wp_register_script('pmfb_pmsupport','//plugmatter.com/js/pm_support_widget.js?pid=pmfb&pkg='.Plugmatter_PACKAGE.'&hash='.$pmfb_hash[0].'-'.$pmfb_hash[5], array('jquery'),PMFB_VERSION,true);	
   		} else{
-  			wp_register_script('pmfb_pmsupport','http://plugmatter.com/js/pm_support_widget.js?pid=pmfb&pkg='.Plugmatter_PACKAGE.'&hash=undefined', array('jquery'),PMFB_VERSION,true);
+  			wp_register_script('pmfb_pmsupport','//plugmatter.com/js/pm_support_widget.js?pid=pmfb&pkg='.Plugmatter_PACKAGE.'&hash=undefined', array('jquery'),PMFB_VERSION,true);
   		}
   		  		 
 		if('admin_page_pmfb_edit_template' == $hook ) {
