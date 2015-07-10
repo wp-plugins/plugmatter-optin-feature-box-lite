@@ -19,6 +19,7 @@ service_list.push({"service":"MailChimp_SingleOptin","fields":["api_key","list_i
 service_list.push({"service":"MailPoet","fields":["list_id", "redirect_url"]});
 service_list.push({"service":"Ontraport","fields":["uid"]});
 service_list.push({"service":"SendInBlue","fields":["js_id","listid"]});
+service_list.push({"service":"ActiveCampaign","fields":["domain","f","nlbox"]});
 service_list.push({"service":"Custom","fields":["action_url","email_field_name","name_field_name", "hidden_filed1","hidden_filed1_value","hidden_filed2","hidden_filed2_value","hidden_filed3","hidden_filed3_value"]});
 
 var email_service_option = {};

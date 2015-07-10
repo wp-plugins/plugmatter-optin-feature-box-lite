@@ -174,7 +174,8 @@ function show_template($template_id, $ab_meta="") {
                               "Feedblitz" => array("action_url" => "http://www.feedblitz.com/f/f.fbz?Sub=".(isset($doc->params->sub)?$doc->params->sub:""),"name" => "email", "name_field" => "name"),
                               "Ontraport" => array("action_url" => "//forms.ontraport.com/v2.4/form_processor.php?","name" => "email", "name_field" => "firstname"),
                               "SendInBlue" => array("action_url" => "https://my.sendinblue.com/users/subscribe/js_id/".(isset($doc->params->js_id)?$doc->params->js_id:"")."/id/1","name" => "email", "name_field" => "NAME"),                                      
-                              "Jetpack" => array("action_url" => "#pm_jetpack","name" => "email", "name_field" => "name"),                                      
+                              "Jetpack" => array("action_url" => "#pm_jetpack","name" => "email", "name_field" => "name"),     
+                              "ActiveCampaign" => array("action_url" => "//".$doc->params->domain.".activehosted.com/proc.php", "name" => "email", "name_field" => "name"),                                 
                               "Custom" => array("action_url" => (isset($doc->params->action_url)?$doc->params->action_url:""), "name" => (isset($doc->params->email_field_name)?$doc->params->email_field_name:""), "name_field" => (isset($doc->params->name_field_name)?$doc->params->name_field_name:""))
 				);
 				$service_name = $doc->params->service;
@@ -189,6 +190,14 @@ function show_template($template_id, $ab_meta="") {
                     $pm_service_hiddens.="<input type='hidden' name='pmfb_tid' value='".$template_id."' />";
                 }
                 
+                if($doc->params->service == "ActiveCampaign" ) {
+                    $pm_service_hiddens.="<input type='hidden' name='s' value='' />";
+                    $pm_service_hiddens.="<input type='hidden' name='c' value='0' />";
+                    $pm_service_hiddens.="<input type='hidden' name='m' value='0' />";
+                    $pm_service_hiddens.="<input type='hidden' name='act' value='sub' />";
+                    
+                }
+
                 foreach($doc->params as $key=>$value){
 				 	if($key != "service"){
 						if($service_name == "Aweber" && $key == "redirect_url") {
