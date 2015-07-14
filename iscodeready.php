@@ -29,9 +29,9 @@
 					<p>Append the following line of code in the functions.php file on the below path:</p>
 					<p>Path: Appearance → Editor → Theme Functions (functions.php)</p>
 					<div class="highlight_code">
-					<?php highlight_string("<?php if (function_exists('plugmatter_custom_hook')) {
+					<?php highlight_string(" if (function_exists('plugmatter_custom_hook')) {
 	add_action('genesis_after_header', 'plugmatter_custom_hook'); 
-} ?>"); ?>
+} "); ?>
 				</div>
 				
 				<p>Read the instructions with screenshots in the <a href="http://plugmatter.com/user-guide#genesis" target="_blank">user guide</a>.</p>
@@ -48,9 +48,9 @@
 					<p>Append the following line of code in the functions.php file on the below path:</p>
 					<p>Path: Appearance → Editor → Theme Functions(functions.php) </p>
 					<div class="highlight_code">
-					<?php highlight_string("<?php if (function_exists('plugmatter_custom_hook')) { 
+					<?php highlight_string(" if (function_exists('plugmatter_custom_hook')) { 
 	add_action('thesis_hook_after_container_plugmatter_header_hook', 'plugmatter_custom_hook');
-} ?>");?>
+} ");?>
 					</div>
 
 					<p>Then go to:</p>
