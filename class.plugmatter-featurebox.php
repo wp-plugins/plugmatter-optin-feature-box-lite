@@ -325,7 +325,7 @@ class Plugmatter_FeatureBox {
 		$email 	= $_POST["email"];
 
 		$temp_id = $_POST["pmfb_tid"];
-		$temp_params = $wpdb->get_row("SELECT params FROM $table WHERE id= $temp_id");
+		$temp_params = $wpdb->get_row($wpdb->prepare("SELECT params FROM $table WHERE id= %d",$temp_id)); //$wpdb->get_row("SELECT params FROM $table WHERE id= $temp_id");
 		
 		$pm_params = json_decode($temp_params->params);
 		
@@ -386,7 +386,7 @@ class Plugmatter_FeatureBox {
 		$email 	= $_POST["MERGE0"];
 
 		$temp_id = $_POST["pmfb_tid"];
-		$temp_params = $wpdb->get_row("SELECT params FROM $table WHERE id= $temp_id");
+		$temp_params = $wpdb->get_row($wpdb->prepare("SELECT params FROM $table WHERE id= %d",$temp_id)); //$wpdb->get_row("SELECT params FROM $table WHERE id= $temp_id");
 		
 		$pm_params = json_decode($temp_params->params);
 		
