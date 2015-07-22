@@ -26,7 +26,7 @@ var email_service_option = {};
 
 //---------------------------------------------------------
 
-var fonts = Array; 
+//var fonts = Array; 
 var fileref = ""; 
 var curfont = Array;
 var curfont2 = "";
@@ -43,22 +43,22 @@ var oDoc, sDefTxt;
 //---------------------------------------------------------
 
 jQuery(document).ready(function() {	
-		jQuery.getJSON(pm_site_url+"/wp-admin/admin-ajax.php?action=get_fonts", function(data) {
-			fonts = data; 
-		}).fail(function() {
-			fonts = [{"family":"Arial","variants":"regular"},
-					{"family":"Comic Sans MS","variants":"regular"},
-					{"family":"Courier New","variants":"regular"},
-					{"family":"Georgia","variants":"regular"},
-					{"family":"Impact","variants":"regular"},
-					{"family":"Lucida Console","variants":"regular"},
-					{"family":"Lucida Sans Unicode","variants":"regular"},
-					{"family":"Palatino Linotype","variants":"regular"},
-					{"family":"Tahoma","variants":"regular"},
-					{"family":"Times New Roman","variants":"regular"},
-					{"family":"Trebuchet MS1","variants":"regular"},
-					{"family":"Verdana","variants":"regular"}];
-		});
+		// jQuery.getJSON(pm_site_url+"/wp-admin/admin-ajax.php?action=get_fonts", function(data) {
+		// 	fonts = data; 
+		// }).fail(function() {
+		// 	fonts = [{"family":"Arial","variants":"regular"},
+		// 			{"family":"Comic Sans MS","variants":"regular"},
+		// 			{"family":"Courier New","variants":"regular"},
+		// 			{"family":"Georgia","variants":"regular"},
+		// 			{"family":"Impact","variants":"regular"},
+		// 			{"family":"Lucida Console","variants":"regular"},
+		// 			{"family":"Lucida Sans Unicode","variants":"regular"},
+		// 			{"family":"Palatino Linotype","variants":"regular"},
+		// 			{"family":"Tahoma","variants":"regular"},
+		// 			{"family":"Times New Roman","variants":"regular"},
+		// 			{"family":"Trebuchet MS1","variants":"regular"},
+		// 			{"family":"Verdana","variants":"regular"}];
+		// });
 		
 
 	pm_style1=document.createElement("link");

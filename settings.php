@@ -8,92 +8,85 @@ if(isset($_POST["plugmatter_enable"] ) && ($_POST["plugmatter_enable"]!="")) {
 }
 
 if(isset($_POST["plugmatter_show_temp_optinuser"] ) && ($_POST["plugmatter_show_temp_optinuser"]!="")) {
-	$plugmatter_show_temp_optinuser = $_POST['plugmatter_show_temp_optinuser'];
+	$plugmatter_show_temp_optinuser = sanitize_text_field($_POST['plugmatter_show_temp_optinuser']);
 	update_option('plugmatter_show_temp_optinuser', $plugmatter_show_temp_optinuser);
-	//echo $variable = get_option('plugmatter_show_temp_optinuser');
 	$saved++;
 }
+
 if(isset($_POST["global_template"] ) && ($_POST["global_template"]!="")) {
-	$global_template = $_POST['global_template'];
+	$global_template = sanitize_text_field($_POST['global_template']);
 	update_option('plugmatter_global_template', $global_template);
-	//echo $variable = get_option('plugmatter_global_template');
 	$saved++;
 }
+
 if(isset($_POST["home_template"] ) && ($_POST["home_template"]!="")) {
-	$plugmatter_home_temp = $_POST['home_template'];
+	$plugmatter_home_temp = sanitize_text_field($_POST['home_template']);
 	update_option('plugmatter_home_temp', $plugmatter_home_temp);
-	//echo $variable = get_option('plugmatter_home_temp');
 	$saved++;
 }
+
 if(isset($_POST["post_template"] ) && ($_POST["post_template"]!="")) {
-	$plugmatter_post_temp = $_POST['post_template'];
+	$plugmatter_post_temp = sanitize_text_field($_POST['post_template']);
 	update_option('plugmatter_post_temp', $plugmatter_post_temp);
-	//echo $variable = get_option('plugmatter_post_temp');
 	$saved++;
 }
+
 if(isset($_POST["page_template"] ) && ($_POST["page_template"]!="")) {
-	$plugmatter_page_temp = $_POST['page_template'];
+	$plugmatter_page_temp = sanitize_text_field($_POST['page_template']);
 	update_option('plugmatter_page_temp', $plugmatter_page_temp);
-	//echo $variable = get_option('plugmatter_page_temp');
 	$saved++;
 }
+
 if(isset($_POST["archieve_template"] ) && ($_POST["archieve_template"]!="")) {
-	$plugmatter_archieve_temp = $_POST['archieve_template'];
+	$plugmatter_archieve_temp = sanitize_text_field($_POST['archieve_template']);
 	update_option('plugmatter_archieve_temp', $plugmatter_archieve_temp);
-	//echo $variable = get_option('plugmatter_archieve_temp');
 	$saved++;
 }
 
 if(isset($_POST["enable_review"] ) && ($_POST["enable_review"]!="")) {
-	$plugmatter_enable_on_review = $_POST['enable_review'];
+	$plugmatter_enable_on_review = sanitize_text_field($_POST['enable_review']);
 	update_option('plugmatter_enable_on_review', $plugmatter_enable_on_review);
-	//echo $variable = get_option('plugmatter_enable_on_review');
 	$saved++;
 }
 
 if(isset($_POST["reviews"] ) && ($_POST["reviews"]!="")) {
-	$plugmatter_num_of_reviews = $_POST['reviews'];
+	$plugmatter_num_of_reviews = sanitize_text_field($_POST['reviews']);
 	update_option('plugmatter_num_of_reviews', $plugmatter_num_of_reviews);
-	//echo $variable = get_option('$plugmatter_num_of_reviews');
 	$saved++;
 }
 if(isset($_POST["home_template_review"] ) && ($_POST["home_template_review"]!="")) {
-	$plugmatter_home_temp_review =$_POST['home_template_review'];
+	$plugmatter_home_temp_review = sanitize_text_field($_POST['home_template_review']);
 	update_option('plugmatter_home_temp_review', $plugmatter_home_temp_review);
-	//echo $variable = get_option('plugmatter_home_temp_review');
 	$saved++;
 }
 if(isset($_POST["post_template_review"] ) && ($_POST["post_template_review"]!="")) {
-	$plugmatter_post_temp_review = $_POST['post_template_review'];
+	$plugmatter_post_temp_review = sanitize_text_field($_POST['post_template_review']);
 	update_option('plugmatter_post_temp_review', $plugmatter_post_temp_review);
-	//echo $variable = get_option('plugmatter_post_temp_review');
 	$saved++;
 }
+
 if(isset($_POST["page_template_review"] ) && ($_POST["page_template_review"]!="")) {
-	$plugmatter_page_temp_review = $_POST['page_template_review'];
+	$plugmatter_page_temp_review = sanitize_text_field($_POST['page_template_review']);
 	update_option('plugmatter_page_temp_review', $plugmatter_page_temp_review);
-	//echo $variable = get_option('plugmatter_page_temp_review');
 	$saved++;
 }
+
 if(isset($_POST["archieve_template_review"] ) && ($_POST["archieve_template_review"]!="")) {
-	$plugmatter_archieve_temp_review = $_POST['archieve_template_review'];
+	$plugmatter_archieve_temp_review = sanitize_text_field($_POST['archieve_template_review']);
 	update_option('plugmatter_archieve_temp_review', $plugmatter_archieve_temp_review);
-	//echo $variable = get_option('plugmatter_archieve_temp_review');
 	$saved++;
 }
 
 
 if(isset($_POST["pmfb_track_analytics"] ) && ($_POST["pmfb_track_analytics"]!="")) {
-	$pmfb_track_analytics = $_POST['pmfb_track_analytics'];
+	$pmfb_track_analytics = sanitize_text_field($_POST['pmfb_track_analytics']);
 	update_option('plugmatter_track_analytics', $pmfb_track_analytics);
-	//echo "pmfb_track_analytics -->".$variable = get_option('pmfb_track_analytics');
 	$saved++;
 }
 
 if(isset($_POST["pmfb_remove_data"] ) && ($_POST["pmfb_remove_data"]!="")) {
-	$pmfb_remove_data = $_POST['pmfb_remove_data'];
+	$pmfb_remove_data = sanitize_text_field($_POST['pmfb_remove_data']);
 	update_option('plugmatter_remove_data', $pmfb_remove_data);
-	//echo "pmfb_remove_data --->" . $variable = get_option('pmfb_remove_data');
 	$saved++;
 }
 
@@ -503,11 +496,11 @@ if(isset($_POST["plugmatter_show_on_sections"] ) && ($_POST["plugmatter_show_on_
 					</div>
 				</div>
 				<div class="pmfb_remove_data">
-					<h3>Remove Data:</h3>
+					<h3>Retain Data on Uninstall:</h3>
 					<div style="padding-left:30px;">
-						<label for="pmfb_remove_data">Remove templates and split test data on uninstall:</label>&nbsp;&nbsp;
-						<input type="radio" name="pmfb_remove_data" id="" value="1" <?php if(get_option('plugmatter_remove_data') != 0) echo "checked"; ?> /> &nbsp; Yes &nbsp;&nbsp;
-						<input type="radio" name="pmfb_remove_data" id="" value="0" <?php if(get_option('plugmatter_remove_data') == 0) echo "checked"; ?> /> &nbsp; No
+						<label for="pmfb_remove_data">Retain templates and split test data on uninstall:</label>&nbsp;&nbsp;
+						<input type="radio" name="pmfb_remove_data" id=""  value="0" <?php if(get_option('plugmatter_remove_data') == 0) echo "checked"; ?> /> &nbsp; Yes &nbsp;&nbsp;
+						<input type="radio" name="pmfb_remove_data" id="" value="1" <?php if(get_option('plugmatter_remove_data') != 0) echo "checked"; ?> /> &nbsp; No
 					</div>
 				</div>
 			</div>

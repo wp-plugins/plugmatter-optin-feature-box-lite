@@ -8,7 +8,7 @@ class Plugmatter_FeatureBox {
 		// Ajax Functions
 		add_action( 'wp_ajax_plug_load_template', array($this, 'load_template'));
 		add_action( 'wp_ajax_plug_get_page_content', array($this,'get_page_content'));
-		add_action( 'wp_ajax_get_fonts', array($this,'get_fonts'));
+		//add_action( 'wp_ajax_get_fonts', array($this,'get_fonts'));
 		add_action( 'wp_ajax_pmfb_cc', array($this,'pmfb_cc'));
 		add_action( 'wp_ajax_nopriv_pmfb_cc', array($this,'pmfb_cc'));
 
@@ -579,6 +579,7 @@ class Plugmatter_FeatureBox {
 		echo "<script type='text/javascript'>
 				var pm_plugin_url = '".plugins_url(Plugmatter_DIR_NAME.'/')."';
 				var pm_site_url = '".admin_url('admin-ajax.php')."';
+				var fonts = ".file_get_contents(Plugmatter_FILE_PATH.'/js/gfonts.json').";
 				var button_fluid = 0;
 			  </script>";
 	}
