@@ -5,10 +5,15 @@ function show_template($template_id, $ab_meta="") {
 	 	$pm_service_action=" ";
 	 	$pm_service_hiddens=" ";
 	 	$pm_meta_tid = " ";
+	 	$pm_load_style = "";
+	 	$pm_custom_css = "";
+
 	 	     
 	 	$table = $wpdb->prefix.'plugmatter_templates';
 
-	 	$result = $wpdb->get_row("SELECT id,temp_name,base_temp_name,params FROM $table WHERE id= $template_id	");
+	 	$template_id = intval($template_id);
+
+	 	$result = $wpdb->get_row($wpdb->prepare("SELECT id,temp_name,base_temp_name,params FROM $table WHERE id=%d", $template_id));
 	 	if(!$result) return;
 	 	 
 	 	$id=$result->id;
@@ -18,10 +23,10 @@ function show_template($template_id, $ab_meta="") {
 
   		if(get_option("pmfb_track_analytics")){
   			$pm_meta_tid = $id."_".$temp_name;	
-  		}
-  		
-	 	  		 	  	
-  	    $obj = json_decode($params);  	   
+  		}  		
+	    
+  	    $obj = json_decode($params);  	 
+  	      	   	 
         $gwf1arr = array();
 
 		foreach($obj as $doc){
@@ -144,9 +149,9 @@ function show_template($template_id, $ab_meta="") {
 					$pm_cta_inline_style = '100%';	
 				}
 				
-				$pm_cta_btn_class 	= $doc->params->btn_class;
-                $pm_cta_btn_url 	= $doc->params->url;
-                $pm_cta_lead_id 	= $doc->params->lead_id; 
+				@$pm_cta_btn_class 	= $doc->params->btn_class;
+                @$pm_cta_btn_url 	= $doc->params->url;
+                @$pm_cta_lead_id 	= $doc->params->lead_id; 
             	
             	$pm_cta_style  	= json_decode($doc->params->button_style);
 

@@ -8,7 +8,7 @@ class Plugmatter_FeatureBox {
 		// Ajax Functions
 		add_action( 'wp_ajax_plug_load_template', array($this, 'load_template'));
 		add_action( 'wp_ajax_plug_get_page_content', array($this,'get_page_content'));
-		//add_action( 'wp_ajax_get_fonts', array($this,'get_fonts'));
+		
 		add_action( 'wp_ajax_pmfb_cc', array($this,'pmfb_cc'));
 		add_action( 'wp_ajax_nopriv_pmfb_cc', array($this,'pmfb_cc'));
 
@@ -324,8 +324,8 @@ class Plugmatter_FeatureBox {
 		$fname = $_POST["fname"];
 		$email 	= $_POST["email"];
 
-		$temp_id = $_POST["pmfb_tid"];
-		$temp_params = $wpdb->get_row($wpdb->prepare("SELECT params FROM $table WHERE id= %d",$temp_id)); //$wpdb->get_row("SELECT params FROM $table WHERE id= $temp_id");
+		$temp_id = intval($_POST["pmfb_tid"]);
+		$temp_params = $wpdb->get_row($wpdb->prepare("SELECT params FROM $table WHERE id= %d",$temp_id)); 
 		
 		$pm_params = json_decode($temp_params->params);
 		
@@ -385,8 +385,8 @@ class Plugmatter_FeatureBox {
 		$fname = $_POST["MERGE1"];
 		$email 	= $_POST["MERGE0"];
 
-		$temp_id = $_POST["pmfb_tid"];
-		$temp_params = $wpdb->get_row($wpdb->prepare("SELECT params FROM $table WHERE id= %d",$temp_id)); //$wpdb->get_row("SELECT params FROM $table WHERE id= $temp_id");
+		$temp_id = intval($_POST["pmfb_tid"]);
+		$temp_params = $wpdb->get_row($wpdb->prepare("SELECT params FROM $table WHERE id= %d",$temp_id));
 		
 		$pm_params = json_decode($temp_params->params);
 		

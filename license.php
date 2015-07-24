@@ -63,7 +63,7 @@ if(isset($_POST["license_key"] ) && ($_POST["license_key"]!="")) {
 	?>
 	<div class='pmadmin_body'  style="position:relative">
         <br>
-        <!--<b>Congratulations! You have successfully installed the Plugin. One Quick Reminder Below...</b>-->
+        
         <b><span style='color:red'>REMINDER:</span> Have you added the code snippet to your theme file to make the plugin work?</b>
         <br><br>
         If yes, then <b>Get Started</b> below.        

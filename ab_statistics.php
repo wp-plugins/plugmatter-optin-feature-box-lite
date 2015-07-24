@@ -2,7 +2,8 @@
 function  get_graph_data($ab_id){
 	global $wpdb;
 	$table = $wpdb->prefix.'plugmatter_ab_stats';	
-	$results = $wpdb->get_results("SELECT * FROM $table WHERE ab_id ='$ab_id' ORDER BY date ASC ");
+	
+	$results = $wpdb->get_results($wpdb->prepare("SELECT * FROM $table WHERE ab_id = %d ORDER BY date ASC ",$ab_id));
 	$box_data = array();
 	$a_data[]="";
 	$b_data[]="";
@@ -20,7 +21,7 @@ function  get_graph_data($ab_id){
 }
 
 	global $wpdb;	
-	$ab_id = $_GET['ab_id'];	
+	$ab_id = intval($_GET['ab_id']);	
 	$tot_a_conversion = 0;
 	$tot_b_conversion = 0;
 	$tot_a_impression = 0;
@@ -32,17 +33,16 @@ function  get_graph_data($ab_id){
 	$ab_stats_tbl = $wpdb->prefix.'plugmatter_ab_stats';	
 	$ab_test_tbl = $wpdb->prefix.'plugmatter_ab_test';
 	$temp_tbl = $wpdb->prefix.'plugmatter_templates';	
-	$resultss = $wpdb->get_results("SELECT *,COUNT(date) AS tot_date,SUM(a_imp) AS tot_a_impression,SUM(b_imp) AS tot_b_impression, SUM(a_conv) AS tot_a_conversion,SUM(b_conv) AS tot_b_conversion FROM $ab_stats_tbl WHERE ab_id ='$ab_id' ");	
+	$resultss = $wpdb->get_results($wpdb->prepare("SELECT *,COUNT(date) AS tot_date,SUM(a_imp) AS tot_a_impression,SUM(b_imp) AS tot_b_impression, SUM(a_conv) AS tot_a_conversion,SUM(b_conv) AS tot_b_conversion FROM $ab_stats_tbl WHERE ab_id =%d",$ab_id));	
 	
-	$results2 = $wpdb->get_row("SELECT * FROM $ab_test_tbl WHERE id ='$ab_id' ");
+	$results2 = $wpdb->get_row($wpdb->prepare("SELECT * FROM $ab_test_tbl WHERE id =%d",$ab_id));
 	$results3 = $wpdb->get_row("SELECT temp_name  FROM $temp_tbl WHERE id ='$results2->boxA' ");	
 	$results4 = $wpdb->get_row("SELECT temp_name  FROM $temp_tbl WHERE id ='$results2->boxB' ");	
 	
 	$campaign_name = $results2->compaign_name;
 	$boxA_name =  $results3->temp_name;
 	$boxB_name =  $results4->temp_name;
-	foreach ( $resultss as $fivesdraft )
-	{
+	foreach ( $resultss as $fivesdraft ) {
 		 $ab_id=$fivesdraft->ab_id;		
 		 $tot_a_conversion=$fivesdraft->tot_a_conversion;
 		 $tot_b_conversion=$fivesdraft->tot_b_conversion;
@@ -59,7 +59,7 @@ function  get_graph_data($ab_id){
 		 }
 	}
 	
-	$ab_graph_data = get_graph_data($_GET['ab_id']);
+	$ab_graph_data = get_graph_data($ab_id);
 ?>
 
 
@@ -90,7 +90,7 @@ function  get_graph_data($ab_id){
 <div class='pmadmin_wrap'>
 	<div class='pmadmin_headbar'>
 		<div class='pmadmin_pagetitle'><h2>A/B Split-Test Statistics - <?php echo $campaign_name; ?></h2></div>
-	    <div class='pmadmin_logodiv'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/logo.png";?>' height='35'></div>
+	    <div class='pmadmin_logodiv'><img src='<?php echo plugins_url("/images/logo.png", __FILE__ );?>' height='35'></div>
 	</div>
 	<div class='pmadmin_body'>
 	<div id="ab_chart"></div>

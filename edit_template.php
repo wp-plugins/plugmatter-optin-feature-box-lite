@@ -14,14 +14,15 @@ $pm_custom_css = "\" \"";
 $pm_display_fields = '';
 //------------------
 if($_GET['action']=="edit" && $_GET['template_id']!='') {
-	 $temp_id= $_GET['template_id'];
-	 $fivesdrafts = $wpdb->get_results("SELECT id,temp_name,base_temp_name,params FROM $table WHERE id= $temp_id");
+	 $temp_id= intval($_GET['template_id']);
+	 $fivesdrafts = $wpdb->get_results($wpdb->prepare("SELECT id,temp_name,base_temp_name,params FROM $table WHERE id=%d", $temp_id));
 	 foreach ( $fivesdrafts as $fivesdraft ) {
 	 	$id=$fivesdraft->id;
 	 	$temp_name=$fivesdraft->temp_name;
 	 	$base_temp_name=$fivesdraft->base_temp_name;
-		$params=$fivesdraft->params;
-		$getalign = json_decode($params);
+    	$params = $fivesdraft->params;
+    	$getalign = json_decode($params);
+       
 		foreach($getalign as $align) {
 			if($align->type == "alignment") {
 				$pm_box_width = $align->width;
@@ -41,8 +42,6 @@ function get_pages_list() {
 	$pages = get_pages();
 	$list = array();
 	foreach ($pages as $page_data) {
-		//echo "|".$title = $page_data->ID;
-		//echo "|".$title = $page_data->post_content;				
 		$list[] = array("id"=>$page_data->ID,"title"=>escapeJsonString(addslashes($page_data->post_title)));
 	}
 	print json_encode($list);
@@ -115,7 +114,7 @@ function escapeJsonString($value) {
 				Bottom Margin: <input type='text' size='3' maxlength='3' name='pm_box_bmargin' id='pm_box_bmargin' value='<?php echo $pm_box_bmargin; ?>'>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 		</tr>
-		<?php // if($base_temp_name == "") { ?>
+		
 		<tr valign="top" id="pm_sel_fields">
 			<th scope="row">
 				<label for="base_template">
@@ -128,9 +127,7 @@ function escapeJsonString($value) {
 				<input type='radio' class="pm_display_fields" id="pm_cta_btn" name='pm_display_fields' value='pm_cta_btn' > CTA Button  &nbsp;&nbsp;&nbsp;&nbsp;			    
 			</td>
 		</tr> 	
-		<?php// } else { ?>
-				<!-- <input type="hidden" id="pm_display_fields" name="pm_display_fields" value="" > -->
-		<?php// } ?>		
+		
 		<tr>
 			<td colspan="2">
 				<div id="ajax_load_temp"></div>
@@ -208,7 +205,9 @@ jQuery(document).ready(function(){
 	if(temp_name != ""){
 		var base_temp_name = '<?php echo $base_temp_name; ?>';
 		var page_id = "";
-		var params = JSON.parse('<?php echo trim(addslashes($params));?>');
+        var params_string = '<?php echo trim(addslashes($params));?>';
+
+		var params = JSON.parse(params_string);
 		for(var i=0;i<params.length;i++) {
 			if(params[i]["type"] == "user_designed_template") {
 				base_template = params[i]["type"];
@@ -687,6 +686,7 @@ jQuery(document).ready(function(){
 		hidden.setAttribute("name", "params");
 		jQuery("#title").append(hidden);
 		var json_params = pm_temp_values();
+      
 		json_params = JSON.stringify(json_params);
 		hidden.setAttribute("value", json_params);
         document.forms["form1"].submit();

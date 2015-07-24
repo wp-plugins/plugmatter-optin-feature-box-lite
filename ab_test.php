@@ -3,6 +3,8 @@ $message = "";
 global $wpdb;
 $siteurl = get_option('siteurl');
 $table = $wpdb->prefix.'plugmatter_ab_test';
+$temp_tbl = $wpdb->prefix.'plugmatter_templates';
+
 
 if(isset($_POST)) {
 	if(isset($_POST["plugmatter_ab_enable"]) && ($_POST["plugmatter_ab_enable"]!="")) {
@@ -14,10 +16,17 @@ if(isset($_POST)) {
 	}	
 	
 	if(isset($_POST["compaign_name"] ) && ($_POST["compaign_name"]!="") && ($_GET['action'])=="add_new" ) {
-		$table = $wpdb->prefix.'plugmatter_ab_test';
+		$campaign_name = sanitize_text_field($_POST["compaign_name"]);
+		$abtest_box_a = sanitize_text_field($_POST['boxA']);
+		$abtest_box_b = sanitize_text_field($_POST['boxB']);
+		$abtest_home = sanitize_text_field($_POST['home']);
+		$abtest_pages = sanitize_text_field($_POST['pages']);
+        $abtest_posts = sanitize_text_field($_POST['posts']);
+        $abtest_archives = sanitize_text_field($_POST['archieves']);
+
 		$date=date("d/m/Y");
-		$wpdb->query("INSERT INTO $table(compaign_name,boxA,boxB,home,page,post,archieve,start_date)
-				VALUES('".$_POST["compaign_name"]."', '".$_POST["boxA"]."', '".$_POST["boxB"]."', '".$_POST["home"]."', '".$_POST["pages"]."', '".$_POST["posts"]."', '".$_POST["archieves"]."', '".$date."')");
+		$wpdb->query($wpdb->prepare("INSERT INTO $table (compaign_name,boxA,boxB,home,page,post,archieve,start_date)
+				VALUES(%s,%s,%s,%s,%s,%s,%s,'".$date."')",$campaign_name,$abtest_box_a,$abtest_box_b,$abtest_home,$abtest_pages,$abtest_posts,$abtest_archives));
 
 		$message = "<div id=\"setting-error-settings_updated\" class='pm_msg_warning'>Your split-test campaign has been saved successfully.</div>";
 	}
@@ -26,8 +35,10 @@ if(isset($_POST)) {
 
 if(isset($_GET['action'])) {
 	if(($_GET['action']=="activate" || $_GET['action']=="deactivate") && $_GET['update_id']!='' ){
-		$id= $_GET['update_id'];
+		$id= intval($_GET['update_id']);
+		
 		if($_GET['action']=="activate") {
+
 			$wpdb->update(
 					"$table",
 					array('active' => "yes"	),
@@ -50,8 +61,8 @@ if(isset($_GET['action'])) {
 	}
 
 	if($_GET['action']=="delete" && $_GET['delete_id']!='') {
-		$table = $wpdb->prefix.'plugmatter_ab_test';
-		$id= $_GET['delete_id'];
+		
+		$id= intval($_GET['delete_id']);
 
 		$dq = $wpdb->query(
 				$wpdb->prepare(
@@ -75,7 +86,7 @@ if(isset($_GET['action'])) {
 		<div class='pmadmin_pagetitle'><h2>Split-Testing 
 		<?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_pro" || get_option("Plugmatter_PACKAGE") == "plug_featurebox_dev") { ?><a href="<?php echo admin_url('admin.php?page=pmfb_add_ab_test'); ?>">Add New</a><?php }?>
 		</h2></h2></div>
-	    <div class='pmadmin_logodiv'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/logo.png";?>' height='35'></div>
+	    <div class='pmadmin_logodiv'><img src='<?php echo plugins_url("/images/logo.png",__FILE__);?>' height='35'></div>
 	</div>
 	<div class='pmadmin_body'>
 	<?php echo $message; ?>
@@ -85,9 +96,7 @@ if(isset($_GET['action'])) {
 	<br>
 	<div class='plug_list_head'>Your Split-Test Campaigns</div>
 	<?php 
-		global $wpdb;		
-		$table = $wpdb->prefix.'plugmatter_ab_test';
-		$temp_tbl = $wpdb->prefix.'plugmatter_templates';
+		
 		$resultss = $wpdb->get_results("SELECT * FROM $table ORDER BY id DESC");		
 		$result_count = count($resultss);
 		if($result_count != 0) {
@@ -156,10 +165,10 @@ if(isset($_GET['action'])) {
 						<?php  echo implode(", ",$list); ?>	
 						<?php 
 							if($active=="yes"){
-								$ap_test_tmp_url = admin_url("admin.php?page=pmfb_add_ab_test&action=deactivate&update_id=".$id);
+								$ap_test_tmp_url = admin_url("admin.php?page=pmfb_ab_test&action=deactivate&update_id=".$id);
 								$ap_test_tmp_status = "Deactivate";
 							} else { 
-								$ap_test_tmp_url = admin_url("admin.php?page=pmfb_add_ab_test&action=activate&update_id=".$id);
+								$ap_test_tmp_url = admin_url("admin.php?page=pmfb_ab_test&action=activate&update_id=".$id);
 								$ap_test_tmp_status = "Activate";
 							} 
 						?>	
@@ -170,7 +179,7 @@ if(isset($_GET['action'])) {
 					<td>								
 						<a title="Activate/Deactivate" id="act_deact_btn" href="<?php echo $ap_test_tmp_url; ?>" ><?php echo $ap_test_tmp_status; ?></a> / 
 						<a title="Delete" onclick="javascript:check=confirm('Are you sure you want to delete this campaign?');if(check==false) return false;"
-						href="<?php echo admin_url("admin.php?page=pmfb_add_ab_test&action=delete&delete_id=$id"); ?>">Delete</a>
+						href="<?php echo admin_url("admin.php?page=pmfb_ab_test&action=delete&delete_id=$id"); ?>">Delete</a>
 					</td>
 				</tr>
 				<?php 

@@ -1,10 +1,12 @@
-<?php 
+<?php
+global $wpdb;
+$table = $wpdb->prefix.'plugmatter_templates'; 
+
 if(isset($_GET['action'])) {
 	if($_GET['action']=="edit" && $_GET['edit_id']!='') {
-	 $get_id= $_GET['edit_id'];
-	 global $wpdb;
-	 $table = $wpdb->prefix.'plugmatter_templates';
-	 $fivesdrafts = $wpdb->get_results("SELECT id,temp_name,base_temp_name	FROM $table WHERE id= $get_id");
+	 $get_id= intval($_GET['edit_id']);
+	 $fivesdrafts = $wpdb->get_results($wpdb->prepare("SELECT id,temp_name,base_temp_name	FROM $table WHERE id=%d", $get_id));
+	 
 	 foreach ( $fivesdrafts as $fivesdraft ) {
 	 	$id=$fivesdraft->id;
 	 	$temp_name=$fivesdraft->temp_name;
@@ -46,7 +48,7 @@ jQuery(document).ready(function(){
 <div class='pmadmin_wrap'>
 	<div class='pmadmin_headbar'>
 		<div class='pmadmin_pagetitle'><h2>Create a Split-Test Campaign</h2></div>
-	    <div class='pmadmin_logodiv'><img src='<?php echo plugins_url()."/".Plugmatter_DIR_NAME."/images/logo.png";?>' height='35'></div>
+	    <div class='pmadmin_logodiv'><img src='<?php echo plugins_url("/images/logo.png", __FILE__ );?>' height='35'></div>
 	</div>
 	<div class='pmadmin_body'>
 	<form action="<?php $siteurl = get_option('siteurl');echo admin_url("admin.php?page=pmfb_ab_test&action=add_new"); ?>"	method="POST">
@@ -67,8 +69,6 @@ jQuery(document).ready(function(){
 					<td>
 						<select name="boxA" id="boxA" >
 							<?php 
-								global $wpdb;
-								$table = $wpdb->prefix.'plugmatter_templates';
 								$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name	FROM $table	ORDER BY id DESC");
 
 								foreach ( $resultss as $fivesdraft )
@@ -89,8 +89,6 @@ jQuery(document).ready(function(){
 					<td>
 						<select name="boxB" id="boxB" >
 							<?php 
-								global $wpdb;
-								$table = $wpdb->prefix.'plugmatter_templates';
 								$resultss = $wpdb->get_results("SELECT id,temp_name,base_temp_name	FROM $table	ORDER BY id ASC");
 
 								foreach ( $resultss as $fivesdraft )
