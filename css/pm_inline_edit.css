@@ -444,3 +444,9 @@
   line-height: 10px;
   padding: 0px;
 }
+
+.upgrade_templates {
+	 margin:10px 20px;
+	 display: inline-block;
+
+}

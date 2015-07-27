@@ -787,21 +787,21 @@ jQuery(document).ready(function(){
 });
 
 </script>
-</div></div>
+</div>
 <?php if(get_option("Plugmatter_PACKAGE") != "plug_featurebox_pro") { ?>
     <div style='background:#fff;border:#ddd;padding:20px;margin:30px;'>
         <div class='plug_enable_lable' style='margin-top:10px;width:100%;margin-bottom:20px;'>Need more base templates? Check them out:</div>    
         <?php if(get_option("Plugmatter_PACKAGE") == "plug_featurebox_lite") { ?>
-            <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url("/images/up_preview_3.png", __FILE__); ?>' width='225'></div>
-            <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url("/images/up_preview_4.png", __FILE__); ?>' width='225'></div>
-            <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url("/images/up_preview_5.png", __FILE__); ?>' width='225'></div>
-            <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url("/images/up_preview_6.png", __FILE__); ?>' width='225'></div>
+            <div class="upgrade_templates"><img src='<?php echo plugins_url("/images/up_preview_3.png", __FILE__); ?>' width='225'></div>
+            <div class="upgrade_templates"><img src='<?php echo plugins_url("/images/up_preview_4.png", __FILE__); ?>' width='225'></div>
+            <div class="upgrade_templates"><img src='<?php echo plugins_url("/images/up_preview_5.png", __FILE__); ?>' width='225'></div>
+            <div class="upgrade_templates"><img src='<?php echo plugins_url("/images/up_preview_6.png", __FILE__); ?>' width='225'></div>
         <?php } ?>
-        <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url("/images/up_preview_7.png", __FILE__); ?>' width='225'></div>
-        <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url("/images/up_preview_8.png", __FILE__); ?>' width='225'></div>
-        <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url("/images/up_preview_9.png", __FILE__); ?>' width='225'></div>
-        <div style='float:left;margin:10px 20px;'><img src='<?php echo plugins_url("/images/up_preview_10.png", __FILE__); ?>' width='225'></div>            
-        <div style='clear:both'>&nbsp;</div>
+        <div class="upgrade_templates"><img src='<?php echo plugins_url("/images/up_preview_7.png", __FILE__); ?>' width='225'></div>
+        <div class="upgrade_templates"><img src='<?php echo plugins_url("/images/up_preview_8.png", __FILE__); ?>' width='225'></div>
+        <div class="upgrade_templates"><img src='<?php echo plugins_url("/images/up_preview_9.png", __FILE__); ?>' width='225'></div>
+        <div class="upgrade_templates"><img src='<?php echo plugins_url("/images/up_preview_10.png", __FILE__); ?>' width='225'></div>  
         <div style='margin:10px;text-align:center;'><input id="submit" class="pm_primary_buttons" type="button" value="Upgrade To Get More Templates!" onclick="location.href='http://plugmatter.com/feature-box#plans&pricing'" name="submit"></div>    
     </div>
 <?php } ?>
+</div>
